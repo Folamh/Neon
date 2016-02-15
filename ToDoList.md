@@ -1,6 +1,5 @@
 #To Do List:
 Games Fleadh: 9th March
-- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
 - [ ]Game Design Report
 - [ ]A3 game poster
 - [ ]The game...
