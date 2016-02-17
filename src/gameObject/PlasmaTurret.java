@@ -1,9 +1,8 @@
 package gameObject;
 
-
-public class Enemy extends GameObject{
+public class PlasmaTurret extends Tower{
 	
-	Enemy(int x, int y){
+	PlasmaTurret(int x, int y){
 		super(x, y);
 	}
 	
@@ -14,5 +13,4 @@ public class Enemy extends GameObject{
 	void render(){
 		
 	}
-
 }

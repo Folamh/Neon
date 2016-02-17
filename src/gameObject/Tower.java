@@ -1,17 +1,13 @@
 package gameObject;
 
 
-public class Tower extends GameObject{
+public  abstract class Tower extends GameObject{
 	
-	Tower(){
-		
+	Tower(int x, int y){
+		super(x, y);
 	}
 	
-	void update(){
-		
-	}
+	abstract void update();
 	
-	void render(){
-		
-	}
+	abstract void render();
 }

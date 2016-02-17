@@ -5,9 +5,9 @@ import processing.core.*;
 public abstract class GameObject {
 	PVector pos;
 	
-	GameObject() {
-		
-		
+	GameObject(int x, int y) {
+		pos.x = x;
+		pos.y = y;
 	}
 	
 	
