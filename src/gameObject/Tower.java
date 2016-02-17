@@ -1,6 +1,17 @@
 package gameObject;
 
 
-public class Tower {
-
+public class Tower extends GameObject{
+	
+	Tower(){
+		
+	}
+	
+	void update(){
+		
+	}
+	
+	void render(){
+		
+	}
 }
