@@ -2,7 +2,7 @@ package gameObject;
 
 import processing.core.*;
 
-public abstract class GameObject {
+public abstract class GameObject extends PApplet{
 	PVector pos;
 	
 	GameObject(int x, int y) {
