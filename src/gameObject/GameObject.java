@@ -1,6 +1,17 @@
 package gameObject;
 
 
-public class GameObject {
 
+public abstract class GameObject {
+	
+	
+	
+	GameObject() {
+		
+		
+	}
+	
+	
+	abstract void update();
+	abstract void render();
 }

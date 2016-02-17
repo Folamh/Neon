@@ -1,13 +1,27 @@
 package control;
-/*
- * Main loop for the game, all game state control will be here
- */
 
-public class MainLoop {
+import processing.core.*;
 
+public class MainLoop extends PApplet{
+	
+	//DO NOT CHANGE THIS UNDER ANY CIRCUMSTANCES!!!!!!!!!
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		String[] a = {"MAIN"};			
+		PApplet.runSketch(a, new MainLoop());
+	}
+	
+	//Settings go here
+	public void settings() {
+		fullScreen();
+	}
+	
+	//Only use this for initilising variables
+	public void setup() {
+		
+	}
+	
+	public void draw() {
+		
 	}
 
 }
