@@ -1,11 +1,11 @@
 package gameObject;
 
-import processing.core.*;
+import processing.core.PVector;
 
-public class PlasmaTurret extends Tower{
+public class NetTower extends Tower{
 	PVector headPoint;
 	
-	PlasmaTurret(int x, int y){
+	NetTower(int x, int y){
 		super(x, y);
 	}
 	

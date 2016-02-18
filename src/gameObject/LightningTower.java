@@ -1,8 +1,8 @@
 package gameObject;
 
-public class LightningTurret extends Tower{
+public class LightningTower extends Tower{
 	
-	LightningTurret(int x, int y){
+	LightningTower(int x, int y){
 		super(x, y);
 	}
 	
