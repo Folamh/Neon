@@ -6,49 +6,64 @@ import processing.core.*;
 //Class for holding paths to for game objects to follow
 public class Path {
 	
-	//Class to hold path points
-	public class PathPoint {
-		PVector pos;
-		
-		PathPoint(int x, int y) {
-			pos.x = x;
-			pos.y = y;
-		}
-	}
-	
 	//ArrayList to hold the path
-	ArrayList<PathPoint> p;
+	ArrayList<PVector> path;
 	
-	int prevPoint, curPoint, nextPoint;
+	int prevPoint; //Previous current point
+	int curPoint; //Point traveling from
+	int nextPoint; //Point traveling to
 	
 	Path() {
 		//Initializing the array list
-		p = new ArrayList<PathPoint>();
+		path = new ArrayList<PVector>();
 		
-		prevPoint = 0;
 		curPoint = 0;
-		nextPoint = 0;
+		prevPoint = curPoint - 1;
+		nextPoint = curPoint + 1;
 	}
 	
 	//Adds new point to the end of the path
 	public void addPoint(int x, int y) {
-		
-		PathPoint newPoint = new PathPoint(x,y);
-		p.add(newPoint);
+		PVector temp = new PVector(x,y);
+		path.add(temp);
 	}
 	
 	//Removes path point at location x
 	public void remPathPoint(int x) {
-		p.remove(x);
+		path.remove(x);
 	}
 	
 	//Clears the path of all path points
 	public void clearPath() {
-		p.clear();
+		path.clear();
 	}
 	
-	//Returns the path
-	public ArrayList<PathPoint> getPath() {
-		return p;
+	//Increments curPoint(updates prev and next point)
+	public void nextPoint() {
+		curPoint ++;
+		prevPoint = curPoint - 1;
+		nextPoint = curPoint + 1;
+	}
+	
+	//Decrements curPoint(updates prev and next point)
+	public void prevPoint() {
+		curPoint --;
+		prevPoint = curPoint - 1;
+		nextPoint = curPoint + 1;
+	}
+	
+	//Returns the current point(Currently traveling from)
+	public PVector getCurPoint() {
+		return path.get(curPoint);
+	}
+	
+	//Returns the next point(Currently traveling to)
+	public PVector getPrevPoint() {
+		return path.get(nextPoint);
+	}
+	
+	//Returns the previous point(Previous current point)
+	public PVector getNextPoint() {
+		return path.get(prevPoint);
 	}
 }
