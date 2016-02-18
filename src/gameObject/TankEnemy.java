@@ -1,8 +1,8 @@
 package gameObject;
 
-public class FastEnemy extends Enemy{
+public class TankEnemy extends Enemy{
 	
-	FastEnemy(int x, int y){
+	TankEnemy(int x, int y){
 		super(x, y);
 	}
 	

@@ -1,18 +1,14 @@
 package gameObject;
 
 
-public class Enemy extends GameObject{
+public abstract class Enemy extends GameObject{
 	
 	Enemy(int x, int y){
 		super(x, y);
 	}
 	
-	void update(){
-		
-	}
+	abstract void update();
 	
-	void render(){
-		
-	}
+	abstract void render();
 
 }
