@@ -1,7 +1,7 @@
 package gameObject;
 
 import java.util.ArrayList;
-import processing.core.PImage;
+import processing.core.*;
 
 //Anything that is displayed but not interacted with
 public class Tile extends GameObject{
@@ -11,9 +11,8 @@ public class Tile extends GameObject{
 	int tileNum;
 	int tileVal;
 	
-	Tile(int tileNum, int tileVal, int x, int y, ArrayList<PImage> frames) {
-		super(x,y);
-		this.frames = frames;
+	public Tile(PApplet p, int tileNum, int tileVal, int x, int y) {
+		super(p,x,y);
 		this.tileNum = tileNum;
 		this.tileVal = tileVal;
 	}
@@ -22,7 +21,15 @@ public class Tile extends GameObject{
 		
 	}
 	
-	void render() {
-		
+	public void render() {
+		p.pushMatrix();
+		p.translate(pos.x,pos.y);
+		p.rotate(0);
+		p.rectMode(PApplet.CENTER);
+		p.fill(255);
+		p.rect(0,0,20,20);
+		p.fill(0);
+		p.rect(0,0,10,10);
+		p.popMatrix();
 	}
 }

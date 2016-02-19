@@ -6,8 +6,23 @@ import processing.core.*;
 //Class for holding paths to for game objects to follow
 public class Path {
 	
+	//Class to hold path points
+	public class PathPoint {
+		
+		//Order number in path
+		int ppNum;
+		//Location in path
+		PVector ppLoc;
+		
+		PathPoint(int ppNum, int x, int y) {
+			this.ppNum = ppNum;
+			ppLoc.x = x;
+			ppLoc.y = y;
+		}
+	}
+	
 	//ArrayList to hold the path
-	ArrayList<PVector> path;
+	ArrayList<PathPoint> path;
 	
 	int prevPoint; //Previous current point
 	int curPoint; //Point traveling from
@@ -15,17 +30,25 @@ public class Path {
 	
 	Path() {
 		//Initializing the array list
-		path = new ArrayList<PVector>();
+		path = new ArrayList<PathPoint>();
 		
 		curPoint = 0;
 		prevPoint = curPoint - 1;
 		nextPoint = curPoint + 1;
 	}
 	
+	//Sorts the path to be in order(low->high)
+	public void sortPath() {
+		//TODO Implement path point sorting code
+	}
+	
 	//Adds new point to the end of the path
-	public void addPoint(int x, int y) {
-		PVector temp = new PVector(x,y);
+	public void addPoint(int num, int x, int y) {
+		//Temp path point variable
+		PathPoint temp = new PathPoint(num,x,y);
+		//Adding path point to the queue
 		path.add(temp);
+		sortPath();
 	}
 	
 	//Removes path point at location x
@@ -54,16 +77,16 @@ public class Path {
 	
 	//Returns the current point(Currently traveling from)
 	public PVector getCurPoint() {
-		return path.get(curPoint);
+		return path.get(curPoint).ppLoc;
 	}
 	
 	//Returns the next point(Currently traveling to)
 	public PVector getPrevPoint() {
-		return path.get(nextPoint);
+		return path.get(nextPoint).ppLoc;
 	}
 	
 	//Returns the previous point(Previous current point)
 	public PVector getNextPoint() {
-		return path.get(prevPoint);
+		return path.get(prevPoint).ppLoc;
 	}
 }
