@@ -1,5 +1,6 @@
 #To Do List:
 Games Fleadh: 9th March
+- [ ] 30 second trailer by 2nd March
 - [ ] Game Design Report
 - [ ] A3 game poster
 - [ ] The game...
