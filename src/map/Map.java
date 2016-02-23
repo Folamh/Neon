@@ -120,7 +120,7 @@ public class Map {
 			System.out.println(x + " " + y);
 			
 			p.fill(255,0,0);
-			p.rectMode(p.CENTER);
+			p.rectMode(PConstants.CENTER);
 			p.rect(x,y,10,10);
 		}
 	}

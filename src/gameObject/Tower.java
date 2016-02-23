@@ -5,6 +5,7 @@ import java.util.*;
 import processing.core.*;
 
 public abstract class Tower extends GameObject{
+	int range;
 	PVector aim;
 	PVector defaultPlane;
 	
@@ -19,20 +20,28 @@ public abstract class Tower extends GameObject{
 		defaultPlane = new PVector(0, 0);
 	}
 	
-	static Enemy calculateLead(ArrayList<Enemy> enemy, PVector nextPathPoint){
+	void calculateTargets(ArrayList<Enemy> gameEnemies){
+		for(int i = 0; i < gameEnemies.size(); i++){
+			if((gameEnemies.get(i).pos.x < pos.x - range) && (gameEnemies.get(i).pos.x > pos.x + range)){
+				targets.add(gameEnemies.get(i));
+			}
+		}
+	}
+	
+	Enemy calculateLead(ArrayList<Enemy> enemies, PVector nextPathPoint){
 		Enemy leadTarget;
-		for(int i = 0; i < enemy.size(); i++){
-			for(int j = i; j < enemy.size() - i - 1; j++){
+		for(int i = 0; i < enemies.size(); i++){
+			for(int j = i; j < enemies.size() - i - 1; j++){
 				Enemy temp;
 				
-				if(Math.abs(enemy.get(j).pos.x - nextPathPoint.x) > Math.abs(enemy.get(j + 1).pos.x - nextPathPoint.x)){
-					temp = enemy.get(j);
-					enemy.set(j, enemy.get(j + 1));
-					enemy.set(j + 1, temp);
+				if(Math.abs(enemies.get(j).pos.x - nextPathPoint.x) > Math.abs(enemies.get(j + 1).pos.x - nextPathPoint.x)){
+					temp = enemies.get(j);
+					enemies.set(j, enemies.get(j + 1));
+					enemies.set(j + 1, temp);
 				}
 			}
 		}
-		leadTarget = enemy.get(0);
+		leadTarget = enemies.get(0);
 		return leadTarget;
 	}
 }
