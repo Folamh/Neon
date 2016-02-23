@@ -30,6 +30,7 @@ public class PlasmaTower extends Tower{
 	}
 	
 	void shoot(){
+		aim.set(PVector.sub(headPoint, leadTarget.pos));
 		projectiles.add(new PlasmaProjectile(headPoint.x, headPoint.y, leadTarget));
 	}
 }
