@@ -14,8 +14,8 @@ public abstract class Tower extends GameObject{
 	ArrayList<Enemy> targets;
 	Enemy leadTarget;
 	
-	Tower(float x, float y){
-		super(x, y);
+	Tower(PApplet p, float x, float y){
+		super(p, x, y);
 		defaultPlane = new PVector(0, 0);
 	}
 	

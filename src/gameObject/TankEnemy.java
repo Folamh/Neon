@@ -1,9 +1,11 @@
 package gameObject;
 
+import processing.core.PApplet;
+
 public class TankEnemy extends Enemy{
 	
-	TankEnemy(int x, int y){
-		super(x, y);
+	TankEnemy(PApplet p, int x, int y){
+		super(p, x, y);
 	}
 	
 	void update(){

@@ -1,9 +1,11 @@
 package gameObject;
 
+import processing.core.PApplet;
+
 public class FastEnemy extends Enemy{
 	
-	FastEnemy(int x, int y){
-		super(x, y);
+	FastEnemy(PApplet p, int x, int y){
+		super(p, x, y);
 	}
 	
 	void update(){

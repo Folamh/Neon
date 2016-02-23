@@ -8,8 +8,8 @@ public class PlasmaTower extends Tower{
 	PVector headPoint;
 	float angle;
 	
-	PlasmaTower(float x, float y){
-		super(x, y);
+	PlasmaTower(PApplet p, float x, float y){
+		super(p, x, y);
 		projectiles = new ArrayList<Projectile>();
 		targets = new ArrayList<Enemy>();//The game loop should check and add to this list
 	}
@@ -22,15 +22,15 @@ public class PlasmaTower extends Tower{
 		//base turret goes here
 		angle = PVector.angleBetween(aim, defaultPlane);
 		if(aim.y < 0) angle = - angle;
-		pushMatrix();
-		translate(headPoint.x, headPoint.y);
-		rotate(angle);
+		p.pushMatrix();
+		p.translate(headPoint.x, headPoint.y);
+		p.rotate(angle);
 		//turret head goes here
-		popMatrix();
+		p.popMatrix();
 	}
 	
 	void shoot(){
 		aim.set(PVector.sub(headPoint, leadTarget.pos));
-		projectiles.add(new PlasmaProjectile(headPoint.x, headPoint.y, leadTarget));
+		projectiles.add(new PlasmaProjectile(p, headPoint.x, headPoint.y, leadTarget));
 	}
 }
