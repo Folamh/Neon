@@ -1,19 +1,29 @@
 #To Do List:
 Games Fleadh: 9th March
+- [ ] 30 second trailer by 2nd March
 - [ ] Game Design Report
 - [ ] A3 game poster
 - [ ] The game...
 
 <h2>Seamus's:</h2>
-- [ ] Create system architecture
+- [x] Create system architecture
+- [ ] Design map file layout
+- [ ] Get map reading from files done
 
 <h2>Ross's:</h2>
-- [ ] Cry
+- [x] Cry
 - [ ] Get schedule for submissions
+- [x] Make base classes for Towers
+- [x] Make base classes for Enemies
+- [x] Make base classes for Projectiles
+- [ ] Set up Tower and Projectile interactions
+- [ ] Lay down base for Tower aiming at Enemy
 
 <h2>Hash's:</h2>
 - [ ] Code animation architecture
+- [ ] Make animation code modular so it can generate an animation with just a file, timer and cue
 
 <h2>Kalen's:</h2>
-- [ ] Start concept
+- [ ] Start concept art
 - [ ] Start towers
+- [ ] Build a map for scale(so we can work with mapping files and code to art)

@@ -1,6 +1,9 @@
 package gameObject;
 
 
-public class Enemy {
-
+public abstract class Enemy extends GameObject{
+	
+	Enemy(int x, int y){
+		super(x, y);
+	}
 }
