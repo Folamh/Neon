@@ -21,8 +21,18 @@ public abstract class Tower extends GameObject{
 	}
 	
 	void calculateTargets(ArrayList<Enemy> gameEnemies){
+		ArrayList<Integer> toRemove = new ArrayList<Integer>();
+		for(int i = 0; i < targets.size(); i++){
+			if((targets.get(i).pos.x < pos.x - range) && (targets.get(i).pos.x > pos.x + range)){
+				toRemove.add(i);
+			}
+		}
+		for(int i = 0; i < toRemove.size(); i++){
+			targets.remove(toRemove.get(i) - i);
+		}
+		
 		for(int i = 0; i < gameEnemies.size(); i++){
-			if((gameEnemies.get(i).pos.x < pos.x - range) && (gameEnemies.get(i).pos.x > pos.x + range)){
+			if((gameEnemies.get(i).pos.x > pos.x - range) && (gameEnemies.get(i).pos.x < pos.x + range)){
 				targets.add(gameEnemies.get(i));
 			}
 		}
