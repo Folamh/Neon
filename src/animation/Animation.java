@@ -1,6 +1,7 @@
 package animation;
 
 import java.util.ArrayList;
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,7 +11,7 @@ import javax.imageio.*;
 public class Animation 
 {
 	
-	ArrayList<Image> images = new ArrayList<Image>;
+	ArrayList<Image> images = new ArrayList<Image>();
 	public void loadImages()
 	{
 		
