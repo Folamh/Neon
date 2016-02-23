@@ -15,7 +15,7 @@ public class PlasmaTower extends Tower{
 	}
 	
 	void update(){
-		
+		leadTarget = Tower.calculateLead(targets, nextPathPoint);
 	}
 	
 	void render(){
