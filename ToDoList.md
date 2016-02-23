@@ -7,8 +7,8 @@ Games Fleadh: 9th March
 
 <h2>Seamus's:</h2>
 - [x] Create system architecture
-- [ ] Design map file layout
-- [ ] Get map reading from files done
+- [x] Design map file layout
+- [x] Get map reading from files done
 
 <h2>Ross's:</h2>
 - [x] Cry
