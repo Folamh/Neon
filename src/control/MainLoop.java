@@ -25,6 +25,7 @@ public class MainLoop extends PApplet{
 	
 	//Only use this for initilising variables
 	public void setup() {
+		frameRate(60);
 		map.loadMap("Resources\\Maps\\map1.txt");
 		tiles = map.getTiles();
 	}
@@ -32,6 +33,7 @@ public class MainLoop extends PApplet{
 	public void draw() {
 		background(0);
 		map.render();
+		
 	}
 
 }
