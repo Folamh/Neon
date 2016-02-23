@@ -5,7 +5,7 @@ import processing.core.*;
 public abstract class GameObject extends PApplet{
 	PVector pos;
 	
-	GameObject(int x, int y) {
+	GameObject(float x, float y) {
 		pos.x = x;
 		pos.y = y;
 	}
