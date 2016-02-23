@@ -1,34 +1,25 @@
 package animation;
 
+import processing.core.*;
 import java.util.ArrayList;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.FileReader;
-import javax.imageio.*;
 
-public class Animation 
+public class Animation
 {
-	
+	PApplet p;
 	ArrayList<Image> images = new ArrayList<Image>();
+	int counter = framecount%frameRate
+			
+	Animation(PApplet p){
+		this.p = p;
+		
+	}
 	public void loadImages()
 	{
 		
-		try
-		{
-			BufferedReader reader = new BufferedReader(new FileReader(fileName));
-			
-		}
-		catch(FileNotFoundException e)
-		{
-			System.out.println("File not found!");
-			e.printStackTrace();
-		}
-		catch(IOException e)
-		{
-			System.out.println("Error");
-		}
+	
 	}
 	
 	public void runAnimation()
