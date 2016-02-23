@@ -6,7 +6,7 @@ public abstract class GameObject{
 	PVector pos;
 	PApplet p;
 	
-	GameObject(PApplet p, int x, int y) {
+	GameObject(PApplet p, float x, float y) {
 		pos = new PVector(x,y);
 		this.p = p;
 	}
