@@ -123,7 +123,7 @@ public class Map {
 			p.rectMode(PConstants.CENTER);
 			p.rect(x,y,10,10);
 			
-			int c = p.round(p.frameCount%p.frameRate);
+			int c = PApplet.round(p.frameCount%p.frameRate);
 			System.out.println(p.frameRate);
 			
 			if(c % (p.round(p.frameRate/5)) == 0) {
