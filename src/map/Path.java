@@ -20,6 +20,8 @@ public class Path {
 		}
 	}
 	
+	
+	
 	//ArrayList to hold the path
 	ArrayList<PathPoint> path;
 	
