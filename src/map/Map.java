@@ -78,6 +78,7 @@ public class Map {
 					int tileVal = Integer.parseInt(tileData[0]);
 					
 					//Getting the x/y of the tile/path point
+					//TODO make it so you dont have to manually enter tile/half tile sizes
 					int x = (((tileNum%n))*20) + 10; 
 					int y = (((tileNum/n))*20) + 10;
 					
@@ -85,7 +86,7 @@ public class Map {
 					for(int k = 1; k < tileData.length; k++) {
 						if(tileData[k] != "") {
 							int num = Integer.parseInt(tileData[k]);
-							mapPaths.get(k).addPoint(num, x, y);
+							mapPaths.get(k-1).addPoint(num, x, y);
 						}
 					}
 					
@@ -105,9 +106,22 @@ public class Map {
 		return mapTiles;
 	}
 	
+	//TODO dunno if this will be used or not
 	public void render() {
+		
 		for(int i = 0; i < mapTiles.size(); i++) {
 			mapTiles.get(i).render();
-		} 
+		}
+		
+		for(int i = 0; i < mapPaths.get(0).path.size(); i++) {
+			int x = (int) mapPaths.get(0).path.get(i).ppLoc.x;
+			int y = (int) mapPaths.get(0).path.get(i).ppLoc.y;
+			
+			System.out.println(x + " " + y);
+			
+			p.fill(255,0,0);
+			p.rectMode(p.CENTER);
+			p.rect(x,y,10,10);
+		}
 	}
 }

@@ -16,8 +16,7 @@ public class Path {
 		
 		PathPoint(int ppNum, int x, int y) {
 			this.ppNum = ppNum;
-			ppLoc.x = x;
-			ppLoc.y = y;
+			ppLoc = new PVector(x,y);
 		}
 	}
 	
