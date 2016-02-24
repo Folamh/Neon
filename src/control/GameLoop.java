@@ -21,12 +21,16 @@ public class GameLoop {
 			backgroundObjects.get(i).update();
 		}
 		
-		for(int i = 0; i < towers.size(); i++){
-			towers.get(i).update();
-		}
-		
 		for(int i = 0; i < gameEnemies.size(); i++){
 			gameEnemies.get(i).update();
+		}
+		
+		for(int i = 0; i < towers.size(); i++){
+			towers.get(i).update();
+			towers.get(i).calculateTargets(gameEnemies);
+			if(towers.get(i).targets.size() != 0){
+				towers.get(i).calculateLead();
+			}
 		}
 	}
 

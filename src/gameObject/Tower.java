@@ -12,7 +12,7 @@ public abstract class Tower extends GameObject{
 	PVector defaultPlane;
 	
 	ArrayList<Projectile> projectiles;
-	ArrayList<Enemy> targets;
+	public ArrayList<Enemy> targets;
 	Enemy leadTarget;
 	
 	Tower(PApplet p, float x, float y){
@@ -20,7 +20,7 @@ public abstract class Tower extends GameObject{
 		defaultPlane = new PVector(0, 0);
 	}
 	
-	void calculateTargets(ArrayList<Enemy> gameEnemies){
+	public void calculateTargets(ArrayList<Enemy> gameEnemies){
 		ArrayList<Integer> toRemove = new ArrayList<Integer>();
 		
 		if(gameEnemies.size() != 0){
@@ -41,7 +41,7 @@ public abstract class Tower extends GameObject{
 		}
 	}
 	
-	void calculateLead(){
+	public void calculateLead(){
 		for(int i = 0; i < targets.size(); i++){
 			for(int j = i; j < targets.size() - i - 1; j++){
 				Enemy temp;
