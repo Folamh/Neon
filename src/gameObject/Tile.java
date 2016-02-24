@@ -17,7 +17,7 @@ public class Tile extends GameObject{
 		this.tileVal = tileVal;
 	}
 	
-	void update() {
+	public void update() {
 		
 	}
 	

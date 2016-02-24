@@ -10,13 +10,13 @@ public class NetProjectile extends Projectile {
 	}
 
 	@Override
-	void update() {
+	public void update() {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	void render() {
+	public void render() {
 		// TODO Auto-generated method stub
 
 	}

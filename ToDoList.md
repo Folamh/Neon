@@ -1,6 +1,6 @@
 #To Do List:
 Games Fleadh: 9th March
-- [ ] 30 second trailer by 2nd March
+- [ ] 30 second trailer by 2nd March <--------------
 - [ ] Game Design Report
 - [ ] A3 game poster
 - [ ] The game...
@@ -9,6 +9,8 @@ Games Fleadh: 9th March
 - [x] Create system architecture
 - [x] Design map file layout
 - [x] Get map reading from files done
+- [ ] Make path point program
+- [ ] Make game state control
 
 <h2>Ross's:</h2>
 - [x] Cry
@@ -16,8 +18,11 @@ Games Fleadh: 9th March
 - [x] Make base classes for Towers
 - [x] Make base classes for Enemies
 - [x] Make base classes for Projectiles
-- [ ] Set up Tower and Projectile interactions
+- [x] Set up Tower and Projectile interactions
 - [ ] Lay down base for Tower aiming at Enemy
+- [x] Setup GameLoop for updating objects
+- [ ] Do the projectile movement
+- [ ] Add speeds and movements to enemies
 
 <h2>Hash's:</h2>
 - [ ] Code animation architecture

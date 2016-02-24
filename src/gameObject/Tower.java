@@ -1,17 +1,18 @@
 package gameObject;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import processing.core.*;
+import processing.core.PApplet;
+import processing.core.PVector;
+
 
 public abstract class Tower extends GameObject{
+	int range;
 	PVector aim;
 	PVector defaultPlane;
 	
-	PVector nextPathPoint;
-
 	ArrayList<Projectile> projectiles;
-	ArrayList<Enemy> targets;
+	public ArrayList<Enemy> targets;
 	Enemy leadTarget;
 	
 	Tower(PApplet p, float x, float y){
@@ -19,20 +20,39 @@ public abstract class Tower extends GameObject{
 		defaultPlane = new PVector(0, 0);
 	}
 	
-	static Enemy calculateLead(ArrayList<Enemy> enemy, PVector nextPathPoint){
-		Enemy leadTarget;
-		for(int i = 0; i < enemy.size(); i++){
-			for(int j = i; j < enemy.size() - i - 1; j++){
+	public void calculateTargets(ArrayList<Enemy> gameEnemies){
+		ArrayList<Integer> toRemove = new ArrayList<Integer>();
+		
+		if(gameEnemies.size() != 0){
+			for(int i = 0; i < gameEnemies.size(); i++){
+				if((PVector.dist(gameEnemies.get(i).pos, pos) > range)){
+					toRemove.add(i);
+				}
+			}
+			for(int i = 0; i < toRemove.size(); i++){
+				targets.remove(toRemove.get(i) - i);
+			}
+		}
+		
+		for(int i = 0; i < gameEnemies.size(); i++){
+			if(PVector.dist(gameEnemies.get(i).pos, pos) < range){
+				targets.add(targets.get(i));
+			}
+		}
+	}
+	
+	public void calculateLead(){
+		for(int i = 0; i < targets.size(); i++){
+			for(int j = i; j < targets.size() - i - 1; j++){
 				Enemy temp;
 				
-				if(Math.abs(enemy.get(j).pos.x - nextPathPoint.x) > Math.abs(enemy.get(j + 1).pos.x - nextPathPoint.x)){
-					temp = enemy.get(j);
-					enemy.set(j, enemy.get(j + 1));
-					enemy.set(j + 1, temp);
+				if(PVector.dist(targets.get(j).pos, targets.get(j).nextPathPoint) > PVector.dist(targets.get(j + 1).pos, targets.get(j + 1).nextPathPoint)){
+					temp = targets.get(j);
+					targets.set(j, targets.get(j + 1));
+					targets.set(j + 1, temp);
 				}
 			}
 		}
-		leadTarget = enemy.get(0);
-		return leadTarget;
+		leadTarget = targets.get(0);
 	}
 }

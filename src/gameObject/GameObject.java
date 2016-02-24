@@ -1,6 +1,7 @@
 package gameObject;
 
-import processing.core.*;
+import processing.core.PApplet;
+import processing.core.PVector;
 
 public abstract class GameObject{
 	PVector pos;
@@ -12,6 +13,6 @@ public abstract class GameObject{
 	}
 	
 	
-	abstract void update();
-	abstract void render();
+	public abstract void update();
+	public abstract void render();
 }

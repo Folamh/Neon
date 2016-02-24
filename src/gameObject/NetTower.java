@@ -10,11 +10,11 @@ public class NetTower extends Tower{
 		super(p, x, y);
 	}
 	
-	void update(){
+	public void update(){
 		
 	}
 	
-	void render(){
+	public void render(){
 		//base turret goes here
 		float angle = PVector.angleBetween(aim, defaultPlane);
 		if(aim.y < 0) angle = - angle;

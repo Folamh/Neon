@@ -8,11 +8,11 @@ public class BasicEnemy extends Enemy{
 		super(p, x, y);
 	}
 	
-	void update(){
+	public void update(){
 		
 	}
 	
-	void render(){
+	public void render(){
 		
 	}
 }
