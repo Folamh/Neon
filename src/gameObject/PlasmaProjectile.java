@@ -8,11 +8,11 @@ public class PlasmaProjectile extends Projectile{
 		super(p, x, y, target);
 	}
 	
-	void update(){
+	public void update(){
 		
 	}
 	
-	void render(){
+	public void render(){
 		
 	}
 }

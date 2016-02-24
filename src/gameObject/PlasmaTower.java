@@ -2,7 +2,8 @@ package gameObject;
 
 import java.util.ArrayList;
 
-import processing.core.*;
+import processing.core.PApplet;
+import processing.core.PVector;
 
 public class PlasmaTower extends Tower{
 	PVector headPoint;
@@ -14,11 +15,11 @@ public class PlasmaTower extends Tower{
 		targets = new ArrayList<Enemy>();//The game loop should check and add to this list
 	}
 	
-	void update(){
-		leadTarget = Tower.calculateLead(targets, nextPathPoint);
+	public void update(){
+		
 	}
 	
-	void render(){
+	public void render(){
 		//base turret goes here
 		angle = PVector.angleBetween(aim, defaultPlane);
 		if(aim.y < 0) angle = - angle;

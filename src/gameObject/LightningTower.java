@@ -8,11 +8,11 @@ public class LightningTower extends Tower{
 		super(p, x, y);
 	}
 	
-	void update(){
+	public void update(){
 		
 	}
 	
-	void render(){
+	public void render(){
 		//turret base goes here
 	}
 }
