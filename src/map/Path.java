@@ -1,6 +1,7 @@
 package map;
 
 import java.util.ArrayList;
+
 import processing.core.*;
 
 //Class for holding paths to for game objects to follow
@@ -8,12 +9,12 @@ public class Path {
 	
 	//Class to hold path points
 	public class PathPoint {
-		
 		//Order number in path
 		int ppNum;
 		//Location in path
 		PVector ppLoc;
 		
+		//Taking in the order num and position of the path point
 		PathPoint(int ppNum, int x, int y) {
 			this.ppNum = ppNum;
 			ppLoc = new PVector(x,y);
@@ -24,8 +25,6 @@ public class Path {
 			return ppNum;
 		}
 	}
-	
-	
 	
 	//ArrayList to hold the path
 	ArrayList<PathPoint> path;

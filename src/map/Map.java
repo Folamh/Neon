@@ -132,9 +132,9 @@ public class Map {
 			
 			p.fill(255,0,0);
 			p.textAlign(PApplet.CENTER);
-			p.textSize(30);
-			p.text(i, x, y);
-			p.text(mapPaths.get(0).path.get(i).getPPNum(), x + 15, y);
+			p.textSize(15);
+			//p.text(i, x, y);
+			//p.text(mapPaths.get(0).path.get(i).getPPNum(), x, y);
 		}
 	}
 }

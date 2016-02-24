@@ -17,7 +17,7 @@ public class MainLoop extends PApplet{
 	
 	//Settings go here
 	public void settings() {
-		fullScreen();
+		size(500,500);
 	}
 	
 	Map map = new Map(this);
