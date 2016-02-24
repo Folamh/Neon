@@ -1,16 +1,16 @@
 package gameObject;
 
-import java.util.*;
+import java.util.ArrayList;
 
-import processing.core.*;
+import processing.core.PApplet;
+import processing.core.PVector;
+
 
 public abstract class Tower extends GameObject{
 	int range;
 	PVector aim;
 	PVector defaultPlane;
 	
-	PVector nextPathPoint;
-
 	ArrayList<Projectile> projectiles;
 	ArrayList<Enemy> targets;
 	Enemy leadTarget;
@@ -20,38 +20,39 @@ public abstract class Tower extends GameObject{
 		defaultPlane = new PVector(0, 0);
 	}
 	
-	void calculateTargets(ArrayList<Enemy> gameEnemies){//TODO y direction checking
+	void calculateTargets(ArrayList<Enemy> gameEnemies){
 		ArrayList<Integer> toRemove = new ArrayList<Integer>();
-		for(int i = 0; i < targets.size(); i++){
-			if((targets.get(i).pos.x < pos.x - range) && (targets.get(i).pos.x > pos.x + range)){
-				toRemove.add(i);
+		
+		if(gameEnemies.size() != 0){
+			for(int i = 0; i < gameEnemies.size(); i++){
+				if((PVector.dist(gameEnemies.get(i).pos, pos) > range)){
+					toRemove.add(i);
+				}
 			}
-		}
-		for(int i = 0; i < toRemove.size(); i++){
-			targets.remove(toRemove.get(i) - i);
+			for(int i = 0; i < toRemove.size(); i++){
+				targets.remove(toRemove.get(i) - i);
+			}
 		}
 		
 		for(int i = 0; i < gameEnemies.size(); i++){
-			if((gameEnemies.get(i).pos.x > pos.x - range) && (gameEnemies.get(i).pos.x < pos.x + range)){
-				targets.add(gameEnemies.get(i));
+			if(PVector.dist(gameEnemies.get(i).pos, pos) < range){
+				targets.add(targets.get(i));
 			}
 		}
 	}
 	
-	Enemy calculateLead(ArrayList<Enemy> enemies, PVector nextPathPoint){//TODO change nextPathPoint to the actual next point of the instance of the enemy
-		Enemy leadTarget;
-		for(int i = 0; i < enemies.size(); i++){
-			for(int j = i; j < enemies.size() - i - 1; j++){
+	void calculateLead(){
+		for(int i = 0; i < targets.size(); i++){
+			for(int j = i; j < targets.size() - i - 1; j++){
 				Enemy temp;
 				
-				if(Math.abs(enemies.get(j).pos.x - nextPathPoint.x) > Math.abs(enemies.get(j + 1).pos.x - nextPathPoint.x)){
-					temp = enemies.get(j);
-					enemies.set(j, enemies.get(j + 1));
-					enemies.set(j + 1, temp);
+				if(PVector.dist(targets.get(j).pos, targets.get(j).nextPathPoint) > PVector.dist(targets.get(j + 1).pos, targets.get(j + 1).nextPathPoint)){
+					temp = targets.get(j);
+					targets.set(j, targets.get(j + 1));
+					targets.set(j + 1, temp);
 				}
 			}
 		}
-		leadTarget = enemies.get(0);
-		return leadTarget;
+		leadTarget = targets.get(0);
 	}
 }
