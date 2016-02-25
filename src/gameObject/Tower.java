@@ -21,16 +21,11 @@ public abstract class Tower extends GameObject{
 	}
 	
 	public void calculateTargets(ArrayList<Enemy> gameEnemies){
-		ArrayList<Integer> toRemove = new ArrayList<Integer>();
-		
 		if(gameEnemies.size() != 0){
 			for(int i = 0; i < gameEnemies.size(); i++){
 				if((PVector.dist(gameEnemies.get(i).pos, pos) > range)){
-					toRemove.add(i);
+					targets.remove(i);//TODO check this for out of bounds
 				}
-			}
-			for(int i = 0; i < toRemove.size(); i++){
-				targets.remove(toRemove.get(i) - i);
 			}
 		}
 		
@@ -54,5 +49,13 @@ public abstract class Tower extends GameObject{
 			}
 		}
 		leadTarget = targets.get(0);
+	}
+	
+	void cleanProjectiles(){
+		for(int i = 0; i < projectiles.size(); i++){
+			if(PVector.dist(projectiles.get(i).pos, projectiles.get(i).target.pos) < projectiles.get(i).speed){
+				projectiles.remove(i);//TODO check this for out of bounds
+			}
+		}
 	}
 }

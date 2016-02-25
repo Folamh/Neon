@@ -1,9 +1,10 @@
 package gameObject;
 
 import processing.core.PApplet;
+import processing.core.PVector;
 
 public abstract class Projectile extends GameObject{
-	int speed;
+	float speed;
 	Enemy target;
 	
 	Projectile(PApplet p, float x, float y, Enemy target){
@@ -12,6 +13,10 @@ public abstract class Projectile extends GameObject{
 	}
 	
 	void moveToTarget(){
-		
+		PVector move;
+		float angle = PVector.angleBetween(pos, target.pos);
+		move = PVector.fromAngle(angle);
+		move.setMag(speed);
+		pos.add(move);
 	}
 }

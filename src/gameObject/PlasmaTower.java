@@ -20,6 +20,7 @@ public class PlasmaTower extends Tower{
 		for(int i = 0; i < projectiles.size(); i++){
 			projectiles.get(i).update();
 		}
+		cleanProjectiles();
 	}
 	
 	public void render(){
