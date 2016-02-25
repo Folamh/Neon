@@ -4,26 +4,40 @@ import processing.core.*;
 import java.util.ArrayList;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
 
-public class Animation
-{
-	PApplet p;
+public class Animation {
 	ArrayList<Image> images = new ArrayList<Image>();
-	int counter = frameCount%frameRate;
-		
-	Animation(PApplet p){
-		this.p = p;
-		
-	}
-	public void loadImages()
-	{
-		
+	PApplet p;
 	
-	}
-	public void currentFrame()
-	{
+	//Current frame index
+	int curFrame;
+	//Total number of frames
+	int fCount;
+	
+	//Taking in papplet and the number of frames
+	Animation(PApplet p, int fCount) {
+		this.p = p;
+		this.fCount = fCount;
 		
+		curFrame = 0;
 	}
-
+	
+	//Checking for swapping of next frame
+	public void nextFrame() {
+		//Calculating number of frames to wait to swap frame
+		int count = (int) (p.frameCount%p.frameRate);
+		//Making count a multiple of fCount
+		count -= count%fCount;
+		
+		//Checking if count frames have passed
+		if(count%fCount == 0) {
+			curFrame++;
+			curFrame = curFrame%fCount;
+		}
+	}
+	
+	//Returning the index of the current frame
+	public int getCurFrame() {
+		return curFrame;
+	}
 }
