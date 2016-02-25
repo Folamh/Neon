@@ -13,6 +13,8 @@ public class PlasmaProjectile extends Projectile{
 	}
 	
 	public void render(){
-		
+		p.pushMatrix();
+		//
+		p.popMatrix();
 	}
 }

@@ -17,8 +17,9 @@ public class NetProjectile extends Projectile {
 
 	@Override
 	public void render() {
+		p.pushMatrix();
 		// TODO Auto-generated method stub
-
+		p.popMatrix();
 	}
 
 }

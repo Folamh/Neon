@@ -24,6 +24,7 @@ public class PlasmaTower extends Tower{
 	}
 	
 	public void render(){
+		p.pushMatrix();
 		for(int i = 0; i < projectiles.size(); i++){
 			projectiles.get(i).render();
 		}
@@ -34,6 +35,7 @@ public class PlasmaTower extends Tower{
 		p.translate(headPoint.x, headPoint.y);
 		p.rotate(angle);
 		//turret head goes here
+		p.popMatrix();
 		p.popMatrix();
 	}
 	

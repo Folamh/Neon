@@ -13,6 +13,8 @@ public class LightningTower extends Tower{
 	}
 	
 	public void render(){
+		p.pushMatrix();
 		//turret base goes here
+		p.popMatrix();
 	}
 }
