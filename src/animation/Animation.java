@@ -10,8 +10,8 @@ public class Animation
 {
 	PApplet p;
 	ArrayList<Image> images = new ArrayList<Image>();
-	int counter = framecount%frameRate
-			
+	int counter = frameCount%frameRate;
+		
 	Animation(PApplet p){
 		this.p = p;
 		
@@ -21,13 +21,7 @@ public class Animation
 		
 	
 	}
-	
-	public void runAnimation()
-	{
-		
-	}
-	
-	public void chooseAnimation()
+	public void currentFrame()
 	{
 		
 	}
