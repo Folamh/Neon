@@ -1,6 +1,5 @@
 package animation;
 
-import java.util.ArrayList;
 import processing.core.*;
 
 public class Animation {

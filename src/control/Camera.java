@@ -4,42 +4,58 @@ import processing.core.*;
 
 public class Camera {
 	
+	//PApplet from the main loop
 	PApplet p;
 	
-	int curX, offSetX;
-	int curY, offSetY;
+	int curX, offSetX, setX;
+	int curY, offSetY, setY;
+	
+	boolean r;
 	
 	Camera(PApplet p) {
 		this.p = p;
 		
 		offSetX = 0;
 		offSetY = 0;
+		setX = 0;
+		setY = 0;
+		
+		r = false;
 	}
 	
-	//Checking if mouse is pressed
-	public void mousePressed() {
+	//Updating the camera
+	public void update(PVector off) {
+		
+		//Checking for the initial click
+		if(p.mousePressed && !r) {
+			r = true;
+			startLoc(off);
+		}
+		
+		//Calculating the off set
+		if(p.mousePressed) {
+			calcOffSet();
+		} else {
+			r = false;
+		}
+	}
+	
+	//Get initial location
+	public void startLoc(PVector off) {
+		//Getting the current off set
+		setX = (int) off.x;
+		setY = (int) off.y;
+		
+		//Getting the current position of the mouse
 		curX = p.mouseX;
 		curY = p.mouseY;
 	}
 	
-	//Checking if the mouse is dragged
-	public void mouseDragged() {
-		calcOffSet();
-	}
-	
-	//Checking if the mouse is released
-	public void mouseReleased() {
-		calcOffSet();
-	}
-	
-	
 	//Calculating the off set
 	public void calcOffSet() {
-		int x = p.mouseX;
-		int y = p.mouseY;
-		
-		offSetX = curX - x;
-		offSetY = curY - y;
+		//Setting offset relative to old off set
+		offSetX = setX + (curX - p.mouseX);
+		offSetY = setX + (curY - p.mouseY);
 	}
 	
 	//Returning the off set

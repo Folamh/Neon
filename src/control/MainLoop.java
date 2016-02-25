@@ -18,27 +18,30 @@ public class MainLoop extends PApplet{
 		size(1280,720);
 	}
 	
-	Map map = new Map(this);
-	Camera cam = new Camera(this);
+	Map map;
+	Camera cam;
 	PVector off;
+	PVector set;
 	ArrayList<Tile> tiles;
 	
 	//Only use this for initilising variables
 	public void setup() {
 		frameRate(60);
+		map = new Map(this);
 		off = new PVector(0,0);
 		map.loadMap("Resources\\Maps\\map1.txt");
 		tiles = map.getTiles();
-		
+		cam = new Camera(this);
 	}
 	
 	public void draw() {
 		background(0);
 		
+		cam.update(off);
 		off = cam.getOffSet();
 		
 		pushMatrix();
-		//translate(0,0);
+		translate(-off.x,-off.y);
 		map.render();
 		popMatrix();
 		
