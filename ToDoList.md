@@ -19,9 +19,9 @@ Games Fleadh: 9th March
 - [x] Make base classes for Enemies
 - [x] Make base classes for Projectiles
 - [x] Set up Tower and Projectile interactions
-- [ ] Lay down base for Tower aiming at Enemy
+- [x] Lay down base for Tower aiming at Enemy
 - [x] Setup GameLoop for updating objects
-- [ ] Do the projectile movement
+- [x] Do the projectile movement
 - [ ] Add speeds and movements to enemies
 
 <h2>Hash's:</h2>
