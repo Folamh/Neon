@@ -16,7 +16,10 @@ public class PlasmaTower extends Tower{
 	}
 	
 	public void update(){
-		
+		shoot();
+		for(int i = 0; i < projectiles.size(); i++){
+			projectiles.get(i).update();
+		}
 	}
 	
 	public void updateRelations(ArrayList<Enemy> gameEnemies){
@@ -27,6 +30,9 @@ public class PlasmaTower extends Tower{
 	}
 	
 	public void render(){
+		for(int i = 0; i < projectiles.size(); i++){
+			projectiles.get(i).render();
+		}
 		//base turret goes here
 		angle = PVector.angleBetween(aim, defaultPlane);
 		if(aim.y < 0) angle = - angle;

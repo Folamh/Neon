@@ -122,13 +122,6 @@ public class Map {
 			p.fill(255,0,0);
 			p.rectMode(PConstants.CENTER);
 			p.rect(x,y,10,10);
-			
-			int c = PApplet.round(p.frameCount%p.frameRate);
-			System.out.println(p.frameRate);
-			
-			if(c % (p.round(p.frameRate/5)) == 0) {
-				//System.out.println("LOAD THE NEXT FRAME" + c);
-			}
 		}
 	}
 }
