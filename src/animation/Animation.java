@@ -4,6 +4,8 @@ import processing.core.*;
 import java.util.ArrayList;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Animation {
 	ArrayList<Image> images = new ArrayList<Image>();
@@ -20,6 +22,37 @@ public class Animation {
 		this.fCount = fCount;
 		
 		curFrame = 0;
+	}
+	//Method to get all image filenames
+	public static ArrayList<String> getAllImages(File directory, boolean descendIntoSubDirectories) throws IOException 
+	{
+		//ArrayList that stores all the directory paths of the jpegs
+        ArrayList<String> resultList = new ArrayList<String>(100);
+        File[] f = directory.listFiles();
+        for (File file : f) {
+            if (file != null && file.getName().toLowerCase().endsWith(".jpg"))
+            {
+                resultList.add(file.getCanonicalPath());
+                
+            }
+            if (descendIntoSubDirectories && file.isDirectory()) {
+                ArrayList<String> tmp = getAllImages(file, true);
+                if (tmp != null) {
+                    resultList.addAll(tmp);
+                }
+            }
+        }
+        if (resultList.size() > 0)
+            return resultList;
+        else
+            return null;
+    }
+	void loadImages() throws IOException
+	{
+		String path = "Resources" + File.separator + "Images" + File.separator + "Enemy";
+		File p = new File(path);
+		getAllImages(p,true); 
+	
 	}
 	
 	//Checking for swapping of next frame
