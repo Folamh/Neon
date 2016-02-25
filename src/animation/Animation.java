@@ -3,12 +3,14 @@ package animation;
 import processing.core.*;
 import java.util.ArrayList;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class Animation {
-	ArrayList<Image> images = new ArrayList<Image>(6);
+	ArrayList<Image> basicEnemyMoving = new ArrayList<Image>(6);
+	ArrayList<Image> basicEnemyStill = new ArrayList<Image>(5);
 	PApplet p;
 	
 	//Current frame index
@@ -27,7 +29,7 @@ public class Animation {
 	public static ArrayList<String> getAllImages(File directory, boolean descendIntoSubDirectories) throws IOException 
 	{
 		//ArrayList that stores all the directory paths of the jpegs
-        ArrayList<String> resultList = new ArrayList<String>(100);
+		ArrayList<String> resultList = new ArrayList<String>(100);
         File[] f = directory.listFiles();
         for (File file : f) {
             if (file != null && file.getName().toLowerCase().endsWith(".jpg"))
@@ -43,19 +45,28 @@ public class Animation {
             }
         }
         if (resultList.size() > 0)
+        {
             return resultList;
+        }
         else
+        {
             return null;
+        }
+        
     }
-	void loadEnemyImages() throws IOException
+	public Image getImage(String path)
 	{
-		String path = "Resources" + File.separator + "Images" + File.separator + "Enemy";
-		File p = new File(path);
-		
-		for(int i = 0;i <6;i++ )
+		Image tempImage = null;
+		try
 		{
-			images =  image(getAllImages(p,true).resultList[i]);
+			URL imageURL = Animation.class.getResource(path);
+			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
 		}
+		catch(Exception e)
+		{
+			System.out.println("Error loading Image");
+		}
+		return tempImage;
 	
 	}
 	
