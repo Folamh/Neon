@@ -4,6 +4,7 @@ import processing.core.*;
 
 import java.util.ArrayList;
 
+import animation.Animation;
 import gameObject.*;
 import map.*;
 
@@ -22,16 +23,19 @@ public class MainLoop extends PApplet{
 	
 	Map map = new Map(this);
 	ArrayList<Tile> tiles;
-	
+	Animation animation;
 	//Only use this for initilising variables
 	public void setup() {
 		map.loadMap("Resources\\Maps\\map1.txt");
 		tiles = map.getTiles();
+		Animation animation = new Animation(this, frameCount);
+		animation.loadImage();
 	}
 	
 	public void draw() {
 		background(0);
 		map.render();
+		
 	}
 
 }

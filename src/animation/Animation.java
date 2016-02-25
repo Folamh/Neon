@@ -9,28 +9,29 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Animation {
-	ArrayList<Image> basicEnemyMoving = new ArrayList<Image>(6);
+	Image [] basicEnemyMoving = new Image[6];
 	ArrayList<Image> basicEnemyStill = new ArrayList<Image>(5);
 	PApplet p;
-	
+	File[] f;
+	ArrayList<String> resultList;
 	//Current frame index
 	int curFrame;
 	//Total number of frames
 	int fCount;
 	
 	//Taking in papplet and the number of frames
-	Animation(PApplet p, int fCount) {
+	public Animation(PApplet p, int fCount) {
 		this.p = p;
 		this.fCount = fCount;
 		
 		curFrame = 0;
 	}
 	//Method to get all image filenames
-	public static ArrayList<String> getAllImages(File directory, boolean descendIntoSubDirectories) throws IOException 
+	public ArrayList<String> getAllImages(File directory, boolean descendIntoSubDirectories) throws IOException 
 	{
 		//ArrayList that stores all the directory paths of the jpegs
-		ArrayList<String> resultList = new ArrayList<String>(100);
-        File[] f = directory.listFiles();
+		resultList = new ArrayList<String>(100);
+        f = directory.listFiles();
         for (File file : f) {
             if (file != null && file.getName().toLowerCase().endsWith(".jpg"))
             {
@@ -68,6 +69,19 @@ public class Animation {
 		}
 		return tempImage;
 	
+	}
+	
+	public void loadImage()throws IOException
+	{
+		String p = "Resources" + File.separator + "images" + File.separator + "Enemy";
+		File path = new File(p);
+		getAllImages(path,true);
+		for(int i = 0;i<6;i++)
+		{
+			p = resultList.get(i);
+			basicEnemyMoving[i] = getImage(p);
+		}
+		
 	}
 	
 	//Checking for swapping of next frame
