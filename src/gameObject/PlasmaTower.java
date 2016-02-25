@@ -22,13 +22,6 @@ public class PlasmaTower extends Tower{
 		}
 	}
 	
-	public void updateRelations(ArrayList<Enemy> gameEnemies){
-		calculateTargets(gameEnemies);
-		if(targets.size() != 0){
-			calculateLead();
-		}
-	}
-	
 	public void render(){
 		for(int i = 0; i < projectiles.size(); i++){
 			projectiles.get(i).render();

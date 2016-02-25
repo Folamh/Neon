@@ -21,12 +21,18 @@ public class Map {
 	ArrayList<Path> mapPaths;
 	//ArrayList to hold all of the tiles that will be loaded in
 	ArrayList<Tile> mapTiles;
+	//Width and height of the tiles
+	int tileWidth,tileHeight;
 	
 	public Map(PApplet p) {
 		//Initalising mapPath arraylist
 		mapPaths = new ArrayList<Path>();
 		mapTiles = new ArrayList<Tile>();
 		this.p = p;
+		
+		//Initilising the tiles width and height
+		tileWidth = 0;
+		tileHeight = 0;
 		
 		//Adding for paths to the arraylist(i = greatest number of paths per map)
 		for(int i = 0; i < 4; i++) {
@@ -57,13 +63,20 @@ public class Map {
 			//Getting the background file name
 			backgroundFile = lines.get(0);
 			
+			
+			
 			//Going through each line of the file(first line ignored, holds background file name)
-			for(int i = 1; i < lines.size(); i++) {
+			for(int i = 2; i < lines.size(); i++) {
 				//String array to hold each set of tile data in each line
 				String[] tileDataSet = lines.get(i).split("\\|");
 				
 				//Getting the background file name
 				backgroundFile = lines.get(0);
+				
+				//Getting the width and heoght of the tiles
+				String[] tSize = lines.get(1).split(",");
+				tileWidth = Integer.parseInt(tSize[0]);
+				tileHeight = Integer.parseInt(tSize[1]);
 				
 				//Going through each set of tile data
 				for(int j = 0; j < tileDataSet.length; j++) {
@@ -79,8 +92,8 @@ public class Map {
 					
 					//Getting the x/y of the tile/path point
 					//TODO make it so you dont have to manually enter tile/half tile sizes
-					int x = (((tileNum%n))*20) + 10; 
-					int y = (((tileNum/n))*20) + 10;
+					int x = (((tileNum%n))*tileWidth) + tileWidth/2; 
+					int y = (((tileNum/n))*tileHeight) + tileHeight/2;
 					
 					//Getting the path points
 					for(int k = 1; k < tileData.length; k++) {
@@ -117,11 +130,11 @@ public class Map {
 			int x = (int) mapPaths.get(0).path.get(i).ppLoc.x;
 			int y = (int) mapPaths.get(0).path.get(i).ppLoc.y;
 			
-			//System.out.println(x + " " + y);
-			
 			p.fill(255,0,0);
-			p.rectMode(PConstants.CENTER);
-			p.rect(x,y,10,10);
+			p.textAlign(PApplet.CENTER);
+			p.textSize(15);
+			//p.text(i, x, y);
+			//p.text(mapPaths.get(0).path.get(i).getPPNum(), x, y);
 		}
 	}
 }
