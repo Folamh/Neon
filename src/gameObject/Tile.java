@@ -7,7 +7,6 @@ import processing.core.*;
 public class Tile extends GameObject{
 	
 	//Holds all of the frames of the tile
-	ArrayList<PImage> frames;
 	int tileNum;
 	int tileVal;
 	
@@ -27,9 +26,9 @@ public class Tile extends GameObject{
 		p.rotate(0);
 		p.rectMode(PApplet.CENTER);
 		p.fill(255);
-		//p.rect(0,0,20,20);
+		p.rect(0,0,20,20);
 		p.fill(0);
-		//p.rect(0,0,10,10);
+		p.rect(0,0,10,10);
 		p.popMatrix();
 	}
 }

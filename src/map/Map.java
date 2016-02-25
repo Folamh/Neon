@@ -1,14 +1,9 @@
 package map;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.io.*;
 import java.util.*;
-
 import gameObject.Tile;
 import processing.core.*;
-
-import gameObject.Tile;
 
 public class Map {
 	
@@ -46,37 +41,36 @@ public class Map {
 		String backgroundFile;
 		
 		//List to hold all lines of the file
-		List<String> lines = null;
+		ArrayList<String> lines = new ArrayList<String>();
 		
 		//Tile number
 		int tileNum = 0;
 		
 		//Trying to read in the file
 		try {
-			//List that holds every line of the file
-			lines = Files.readAllLines(Paths.get(mapFile), StandardCharsets.US_ASCII);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		if(lines != null) {
+			
+			//Buffered reader to read in lines from the file
+			BufferedReader reader = new BufferedReader(new FileReader(mapFile));
+			//String to hold lines
+			String line = "";
+			
+			//Going through each line of the file and adding it to the array list
+			while((line = reader.readLine()) != null) {
+				lines.add(line);
+			}
+			
 			//Getting the background file name
 			backgroundFile = lines.get(0);
 			
-			
+			//Getting the width and height of the tiles
+			String[] tSize = lines.get(1).split(",");
+			tileWidth = Integer.parseInt(tSize[0]);
+			tileHeight = Integer.parseInt(tSize[1]);
 			
 			//Going through each line of the file(first line ignored, holds background file name)
 			for(int i = 2; i < lines.size(); i++) {
 				//String array to hold each set of tile data in each line
 				String[] tileDataSet = lines.get(i).split("\\|");
-				
-				//Getting the background file name
-				backgroundFile = lines.get(0);
-				
-				//Getting the width and heoght of the tiles
-				String[] tSize = lines.get(1).split(",");
-				tileWidth = Integer.parseInt(tSize[0]);
-				tileHeight = Integer.parseInt(tSize[1]);
 				
 				//Going through each set of tile data
 				for(int j = 0; j < tileDataSet.length; j++) {
@@ -107,6 +101,10 @@ public class Map {
 					tileNum++;
 				}
 			}
+			
+		} catch (IOException e) {
+			//Printing the stack trace for the exception
+			e.printStackTrace();
 		}
 	}
 	

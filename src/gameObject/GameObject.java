@@ -1,9 +1,12 @@
 package gameObject;
 
-import processing.core.PApplet;
-import processing.core.PVector;
+import java.util.ArrayList;
+import processing.core.*;
 
 public abstract class GameObject{
+	
+	//ArrayList to hold the frames of each object
+	ArrayList<PImage> frames;
 	PVector pos;
 	PApplet p;
 	
