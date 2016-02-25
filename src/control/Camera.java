@@ -55,7 +55,7 @@ public class Camera {
 	public void calcOffSet() {
 		//Setting offset relative to old off set
 		offSetX = setX + (curX - p.mouseX);
-		offSetY = setX + (curY - p.mouseY);
+		offSetY = setY + (curY - p.mouseY);
 	}
 	
 	//Returning the off set
