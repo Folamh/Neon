@@ -124,15 +124,5 @@ public class Map {
 			mapTiles.get(i).render();
 		}
 		
-		for(int i = 0; i < mapPaths.get(0).path.size(); i++) {
-			int x = (int) mapPaths.get(0).path.get(i).ppLoc.x;
-			int y = (int) mapPaths.get(0).path.get(i).ppLoc.y;
-			
-			p.fill(255,0,0);
-			p.textAlign(PApplet.CENTER);
-			p.textSize(15);
-			//p.text(i, x, y);
-			//p.text(mapPaths.get(0).path.get(i).getPPNum(), x, y);
-		}
 	}
 }
