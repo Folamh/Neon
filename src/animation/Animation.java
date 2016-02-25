@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Animation {
-	ArrayList<Image> images = new ArrayList<Image>();
+	ArrayList<Image> images = new ArrayList<Image>(6);
 	PApplet p;
 	
 	//Current frame index
@@ -47,23 +47,29 @@ public class Animation {
         else
             return null;
     }
-	void loadImages() throws IOException
+	void loadEnemyImages() throws IOException
 	{
 		String path = "Resources" + File.separator + "Images" + File.separator + "Enemy";
 		File p = new File(path);
-		getAllImages(p,true); 
+		
+		for(int i = 0;i <6;i++ )
+		{
+			images =  image(getAllImages(p,true).resultList[i]);
+		}
 	
 	}
 	
 	//Checking for swapping of next frame
-	public void nextFrame() {
+	public void nextFrame() 
+	{
 		//Calculating number of frames to wait to swap frame
 		int count = (int) (p.frameCount%p.frameRate);
 		//Making count a multiple of fCount
 		count -= count%fCount;
 		
 		//Checking if count frames have passed
-		if(count%fCount == 0) {
+		if(count%fCount == 0) 
+		{
 			curFrame++;
 			curFrame = curFrame%fCount;
 		}
