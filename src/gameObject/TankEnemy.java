@@ -13,6 +13,8 @@ public class TankEnemy extends Enemy{
 	}
 	
 	public void render(){
+		p.pushMatrix();
 		
+		p.popMatrix();
 	}
 }

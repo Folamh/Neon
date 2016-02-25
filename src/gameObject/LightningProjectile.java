@@ -18,7 +18,9 @@ public class LightningProjectile extends Projectile {
 	@Override
 	public void render() {
 		// TODO Auto-generated method stub
-
+		p.pushMatrix();
+		
+		p.popMatrix();
 	}
 
 }

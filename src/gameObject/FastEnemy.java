@@ -13,6 +13,8 @@ public class FastEnemy extends Enemy{
 	}
 	
 	public void render(){
+		p.pushMatrix();
 		
+		p.popMatrix();
 	}
 }

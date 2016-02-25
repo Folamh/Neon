@@ -16,10 +16,18 @@ public class PlasmaTower extends Tower{
 	}
 	
 	public void update(){
-		
+		shoot();
+		for(int i = 0; i < projectiles.size(); i++){
+			projectiles.get(i).update();
+		}
+		cleanProjectiles();
 	}
 	
 	public void render(){
+		p.pushMatrix();
+		for(int i = 0; i < projectiles.size(); i++){
+			projectiles.get(i).render();
+		}
 		//base turret goes here
 		angle = PVector.angleBetween(aim, defaultPlane);
 		if(aim.y < 0) angle = - angle;
@@ -27,6 +35,7 @@ public class PlasmaTower extends Tower{
 		p.translate(headPoint.x, headPoint.y);
 		p.rotate(angle);
 		//turret head goes here
+		p.popMatrix();
 		p.popMatrix();
 	}
 	

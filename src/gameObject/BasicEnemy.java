@@ -13,6 +13,8 @@ public class BasicEnemy extends Enemy{
 	}
 	
 	public void render(){
+		p.pushMatrix();
 		
+		p.popMatrix();
 	}
 }
