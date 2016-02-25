@@ -9,6 +9,7 @@ Games Fleadh: 9th March
 - [x] Create system architecture
 - [x] Design map file layout
 - [x] Get map reading from files done
+- [x] Get camera working
 - [ ] Make path point program
 - [ ] Make game state control
 
