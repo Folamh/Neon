@@ -1,6 +1,5 @@
 package gameObject;
 
-import java.util.ArrayList;
 import processing.core.*;
 
 //Anything that is displayed but not interacted with

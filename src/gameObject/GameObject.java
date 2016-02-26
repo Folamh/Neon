@@ -4,16 +4,11 @@ import java.util.ArrayList;
 import processing.core.*;
 
 public abstract class GameObject{
-<<<<<<< HEAD
 	
 	//ArrayList to hold the frames of each object
-	ArrayList<PImage> frames;
+	ArrayList<ArrayList<PImage>> frames;
 	PVector pos;
 	PApplet p;
-=======
-	PVector pos;//Position of the object.
-	PApplet p;//The current sketch being drawn.
->>>>>>> master
 	
 	GameObject(PApplet p, float x, float y) {
 		pos = new PVector(x,y);

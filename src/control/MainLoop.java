@@ -20,8 +20,8 @@ public class MainLoop extends PApplet{
 	
 	Map map;
 	Camera cam;
+	//PVector to hold the offset for everything on the screen
 	PVector off;
-	PVector set;
 	ArrayList<Tile> tiles;
 	
 	//Only use this for initilising variables
@@ -31,18 +31,18 @@ public class MainLoop extends PApplet{
 		off = new PVector(0,0);
 		map.loadMap("Resources\\Maps\\map1.txt");
 		tiles = map.getTiles();
-		cam = new Camera(this);
+		cam = new Camera(this,true);
 	}
 	
 	public void draw() {
 		background(0);
 		
-		cam.update(off);
+		cam.update(off,0);
 		off = cam.getOffSet();
 		
 		pushMatrix();
 		translate(-off.x,-off.y);
-		map.render();
+		map.render(false);
 		popMatrix();
 		
 	}
