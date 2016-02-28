@@ -35,6 +35,8 @@ public class MainLoop extends PApplet{
 	public void draw() {
 		background(0);
 		map.render();
+		animation.getCurFrame();
+		println(animation.curFrame);
 		
 	}
 

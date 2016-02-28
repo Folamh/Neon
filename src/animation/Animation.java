@@ -5,20 +5,18 @@ import java.util.ArrayList;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 
-public class Animation {
-	Image [] basicEnemyMoving = new Image[6];
-	ArrayList<Image> basicEnemyStill = new ArrayList<Image>(5);
+public class Animation{
+	Image [] basicEnemyMoving = new Image[7];
+	Image [] basicEnemyStill = new Image[6];
 	PApplet p;
 	File[] f;
 	ArrayList<String> resultList;
 	//Current frame index
-	int curFrame;
+	public int curFrame;
 	//Total number of frames
 	int fCount;
-	
 	//Taking in papplet and the number of frames
 	public Animation(PApplet p, int fCount) {
 		this.p = p;
@@ -27,15 +25,15 @@ public class Animation {
 		curFrame = 0;
 	}
 	//Method to get all image filenames
-	public ArrayList<String> getAllImages(File directory, boolean descendIntoSubDirectories) throws IOException 
+	public ArrayList<String> getAllImages(File directory, boolean descendIntoSubDirectories) 
 	{
-		//ArrayList that stores all the directory paths of the jpegs
+		//ArrayList that stores all the directory paths of the png images
 		resultList = new ArrayList<String>(100);
         f = directory.listFiles();
         for (File file : f) {
-            if (file != null && file.getName().toLowerCase().endsWith(".jpg"))
+            if (file != null && file.getName().endsWith(".png"))
             {
-                resultList.add(file.getCanonicalPath());
+            	resultList.add(file.getPath());
                 
             }
             if (descendIntoSubDirectories && file.isDirectory()) {
@@ -65,21 +63,20 @@ public class Animation {
 		}
 		catch(Exception e)
 		{
-			System.out.println("Error loading Image");
+			System.out.println("Error loading Image - " + e.getMessage());
 		}
 		return tempImage;
 	
 	}
 	
-	public void loadImage()throws IOException
+	public void loadImage()
 	{
-		String p = "Resources" + File.separator + "images" + File.separator + "Enemy";
-		File path = new File(p);
+		File path = new File("C:/Users/Hashdog/Documents/Neon/Resources/Images/Enemy/Basic Enemy");
 		getAllImages(path,true);
 		for(int i = 0;i<6;i++)
 		{
-			p = resultList.get(i);
-			basicEnemyMoving[i] = getImage(p);
+			
+			basicEnemyMoving[i] = getImage(resultList.get(i));
 		}
 		
 	}
@@ -97,11 +94,20 @@ public class Animation {
 		{
 			curFrame++;
 			curFrame = curFrame%fCount;
+			
 		}
+		
 	}
 	
 	//Returning the index of the current frame
 	public int getCurFrame() {
+		
 		return curFrame;
+	}
+	
+	public void displayAnimation()
+	{
+		
+		
 	}
 }
