@@ -9,7 +9,7 @@ public class BasicEnemy extends Enemy{
 	}
 	
 	public void update(){
-		
+		moveToPathPoint();
 	}
 	
 	public void render(){
