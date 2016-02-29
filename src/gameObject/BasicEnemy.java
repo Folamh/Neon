@@ -9,7 +9,13 @@ public class BasicEnemy extends Enemy{
 	}
 	
 	public void update(){
-		moveToPathPoint();
+		if(pos.x != nextPathPoint.x){
+			moveToPathPoint();
+		}
+		else{
+			takeElevator();
+		}
+		
 	}
 	
 	public void render(){

@@ -23,7 +23,7 @@ public abstract class Tower extends GameObject{
 	public void calculateTargets(ArrayList<Enemy> gameEnemies){//GameLoop passes all map enemies.
 		if(targets.size() != 0){
 			for(int i = 0; i < targets.size(); i++){
-				if((PVector.dist(targets.get(i).pos, pos) > range)){//If the enemy is out of range remove him.
+				if((PVector.dist(targets.get(i).pos, pos) > range) || targets.get(i).inElevator){//If the enemy is out of range remove him or in a elevator.
 					targets.remove(i);//TODO check this for out of bounds
 				}
 			}
