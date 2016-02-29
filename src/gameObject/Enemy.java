@@ -12,6 +12,7 @@ public abstract class Enemy extends GameObject{
 	}
 	
 	void moveToPathPoint(){
+		
 		if(pos.x != nextPathPoint.x){
 			if((pos.x - nextPathPoint.x) < 0){
 				pos.sub(speed, 0);

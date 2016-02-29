@@ -8,11 +8,10 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Animation extends PApplet{
-	PImage [] basicEnemyMoving = new PImage[7];
+	public PImage [] basicEnemyMoving = new PImage[6];
 	PImage [] basicEnemyStill = new PImage[6];
 	PApplet p;
 	File[] f;
-	ArrayList<String> resultList;
 	//Current frame index
 	public int curFrame;
 	//Total number of frames
@@ -29,7 +28,7 @@ public class Animation extends PApplet{
 	{
 		sketchPath("");
 		System.out.println(sketchPath(""));
-		File path = new File("C:/Users/Hashdog/Documents/Neon/src/data/Enemy/Basic Enemy/Moving");
+		File path = new File("C:/Users/Hashdog/Documents/Neon/Resources/Images/Enemy/Basic Enemy/Moving");
 		int i = 0;
 		f = path.listFiles();
         for (File file : f) {
@@ -42,6 +41,10 @@ public class Animation extends PApplet{
             	basicEnemyMoving[i] = loadImage("Resources/Images/Enemy/Basic Enemy/Moving/" + i + ".png");
 				
             	i++;
+            }
+            else
+            {
+            	System.out.println("Error");
             }
             
         }
