@@ -6,7 +6,9 @@ import processing.core.*;
 public abstract class GameObject{
 	
 	//ArrayList to hold the frames of each object
-	ArrayList<ArrayList<PImage>> frames;
+	ArrayList<ArrayList<PImage>> idleAnim;
+	ArrayList<ArrayList<PImage>> activeAnim;
+	
 	PVector pos;
 	PApplet p;
 	

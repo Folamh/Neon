@@ -31,7 +31,7 @@ public class EditorLoop extends PApplet{
 		mapName = "Resources\\Maps\\map1.txt";
 		
 		//Initializing the camera
-		cam = new Camera(this, true);
+		cam = new Camera(this);
 		
 		//Initializing the map
 		m = new Map(this);

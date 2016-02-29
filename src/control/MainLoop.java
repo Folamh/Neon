@@ -2,6 +2,7 @@ package control;
 
 import processing.core.*;
 import java.util.ArrayList;
+
 import gameObject.*;
 import map.*;
 
@@ -20,24 +21,25 @@ public class MainLoop extends PApplet{
 	
 	Map map;
 	Camera cam;
+	
 	//PVector to hold the offset for everything on the screen
 	PVector off;
 	ArrayList<Tile> tiles;
 	
-	//Only use this for initilising variables
+	//Only use this for initializing variables
 	public void setup() {
 		frameRate(60);
 		map = new Map(this);
 		off = new PVector(0,0);
 		map.loadMap("Resources\\Maps\\map1.txt");
 		tiles = map.getTiles();
-		cam = new Camera(this,true);
+		cam = new Camera(this);
 	}
 	
 	public void draw() {
 		background(0);
 		
-		cam.update(off,0);
+		cam.update(off,1);
 		off = cam.getOffSet();
 		
 		pushMatrix();

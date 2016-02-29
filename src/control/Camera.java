@@ -29,6 +29,11 @@ public class Camera {
 		mCam = false;
 	}
 	
+	//Constructor with yMove defaulted to false
+	Camera(PApplet p) {
+		this(p,false);
+	}
+	
 	//Updating the camera
 	public void update(PVector off, int mode) {
 		
@@ -94,7 +99,7 @@ public class Camera {
 			offSetY = setY + (curY - p.mouseY);
 		//Mouse toward edge camera movement
 		} else if(mode == 1) {
-			System.out.println(p.mouseX + "    " + (p.width-50));
+			//System.out.println(p.mouseX + "    " + (p.width-50));
 			
 			if(p.mouseX < 50) {
 				offSetX -= PApplet.abs(curX - p.mouseX);
