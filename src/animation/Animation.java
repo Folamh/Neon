@@ -1,15 +1,17 @@
 package animation;
 
-import processing.core.*;
-import java.util.ArrayList;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.File;
-import java.net.URL;
+import java.io.IOException;
+import java.util.ArrayList;
 
-public class Animation{
-	Image [] basicEnemyMoving = new Image[7];
-	Image [] basicEnemyStill = new Image[6];
+import org.apache.commons.io.FileUtils;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+
+public class Animation extends PApplet{
+	PImage [] basicEnemyMoving = new PImage[7];
+	PImage [] basicEnemyStill = new PImage[6];
 	PApplet p;
 	File[] f;
 	ArrayList<String> resultList;
@@ -24,59 +26,28 @@ public class Animation{
 		
 		curFrame = 0;
 	}
-	//Method to get all image filenames
-	public ArrayList<String> getAllImages(File directory, boolean descendIntoSubDirectories) 
+	
+	public void loadImages()
 	{
-		//ArrayList that stores all the directory paths of the png images
-		resultList = new ArrayList<String>(100);
-        f = directory.listFiles();
+		sketchPath("");
+		System.out.println(sketchPath(""));
+		File path = new File("C:/Users/Hashdog/Documents/Neon/src/data/Enemy/Basic Enemy/Moving");
+		int i = 0;
+		f = path.listFiles();
         for (File file : f) {
+        	
+        	
             if (file != null && file.getName().endsWith(".png"))
             {
-            	resultList.add(file.getPath());
-                
+            	
+            	System.out.println("image " + i + " loaded successfully");
+            	basicEnemyMoving[i] = loadImage("Resources/Images/Enemy/Basic Enemy/Moving/" + i + ".png");
+				
+            	i++;
             }
-            if (descendIntoSubDirectories && file.isDirectory()) {
-                ArrayList<String> tmp = getAllImages(file, true);
-                if (tmp != null) {
-                    resultList.addAll(tmp);
-                }
-            }
+            
         }
-        if (resultList.size() > 0)
-        {
-            return resultList;
-        }
-        else
-        {
-            return null;
-        }
-        
-    }
-	public Image getImage(String path)
-	{
-		Image tempImage = null;
-		try
-		{
-			URL imageURL = Animation.class.getResource(path);
-			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-		}
-		catch(Exception e)
-		{
-			System.out.println("Error loading Image - " + e.getMessage());
-		}
-		return tempImage;
-	
-	}
-	
-	public void loadImage()
-	{
-		File path = new File("Data/Enemy/Basic Enemy/Moving");
-		getAllImages(path,false);
-		for(int i = 0;i<6;i++)
-		{
-			basicEnemyMoving[i] = getImage(resultList.get(i));
-		}		
+		
 	}
 	
 	//Checking for swapping of next frame
@@ -94,7 +65,7 @@ public class Animation{
 			curFrame = curFrame%fCount;
 			
 		}
-	
+		
 	}
 	
 	//Returning the index of the current frame

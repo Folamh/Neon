@@ -29,14 +29,12 @@ public class MainLoop extends PApplet{
 		map.loadMap("Resources\\Maps\\map1.txt");
 		tiles = map.getTiles();
 		Animation animation = new Animation(this, frameCount);
-		animation.loadImage();
+		animation.loadImages();
 	}
 	
 	public void draw() {
 		background(0);
 		map.render();
-		animation.getCurFrame();
-		println(animation.curFrame);
 		
 	}
 
