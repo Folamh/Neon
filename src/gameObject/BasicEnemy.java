@@ -1,11 +1,14 @@
 package gameObject;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
+import processing.core.PVector;
 
 public class BasicEnemy extends Enemy{
 	
-	BasicEnemy(PApplet p, int x, int y){
-		super(p, x, y);
+	BasicEnemy(PApplet p, int x, int y, ArrayList<PVector> path){
+		super(p, x, y, path);
 	}
 	
 	public void update(){

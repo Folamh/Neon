@@ -1,5 +1,7 @@
 package gameObject;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -7,9 +9,11 @@ public abstract class Enemy extends GameObject{
 	PVector nextPathPoint;
 	float speed;
 	boolean inElevator;
+	ArrayList<PVector> path;
 	
-	Enemy(PApplet p, int x, int y){
+	Enemy(PApplet p, int x, int y, ArrayList<PVector> path){
 		super(p, x, y);
+		this.path = path;
 	}
 	
 	void moveToPathPoint(){
