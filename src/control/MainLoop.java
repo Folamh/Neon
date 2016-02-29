@@ -27,7 +27,7 @@ public class MainLoop extends PApplet{
 	//Only use this for initializing variables
 	public void setup() {
 		frameRate(60);
-		map.loadMap("Resources\\Maps\\map1.txt");
+		map.loadMap("Resources/Maps/map1.txt");
 		tiles = map.getTiles();
 		Animation animation = new Animation(this, frameCount);
 		animation.loadImages();

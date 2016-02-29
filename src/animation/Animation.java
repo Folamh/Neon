@@ -1,9 +1,6 @@
 package animation;
 
 import java.io.File;
-import java.util.ArrayList;
-
-
 import processing.core.PApplet;
 import processing.core.PImage;
 
