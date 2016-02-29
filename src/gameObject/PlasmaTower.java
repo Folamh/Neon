@@ -1,26 +1,46 @@
 package gameObject;
 
-import processing.core.*;
+import java.util.ArrayList;
+
+import processing.core.PApplet;
+import processing.core.PVector;
 
 public class PlasmaTower extends Tower{
 	PVector headPoint;
+	float angle;
 	
-	PlasmaTower(int x, int y){
-		super(x, y);
+	PlasmaTower(PApplet p, float x, float y){
+		super(p, x, y);
+		projectiles = new ArrayList<Projectile>();
+		targets = new ArrayList<Enemy>();//The game loop should check and add to this list
 	}
 	
-	void update(){
-		
+	public void update(){
+		shoot();
+		for(int i = 0; i < projectiles.size(); i++){
+			projectiles.get(i).update();
+		}
+		cleanProjectiles();
 	}
 	
-	void render(){
+	public void render(){
+		p.pushMatrix();
+		for(int i = 0; i < projectiles.size(); i++){
+			projectiles.get(i).render();
+		}
 		//base turret goes here
-		float angle = PVector.angleBetween(aim, defaultPlane);
+		angle = PVector.angleBetween(aim, defaultPlane);
 		if(aim.y < 0) angle = - angle;
-		pushMatrix();
-		translate(headPoint.x, headPoint.y);
-		rotate(angle);
+		p.pushMatrix();
+		p.translate(headPoint.x, headPoint.y);
+		p.rotate(angle);
 		//turret head goes here
-		popMatrix();
+		p.popMatrix();
+		p.popMatrix();
+	}
+	
+	void shoot(){
+		aim.set(PVector.sub(headPoint, leadTarget.pos));
+		projectiles.add(new PlasmaProjectile(p, headPoint.x, headPoint.y, leadTarget));
 	}
 }

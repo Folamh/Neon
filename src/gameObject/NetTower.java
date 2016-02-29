@@ -1,26 +1,29 @@
 package gameObject;
 
+import processing.core.PApplet;
 import processing.core.PVector;
 
 public class NetTower extends Tower{
 	PVector headPoint;
 	
-	NetTower(int x, int y){
-		super(x, y);
+	NetTower(PApplet p, int x, int y){
+		super(p, x, y);
 	}
 	
-	void update(){
+	public void update(){
 		
 	}
 	
-	void render(){
+	public void render(){
+		p.pushMatrix();
 		//base turret goes here
 		float angle = PVector.angleBetween(aim, defaultPlane);
 		if(aim.y < 0) angle = - angle;
-		pushMatrix();
-		translate(headPoint.x, headPoint.y);
-		rotate(angle);
+		p.pushMatrix();
+		p.translate(headPoint.x, headPoint.y);
+		p.rotate(angle);
 		//turret head goes here
-		popMatrix();
+		p.popMatrix();
+		p.popMatrix();
 	}
 }

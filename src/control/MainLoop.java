@@ -18,7 +18,7 @@ public class MainLoop extends PApplet{
 	
 	//Settings go here
 	public void settings() {
-		fullScreen();
+		size(500,500);
 	}
 	
 	Map map = new Map(this);
@@ -26,6 +26,7 @@ public class MainLoop extends PApplet{
 	Animation animation;
 	//Only use this for initilising variables
 	public void setup() {
+		frameRate(60);
 		map.loadMap("Resources\\Maps\\map1.txt");
 		tiles = map.getTiles();
 		Animation animation = new Animation(this, frameCount);

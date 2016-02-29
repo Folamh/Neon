@@ -1,6 +1,7 @@
 package map;
 
 import java.util.ArrayList;
+
 import processing.core.*;
 
 //Class for holding paths to for game objects to follow
@@ -8,16 +9,20 @@ public class Path {
 	
 	//Class to hold path points
 	public class PathPoint {
-		
 		//Order number in path
 		int ppNum;
 		//Location in path
 		PVector ppLoc;
 		
+		//Taking in the order num and position of the path point
 		PathPoint(int ppNum, int x, int y) {
 			this.ppNum = ppNum;
-			ppLoc.x = x;
-			ppLoc.y = y;
+			ppLoc = new PVector(x,y);
+		}
+		
+		//Returns the path point number
+		public int getPPNum() {
+			return ppNum;
 		}
 	}
 	
@@ -39,7 +44,17 @@ public class Path {
 	
 	//Sorts the path to be in order(low->high)
 	public void sortPath() {
-		//TODO Implement path point sorting code
+		for(int i = 2; i < path.size(); i++) {
+			
+			//Temp variable for swapping path points
+			PathPoint temp;
+			
+			for(int j = i; j > 1 && path.get(j).getPPNum() < path.get(j-1).getPPNum(); j--) {
+				temp = path.get(j);
+				path.set(j , path.get(j-1));
+				path.set(j-1, temp);
+			}
+		}
 	}
 	
 	//Adds new point to the end of the path

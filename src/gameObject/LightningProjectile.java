@@ -1,22 +1,26 @@
 package gameObject;
 
+import processing.core.PApplet;
+
 public class LightningProjectile extends Projectile {
 
-	public LightningProjectile(int x, int y, Enemy target) {
-		super(x, y, target);
+	public LightningProjectile(PApplet p, int x, int y, Enemy target) {
+		super(p, x, y, target);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	void update() {
+	public void update() {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	void render() {
+	public void render() {
 		// TODO Auto-generated method stub
-
+		p.pushMatrix();
+		
+		p.popMatrix();
 	}
 
 }

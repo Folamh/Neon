@@ -17,7 +17,7 @@ public class Tile extends GameObject{
 		this.tileVal = tileVal;
 	}
 	
-	void update() {
+	public void update() {
 		
 	}
 	
@@ -27,9 +27,9 @@ public class Tile extends GameObject{
 		p.rotate(0);
 		p.rectMode(PApplet.CENTER);
 		p.fill(255);
-		p.rect(0,0,20,20);
+		//p.rect(0,0,20,20);
 		p.fill(0);
-		p.rect(0,0,10,10);
+		//p.rect(0,0,10,10);
 		p.popMatrix();
 	}
 }

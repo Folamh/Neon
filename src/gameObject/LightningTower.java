@@ -1,16 +1,20 @@
 package gameObject;
 
+import processing.core.PApplet;
+
 public class LightningTower extends Tower{
 	
-	LightningTower(int x, int y){
-		super(x, y);
+	LightningTower(PApplet p, int x, int y){
+		super(p, x, y);
 	}
 	
-	void update(){
+	public void update(){
 		
 	}
 	
-	void render(){
+	public void render(){
+		p.pushMatrix();
 		//turret base goes here
+		p.popMatrix();
 	}
 }
