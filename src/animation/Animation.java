@@ -71,14 +71,12 @@ public class Animation{
 	
 	public void loadImage()
 	{
-		File path = new File("C:/Users/Hashdog/Documents/Neon/Resources/Images/Enemy/Basic Enemy");
-		getAllImages(path,true);
+		File path = new File("Data/Enemy/Basic Enemy/Moving");
+		getAllImages(path,false);
 		for(int i = 0;i<6;i++)
 		{
-			
 			basicEnemyMoving[i] = getImage(resultList.get(i));
-		}
-		
+		}		
 	}
 	
 	//Checking for swapping of next frame
@@ -96,7 +94,7 @@ public class Animation{
 			curFrame = curFrame%fCount;
 			
 		}
-		
+	
 	}
 	
 	//Returning the index of the current frame
