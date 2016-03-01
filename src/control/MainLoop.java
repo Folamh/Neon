@@ -36,6 +36,7 @@ public class MainLoop extends PApplet{
 	public void draw() {
 		background(0);
 		map.render();
+		pushMatrix();
 		for(int i = 0;i<6;i++)
 		{
 			image(animation.basicEnemyMoving[i],250,250);
@@ -44,7 +45,7 @@ public class MainLoop extends PApplet{
 				i = 0;
 			}
 		}
-		
+		popMatrix();
 	}
 
 }
