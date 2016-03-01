@@ -59,9 +59,9 @@ public class Animation{
 	{
 		
 		//Calculating number of frames to wait to swap frame
-		int count = (int) (p.frameCount%p.frameRate);
+		int count = (int) (p.frameCount%60);
 		//Making count a multiple of fCount
-		count -= count%fCount;//TODO fix animation speed
+		//count -= count%fCount;//TODO fix animation speed
 		count*=frameTime;
 		//Checking if count frames have passed
 		if(count%fCount == 0) 
