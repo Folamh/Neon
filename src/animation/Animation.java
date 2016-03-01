@@ -5,28 +5,28 @@ import java.io.File;
 
 import processing.core.*;
 
-public class Animation extends PApplet{
+public class Animation{
 	public PImage [] images;
 	PApplet p;
 	File[] f;
 	String path;
 	double frameTime;
+	PVector pos;
 	//Current frame index
 	public int curFrame;
 	//Total number of frames
 	int fCount;
 	//Taking in papplet and the number of frames
-	public Animation(PApplet p, String path, double frameTime) {
+	public Animation(PApplet p, String path, double frameTime, PVector pos) {
 		this.p = p;
 		this.path = path;
 		this.frameTime = frameTime;
+		this.pos = pos;
 		curFrame = 0;
 	}
 	
 	public void loadImages()
 	{
-		sketchPath("");
-		System.out.println(sketchPath(""));
 		File path = new File(this.path);
 		String url;
 		int fCount = 0;
@@ -86,7 +86,7 @@ public class Animation extends PApplet{
 		try
 		{
 			System.out.println("displaying");
-			p.image(images[curFrame],100,100);
+			p.image(images[curFrame],pos.x,pos.y);
 			nextFrame();
 		}
 		catch(Exception e)
