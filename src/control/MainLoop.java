@@ -27,24 +27,25 @@ public class MainLoop extends PApplet{
 	//Only use this for initializing variables
 	public void setup() {
 		frameRate(60);
-		//map.loadMap("Resources/Maps/map1.txt");
-		//tiles = map.getTiles();
+		map.loadMap("Resources/Maps/map1.txt");
+		tiles = map.getTiles();
 		Animation animation = new Animation(this, frameCount);
 		animation.loadImages();
 	}
 	
 	public void draw() {
 		background(0);
-		//map.render();
-		/*for(int i = 0;i<6;i++)
+		map.render();
+		pushMatrix();
+		for(int i = 0;i<6;i++)
 		{
 			image(animation.basicEnemyMoving[i],250,250);
 			if(i >= 6)
 			{
 				i = 0;
 			}
-		}*/
-		
+		}
+		popMatrix();
 	}
 
 }
