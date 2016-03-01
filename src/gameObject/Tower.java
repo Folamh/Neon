@@ -12,26 +12,22 @@ public abstract class Tower extends GameObject{
 	PVector defaultPlane;//0, 0 plane for calculating angles.
 	
 	ArrayList<Projectile> projectiles;//All projectiles currently in game shot from this tower.
-	public ArrayList<Enemy> targets;//All targets within range.
+	ArrayList<Enemy> targets;//All targets within range.
 	Enemy leadTarget;//Target closest to the it's next path point.
 	
 	Tower(PApplet p, float x, float y){
 		super(p, x, y);
+		projectiles = new ArrayList<Projectile>();
+		targets = new ArrayList<Enemy>();
 		defaultPlane = new PVector(0, 0);
+		aim = new PVector(0, 90);
 	}
 	
 	public void calculateTargets(ArrayList<Enemy> gameEnemies){//GameLoop passes all map enemies.
-		if(targets.size() != 0){
-			for(int i = 0; i < targets.size(); i++){
-				if((PVector.dist(targets.get(i).pos, pos) > range) || targets.get(i).inElevator){//If the enemy is out of range remove him or in a elevator.
-					targets.remove(i);//TODO check this for out of bounds
-				}
-			}
-		}
-		
+		targets.clear();
 		for(int i = 0; i < gameEnemies.size(); i++){
-			if((PVector.dist(gameEnemies.get(i).pos, pos) < range) && !targets.get(i).inElevator){//If an enemy is in range add him to the list.
-				targets.add(targets.get(i));
+			if((PVector.dist(pos, gameEnemies.get(i).pos) < range) && !targets.get(i).inElevator){//If an enemy is in range add him to the list.
+				targets.add(gameEnemies.get(i));
 			}
 		}
 	}
@@ -57,5 +53,9 @@ public abstract class Tower extends GameObject{
 				projectiles.remove(i);//TODO check this for out of bounds
 			}
 		}
+	}
+	
+	public int size(){
+		return targets.size();
 	}
 }
