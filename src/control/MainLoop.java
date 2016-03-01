@@ -5,10 +5,12 @@ import processing.core.*;
 
 import java.util.ArrayList;
 
+import animation.*;
 import gameObject.*;
 import map.*;
 
 public class MainLoop extends PApplet{
+	
 	
 	//DO NOT CHANGE THIS UNDER ANY CIRCUMSTANCES!!!!!!!!!
 	public static void main(String[] args) {
@@ -20,7 +22,7 @@ public class MainLoop extends PApplet{
 	public void settings() {
 		size(500,500);
 	}
-	
+	Animation animation;
 	Map map = new Map(this);
 	ArrayList<Tile> tiles;
 	//Only use this for initializing variables
@@ -28,18 +30,13 @@ public class MainLoop extends PApplet{
 		frameRate(60);
 		map.loadMap("Resources/Maps/map1.txt");
 		tiles = map.getTiles();
-<<<<<<< HEAD
-=======
-		animation = new Animation(this, "Resources/Images/Enemy/Basic Enemy/Moving",1.5,);
-		animation.loadImages();
-		
->>>>>>> master
+		animation.loadBackground("Resources/Images/Backgrounds");
 	}
 	
 	public void draw() {
 		background(255);
 		map.render();
-
+		p.image(animation.background,0,0);
 
 	}
 
