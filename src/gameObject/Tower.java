@@ -27,8 +27,15 @@ public abstract class Tower extends GameObject{
 		targets.clear();
 		for(int i = 0; i < gameEnemies.size(); i++){
 			if((PVector.dist(pos, gameEnemies.get(i).pos) < range) && !gameEnemies.get(i).inElevator){//If an enemy is in range add him to the list.
+				System.out.println("blarg");
 				targets.add(gameEnemies.get(i));
 			}
+		}
+		
+		if(targets.isEmpty()) {
+			leadTarget = null;
+		} else {
+			calculateLead();
 		}
 	}
 	
@@ -44,7 +51,8 @@ public abstract class Tower extends GameObject{
 				}
 			}
 		}
-		leadTarget = targets.get(0);//Sets the closest to the lead.
+		
+		leadTarget = targets.get(0);
 	}
 	
 	void cleanProjectiles(){

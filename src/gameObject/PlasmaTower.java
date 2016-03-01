@@ -17,7 +17,7 @@ public class PlasmaTower extends Tower{
 		base = p.loadImage("Resources\\Images\\Turret\\Basic Turret\\0.png");
 		head = p.loadImage("Resources\\Images\\Turret\\Basic Turret\\1.png");
 		headPoint = new PVector(pos.x, pos.y - 10);
-		range = 100;
+		range = 250;
 		projectiles = new ArrayList<Projectile>();
 		targets = new ArrayList<Enemy>();//The game loop should check and add to this list
 	}
@@ -25,9 +25,18 @@ public class PlasmaTower extends Tower{
 	public void update(){
 		if(leadTarget != null){
 			shoot();
-			angle = PVector.angleBetween(leadTarget.pos, pos);
+			
+			PVector o = PVector.sub(leadTarget.pos, pos);
+			angle = PApplet.atan2(o.y, o.x) - PApplet.HALF_PI;
+			
 			if(aim.y < 0) angle = - angle;
+			
+		} else {
+			
+			angle = 0;
+			
 		}
+		
 		for(int i = 0; i < projectiles.size(); i++){
 			projectiles.get(i).update();
 		}

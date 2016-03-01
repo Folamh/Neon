@@ -57,9 +57,6 @@ public class MainLoop extends PApplet{
 		for(int i = 0; i < towers.size(); i++){
 			towers.get(i).update();
 			towers.get(i).calculateTargets(gameEnemies);
-			if(towers.get(i).size() != 0){
-				towers.get(i).calculateLead();
-			}
 		}
 	}
 	
