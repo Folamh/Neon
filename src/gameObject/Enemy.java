@@ -23,6 +23,7 @@ public abstract class Enemy extends GameObject{
 		this.path = path;
 		curPoint = 0;
 		nextPathPoint = path.get(curPoint);
+		inElevator = false;
 	}
 	
 	void moveToPathPoint(){

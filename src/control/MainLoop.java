@@ -39,9 +39,9 @@ public class MainLoop extends PApplet{
 		path = new ArrayList<PVector>();
 		
 		path.add(e);
-		building = loadImage("C:\\Users\\Ross\\Desktop\\ART\\Building.png");
+		building = loadImage("Resources\\Images\\Backgrounds\\1.png");
 		enemy = new BasicEnemy(this, 900, y, path);
-		tower = new PlasmaTower(this, 500, 350);
+		tower = new PlasmaTower(this, 500, 325);
 		towers = new ArrayList<Tower>();
 		gameEnemies = new ArrayList<Enemy>();
 		towers.add(tower);

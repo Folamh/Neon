@@ -8,7 +8,8 @@ public class PlasmaProjectile extends Projectile{
 	
 	PlasmaProjectile(PApplet p, float x, float y, Enemy target){
 		super(p, x, y, target);
-		bullet = new Animation(p, "D:\\Neon\\Resources\\Images\\Projectiles\\Bullet", 1, pos);
+		bullet = new Animation(p, "Resources\\Images\\Projectiles\\Bullet", 1, pos);
+		speed = 5;
 	}
 	
 	public void update(){
@@ -17,7 +18,7 @@ public class PlasmaProjectile extends Projectile{
 	
 	public void render(){
 		p.pushMatrix();
-		//
+		bullet.displayAnimation();
 		p.popMatrix();
 	}
 }
