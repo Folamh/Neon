@@ -24,6 +24,12 @@ public class Tile extends GameObject{
 		p.translate(pos.x,pos.y);
 		p.rotate(0);
 		p.rectMode(PApplet.CENTER);
+		p.fill(125);
+		
+		if(tileVal == 1) {
+			p.rect(0,0,10,10);
+		}
+		
 		p.popMatrix();
 	}
 }

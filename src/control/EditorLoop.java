@@ -22,13 +22,17 @@ public class EditorLoop extends PApplet{
 	Camera cam;
 	String mapName;
 	
+	PImage background;
+	
 	//Called once
 	public void setup() {
 		//Setting the frame rate
 		frameRate(60);
 		
+		background = loadImage("resources\\images\\backgrounds\\0.png");
+		
 		//Setting the path for the map file
-		mapName = "Resources\\Maps\\map1.txt";
+		mapName = "resources\\maps\\map1.txt";
 		
 		//Initializing the camera
 		cam = new Camera(this);
@@ -41,11 +45,13 @@ public class EditorLoop extends PApplet{
 		
 		//Initializing the offset vector
 		off = new PVector(0,0);
+		
+		imageMode(CENTER);
 	}
 	
 	//Called once a loop
 	public void draw() {
-		background(0);
+		image(background,width/2,height/2);
 		
 		cam.update(off,1);
 		off = cam.getOffSet();
