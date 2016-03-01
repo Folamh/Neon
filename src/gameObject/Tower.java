@@ -9,18 +9,20 @@ import processing.core.PVector;
 public abstract class Tower extends GameObject{
 	int range;//The range that the tower can shoot at.
 	PVector aim;//Location to the target being shot at.
-	PVector defaultPlane;//0, 0 plane for calculating angles.
 	
 	ArrayList<Projectile> projectiles;//All projectiles currently in game shot from this tower.
 	ArrayList<Enemy> targets;//All targets within range.
 	Enemy leadTarget;//Target closest to the it's next path point.
 	
+	Boolean shot;
+	
 	Tower(PApplet p, float x, float y){
 		super(p, x, y);
 		projectiles = new ArrayList<Projectile>();
 		targets = new ArrayList<Enemy>();
-		defaultPlane = new PVector(0, 0);
 		aim = new PVector(0, 90);
+		
+		shot = false;
 	}
 	
 	public void calculateTargets(ArrayList<Enemy> gameEnemies){//GameLoop passes all map enemies.
@@ -57,8 +59,9 @@ public abstract class Tower extends GameObject{
 	
 	void cleanProjectiles(){
 		for(int i = 0; i < projectiles.size(); i++){
-			if(PVector.dist(projectiles.get(i).pos, projectiles.get(i).target.pos) < projectiles.get(i).speed){
-				projectiles.remove(i);//TODO check this for out of bounds
+			if(PVector.dist(projectiles.get(i).pos, projectiles.get(i).o) <= projectiles.get(i).speed){
+				projectiles.remove(i);//TODO check this for out of bound
+				shot = false;
 			}
 		}
 	}
