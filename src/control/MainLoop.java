@@ -30,7 +30,7 @@ public class MainLoop extends PApplet{
 		frameRate(60);
 		map.loadMap("Resources/Maps/map1.txt");
 		tiles = map.getTiles();
-		animation = new Animation(this, "Resources/Images/Enemy/Basic Enemy/Moving",1.5);
+		animation = new Animation(this, "Resources/Images/Enemy/Basic Enemy/Moving",1.5,);
 		animation.loadImages();
 		
 	}
