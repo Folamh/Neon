@@ -38,7 +38,7 @@ public class Animation extends PApplet{
         	
             if (f[i] != null && f[i].getName().endsWith(".png"))
             {
-            	url = "Resources/Images/Enemy/Basic Enemy/Moving/" + i + ".png";
+            	url = this.path + "//" + i + ".png";
             	System.out.println("image " + i + " loaded successfully");
             	images[i] = p.loadImage(url, "png");
             	fCount++;
@@ -61,7 +61,7 @@ public class Animation extends PApplet{
 		//Calculating number of frames to wait to swap frame
 		int count = (int) (p.frameCount%p.frameRate);
 		//Making count a multiple of fCount
-		count -= count%fCount;
+		count -= count%fCount;//TODO fix animation speed
 		count*=frameTime;
 		//Checking if count frames have passed
 		if(count%fCount == 0) 
