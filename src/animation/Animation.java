@@ -1,25 +1,23 @@
 package animation;
 
 import java.io.File;
-import java.util.ArrayList;
 
 
-import processing.core.PApplet;
-import processing.core.PImage;
+import processing.core.*;
 
 public class Animation extends PApplet{
-	public PImage [] basicEnemyMoving = new PImage[6];
-	PImage [] basicEnemyStill = new PImage[6];
+	public PImage [] images;
 	PApplet p;
 	File[] f;
+	String path;
 	//Current frame index
 	public int curFrame;
 	//Total number of frames
 	int fCount;
 	//Taking in papplet and the number of frames
-	public Animation(PApplet p, int fCount) {
+	public Animation(PApplet p, String path) {
 		this.p = p;
-		this.fCount = fCount;
+		this.path = path;
 		
 		curFrame = 0;
 	}
@@ -28,19 +26,22 @@ public class Animation extends PApplet{
 	{
 		sketchPath("");
 		System.out.println(sketchPath(""));
-		File path = new File("C:/Users/Hashdog/Documents/Neon/Resources/Images/Enemy/Basic Enemy/Moving");
-		int i = 0;
+		File path = new File(this.path);
+		String url;
+		int fCount = 0;
 		f = path.listFiles();
-        for (File file : f) {
+		images = new PImage[f.length]; 
+        //for (File file : f) 
+		for(int i = 0; i < f.length; i++){
         	
         	
-            if (file != null && file.getName().endsWith(".png"))
+            if (f[i] != null && f[i].getName().endsWith(".png"))
             {
-            	
+            	url = "Resources/Images/Enemy/Basic Enemy/Moving/" + i + ".png";
             	System.out.println("image " + i + " loaded successfully");
-            	basicEnemyMoving[i] = loadImage("Resources/Images/Enemy/Basic Enemy/Moving/" + i + ".png");
-				
-            	i++;
+            	images[i] = p.loadImage(url, "png");
+            	fCount++;
+            	System.out.println(images[i]);
             }
             else
             {
@@ -49,6 +50,7 @@ public class Animation extends PApplet{
             
         }
 		
+		this.fCount = fCount;
 	}
 	
 	//Checking for swapping of next frame
@@ -70,14 +72,25 @@ public class Animation extends PApplet{
 	}
 	
 	//Returning the index of the current frame
-	public int getCurFrame() {
+	public int getCurFrame()
+	{
 		
 		return curFrame;
 	}
 	
 	public void displayAnimation()
 	{
-		
+		System.out.println(curFrame);
+		try
+		{
+			System.out.println("displaying");
+			p.image(images[curFrame],100,100);
+			
+		}
+		catch(Exception e)
+		{
+			System.out.println("Error1");
+		}
 		
 	}
 }

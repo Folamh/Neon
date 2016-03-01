@@ -29,22 +29,21 @@ public class MainLoop extends PApplet{
 		frameRate(60);
 		map.loadMap("Resources/Maps/map1.txt");
 		tiles = map.getTiles();
-		Animation animation = new Animation(this, frameCount);
+		Animation animation = new Animation(this, "C:/Users/Haashim/Documents/Neon/Resources/Images/Enemy/Basic Enemy/Moving");
 		animation.loadImages();
+		
 	}
 	
 	public void draw() {
-		background(0);
+		background(255);
 		map.render();
-		for(int i = 0;i<6;i++)
-		{
-			image(animation.basicEnemyMoving[i],250,250);
-			if(i >= 6)
-			{
-				i = 0;
-			}
+		try{
+		animation.displayAnimation();
 		}
-		
+		catch(Exception e)
+		{
+			System.out.println("Error - ");
+		}
 	}
 
 }
