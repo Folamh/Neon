@@ -10,15 +10,16 @@ public class Animation extends PApplet{
 	PApplet p;
 	File[] f;
 	String path;
+	double frameTime;
 	//Current frame index
 	public int curFrame;
 	//Total number of frames
 	int fCount;
 	//Taking in papplet and the number of frames
-	public Animation(PApplet p, String path) {
+	public Animation(PApplet p, String path, double frameTime) {
 		this.p = p;
 		this.path = path;
-		
+		this.frameTime = frameTime;
 		curFrame = 0;
 	}
 	
@@ -56,11 +57,12 @@ public class Animation extends PApplet{
 	//Checking for swapping of next frame
 	public void nextFrame() 
 	{
+		
 		//Calculating number of frames to wait to swap frame
 		int count = (int) (p.frameCount%p.frameRate);
 		//Making count a multiple of fCount
 		count -= count%fCount;
-		
+		count*=frameTime;
 		//Checking if count frames have passed
 		if(count%fCount == 0) 
 		{
@@ -85,7 +87,7 @@ public class Animation extends PApplet{
 		{
 			System.out.println("displaying");
 			p.image(images[curFrame],100,100);
-			
+			nextFrame();
 		}
 		catch(Exception e)
 		{
