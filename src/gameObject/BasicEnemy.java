@@ -10,7 +10,7 @@ public class BasicEnemy extends Enemy{
 	Animation moving;
 	public BasicEnemy(PApplet p, int x, int y, ArrayList<PVector> path){
 		super(p, x, y, path);
-		moving = new Animation(p, "Resources/Images/Enemy/Basic Enemy/Moving", 1, pos);
+		moving = new Animation(p, "Resources/Images/Enemy/Basic Enemy/Moving", 1);
 		moving.loadImages();
 	}
 	
@@ -26,6 +26,7 @@ public class BasicEnemy extends Enemy{
 	
 	public void render(){
 		p.pushMatrix();
+		p.translate(pos.x,pos.y);
 		moving.displayAnimation();
 		p.popMatrix();
 	}

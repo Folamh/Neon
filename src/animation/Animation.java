@@ -15,11 +15,10 @@ public class Animation{
 	//Total number of frames
 	int fCount;
 	//Taking in papplet and the number of frames
-	public Animation(PApplet p, String path, double frameTime, PVector pos) {
+	public Animation(PApplet p, String path, double frameTime) {
 		this.p = p;
 		this.path = path;
 		this.frameTime = frameTime;
-		this.pos = pos;
 		curFrame = 0;
 	}
 	
@@ -84,7 +83,7 @@ public class Animation{
 		try
 		{
 			System.out.println("displaying");
-			p.image(images[curFrame],pos.x,pos.y);
+			p.image(images[curFrame],0,0);
 			nextFrame();
 		}
 		catch(Exception e)
