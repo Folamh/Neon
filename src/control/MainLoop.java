@@ -18,12 +18,13 @@ public class MainLoop extends PApplet{
 	
 	//Settings go here
 	public void settings() {
-		size(500,500);
+		size(1000,1021);
 	}
 	
 	Map map = new Map(this);
 	ArrayList<Tile> tiles;
 	ArrayList<PVector> path;
+	PImage building;
 	BasicEnemy enemy;
 	//Only use this for initializing variables
 	public void setup() {
@@ -33,12 +34,16 @@ public class MainLoop extends PApplet{
 		PVector e = new PVector(200, 200);
 		path = new ArrayList<PVector>();
 		path.add(e);
+		building = loadImage("C:\\Users\\Ross\\Desktop\\ART\\Building.png");
 		enemy = new BasicEnemy(this, 100, 100, path);
+
+		imageMode(CENTER);
 	}
 	
 	public void draw() {
 		background(0);
-		map.render();
+		//map.render();
+		this.image(building, width/2, height/2);
 		enemy.render();
 	}
 
