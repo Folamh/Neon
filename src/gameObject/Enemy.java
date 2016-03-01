@@ -26,9 +26,9 @@ public abstract class Enemy extends GameObject{
 	}
 	
 	void moveToPathPoint(){
-		if((pos.x != nextPathPoint.x) && (pos.y != nextPathPoint.y)){
+		if((pos.x != nextPathPoint.x) && (pos.y == nextPathPoint.y)){
 			inElevator = false;
-			if((pos.x - nextPathPoint.x) < 0){
+			if((pos.x - nextPathPoint.x) > 0){
 				pos.sub(speed, 0);
 			}
 			else{
@@ -44,7 +44,7 @@ public abstract class Enemy extends GameObject{
 	void takeElevator(){
 		if((pos.x == nextPathPoint.x) && (pos.y != nextPathPoint.y)){
 			inElevator = true;
-			if((pos.y - nextPathPoint.y) < 0){
+			if((pos.y - nextPathPoint.y) > 0){
 				pos.sub(0, speed - ((speed/100)*50));
 			}
 			else{

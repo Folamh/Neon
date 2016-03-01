@@ -31,11 +31,12 @@ public class MainLoop extends PApplet{
 		frameRate(60);
 		map.loadMap("Resources/Maps/map1.txt");
 		tiles = map.getTiles();
-		PVector e = new PVector(200, 200);
+		int y = 409;
+		PVector e = new PVector(100, y);
 		path = new ArrayList<PVector>();
 		path.add(e);
 		building = loadImage("C:\\Users\\Ross\\Desktop\\ART\\Building.png");
-		enemy = new BasicEnemy(this, 100, 100, path);
+		enemy = new BasicEnemy(this, 900, y, path);
 
 		imageMode(CENTER);
 	}
@@ -43,7 +44,8 @@ public class MainLoop extends PApplet{
 	public void draw() {
 		background(0);
 		//map.render();
-		this.image(building, width/2, height/2);
+		image(building, width/2, height/2);
+		enemy.update();
 		enemy.render();
 	}
 
