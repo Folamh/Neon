@@ -23,12 +23,13 @@ public abstract class Enemy extends GameObject{
 		this.path = path;
 		curPoint = 0;
 		nextPathPoint = path.get(curPoint);
+		inElevator = false;
 	}
 	
 	void moveToPathPoint(){
-		if((pos.x != nextPathPoint.x) && (pos.y != nextPathPoint.y)){
+		if((pos.x != nextPathPoint.x) && (pos.y == nextPathPoint.y)){
 			inElevator = false;
-			if((pos.x - nextPathPoint.x) < 0){
+			if((pos.x - nextPathPoint.x) > 0){
 				pos.sub(speed, 0);
 			}
 			else{
@@ -44,7 +45,7 @@ public abstract class Enemy extends GameObject{
 	void takeElevator(){
 		if((pos.x == nextPathPoint.x) && (pos.y != nextPathPoint.y)){
 			inElevator = true;
-			if((pos.y - nextPathPoint.y) < 0){
+			if((pos.y - nextPathPoint.y) > 0){
 				pos.sub(0, speed - ((speed/100)*50));
 			}
 			else{
@@ -71,7 +72,7 @@ public abstract class Enemy extends GameObject{
 	
 	void collectData(){
 		if(gatherData){
-			if(wait < 8){//TODO add time.
+			if(wait < 60){
 				wait++;
 			}
 			else if(data < maxData){
