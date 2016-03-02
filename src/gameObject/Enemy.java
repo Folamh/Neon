@@ -72,7 +72,7 @@ public abstract class Enemy extends GameObject{
 	
 	void collectData(){
 		if(gatherData){
-			if(wait < 8){//TODO add time.
+			if(wait < 60){
 				wait++;
 			}
 			else if(data < maxData){
