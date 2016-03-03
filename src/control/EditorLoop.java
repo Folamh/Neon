@@ -1,6 +1,9 @@
 package control;
 
+import java.util.ArrayList;
+
 import map.*;
+import map.Path.PathPoint;
 import processing.core.*;
 
 public class EditorLoop extends PApplet{
@@ -21,8 +24,9 @@ public class EditorLoop extends PApplet{
 	Map m;
 	Camera cam;
 	String mapName;
+	ArrayList<Path> mapPaths;
 	
-	PImage background;
+	PImage background,building;
 	
 	//Called once
 	public void setup() {
@@ -30,6 +34,7 @@ public class EditorLoop extends PApplet{
 		frameRate(60);
 		
 		background = loadImage("resources\\images\\backgrounds\\0.png");
+		building = loadImage("resources\\images\\backgrounds\\1.png");
 		
 		//Setting the path for the map file
 		mapName = "resources\\maps\\map1.txt";
@@ -42,6 +47,8 @@ public class EditorLoop extends PApplet{
 		
 		//Loading in a map
 		m.loadMap(mapName);
+		//Getting the loaded in paths from the map class
+		mapPaths = m.getPaths();
 		
 		//Initializing the offset vector
 		off = new PVector(0,0);
@@ -56,9 +63,12 @@ public class EditorLoop extends PApplet{
 		cam.update(off,1);
 		off = cam.getOffSet();
 		
+		Path p = mapPaths.get(0);
+		
 		pushMatrix();
 		translate(-off.x,-off.y);
-		m.render(true);
+		image(building,width/2,height-(building.height/2));
+		p.display();
 		popMatrix();
 		
 	}
