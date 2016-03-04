@@ -1,6 +1,7 @@
 package control;
 
 import processing.core.*;
+import userInterface.Button;
 
 import java.util.ArrayList;
 
@@ -23,16 +24,21 @@ public class MainLoop extends PApplet{
 	
 	Map map = new Map(this);
 	ArrayList<PVector> path;
-	PImage building, background;
+	PImage building, background, bImage;
 	BasicEnemy enemy, enemy1;
 	PlasmaTower tower, t2, t3;
 	ArrayList<Tower> towers;
 	ArrayList<Enemy> gameEnemies;
 	
+	Button button;
+	
 	Boolean spawn;
 	//Only use this for initializing variables
 	public void setup() {
 		frameRate(60);
+		
+		bImage = loadImage("resources/images/menu/2.png");
+		button = new Button(this,250,250,bImage,"Text in the button", 10);
 		
 		spawn = true;
 		
@@ -59,6 +65,8 @@ public class MainLoop extends PApplet{
 		
 		System.out.println(frameRate);
 		
+		button.update();
+		
 		if(PApplet.second() % 4 == 0 && spawn) {
 			Enemy enemy =  new BasicEnemy(this, 1000, 409, path);
 			gameEnemies.add(enemy);
@@ -80,6 +88,9 @@ public class MainLoop extends PApplet{
 	}
 	
 	public void render(){
+		
+		button.render();
+		
 		for(int i = 0; i < towers.size(); i++){
 			towers.get(i).render();
 		}

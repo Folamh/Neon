@@ -23,7 +23,9 @@ public abstract class MenuObject {
 	
 	MenuObject(PApplet p, float x, float y, int w, int h) {
 		//Initializing the position of the object
-		pos = new PVector(x,y);
+		//pos = new PVector(x,y);
+		pos.x = x;
+		pos.y = y;
 		
 		//Initializing the height and width of the object
 		objWidth = w;
@@ -42,7 +44,7 @@ public abstract class MenuObject {
 	public void mouseListener() {
 		
 		//Checking if the mouse is within the bounds of the object
-		if(p.mouseX <= pos.x+(objWidth/2) && p.mouseX >= pos.x-(objWidth/2) && p.mouseY <= pos.y+(objHeight/2) && p.mouseY >= pos.y-(objHeight/2)) {
+		if((p.mouseX <= pos.x+(objWidth/2)) && (p.mouseX >= pos.x-(objWidth/2)) && (p.mouseY <= pos.y+(objHeight/2)) && (p.mouseY >= pos.y-(objHeight/2))) {
 			hover = true;
 			
 			//Checking if the mouse is pressed
