@@ -34,14 +34,14 @@ public class Animation{
             if (f[i] != null && f[i].getName().endsWith(".png"))
             {
             	url = this.path + "//" + i + ".png";
-            	System.out.println("image " + i + " loaded successfully");
+            	//System.out.println("image " + i + " loaded successfully");
             	images[i] = p.loadImage(url, "png");
             	fCount++;
-            	System.out.println(images[i]);
+            	//System.out.println(images[i]);
             }
             else
             {
-            	System.out.println("File of not png type");
+            	//System.out.println("File of not png type");
             }
             
         }
@@ -79,13 +79,13 @@ public class Animation{
 		System.out.println(curFrame);
 		try
 		{
-			System.out.println("displaying");
+			//System.out.println("displaying");
 			p.image(images[curFrame],0,0);
 			nextFrame();
 		}
 		catch(Exception e)
 		{
-			System.out.println("Error1");
+			//System.out.println("Error1");
 		}
 		
 	}

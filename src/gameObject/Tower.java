@@ -29,7 +29,6 @@ public abstract class Tower extends GameObject{
 		targets.clear();
 		for(int i = 0; i < gameEnemies.size(); i++){
 			if((PVector.dist(pos, gameEnemies.get(i).pos) < range) && !gameEnemies.get(i).inElevator){//If an enemy is in range add him to the list.
-				System.out.println("blarg");
 				targets.add(gameEnemies.get(i));
 			}
 		}
