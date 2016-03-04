@@ -24,7 +24,7 @@ public class GameLoop {
 		for(int i = 0; i < towers.size(); i++){
 			towers.get(i).update();
 			towers.get(i).calculateTargets(gameEnemies);
-			if(towers.get(i).targets.size() != 0){
+			if(towers.get(i).size() != 0){
 				towers.get(i).calculateLead();
 			}
 		}

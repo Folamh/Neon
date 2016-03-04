@@ -9,7 +9,6 @@ public class Animation{
 	File[] f;
 	String path;
 	double frameTime;
-	PVector pos;
 	//Current frame index
 	public int curFrame;
 	//Total number of frames
@@ -32,7 +31,6 @@ public class Animation{
         //for (File file : f) 
 		for(int i = 0; i < f.length; i++){
         	
-        	
             if (f[i] != null && f[i].getName().endsWith(".png"))
             {
             	url = this.path + "//" + i + ".png";
@@ -43,7 +41,7 @@ public class Animation{
             }
             else
             {
-            	System.out.println("Error");
+            	System.out.println("File of not png type");
             }
             
         }
@@ -73,7 +71,6 @@ public class Animation{
 	//Returning the index of the current frame
 	public int getCurFrame()
 	{
-		
 		return curFrame;
 	}
 	
