@@ -57,13 +57,15 @@ public class MainLoop extends PApplet{
 	
 	public void update(){
 		
-		if(PApplet.second() % 5 == 0 && spawn) {
+		System.out.println(frameRate);
+		
+		if(PApplet.second() % 4 == 0 && spawn) {
 			Enemy enemy =  new BasicEnemy(this, 1000, 409, path);
 			gameEnemies.add(enemy);
 			spawn = !spawn;
 		}
 		
-		if(PApplet.second() % 5 != 0) {
+		if(PApplet.second() % 4 != 0) {
 			spawn = true;
 		}
 		

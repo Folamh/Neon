@@ -76,7 +76,7 @@ public class Animation{
 	
 	public void displayAnimation()
 	{
-		System.out.println(curFrame);
+		//System.out.println(curFrame);
 		try
 		{
 			//System.out.println("displaying");
