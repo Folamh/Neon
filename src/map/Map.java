@@ -15,6 +15,9 @@ public class Map {
 	//Spacing between the path points
 	int vertSpace, horiSpace;
 	
+	//The width and height of the map
+	int mapWidth, mapHeight;
+	
 	public Map(PApplet p) {
 		//Initializing mapPath array list
 		mapPaths = new ArrayList<Path>();
@@ -52,13 +55,20 @@ public class Map {
 					lines.add(line);
 				}
 				
-				String[] temp = lines.get(0).split("\\|");
+				//Getting the map width and height
+				String[] dim = lines.get(0).split(",");
 				
-				vertSpace = p.height/lines.size();
-				horiSpace = p.width/temp.length;
+				mapWidth = Integer.parseInt(dim[0]);
+				mapHeight = Integer.parseInt(dim[1]);
+				
+				//Getting the spacing of path points for the map
+				String[] temp = lines.get(1).split("\\|");
+				
+				vertSpace = mapHeight/lines.size();
+				horiSpace = mapWidth/temp.length;
 				
 				//Going through each line of the file(first line ignored, holds background file name)
-				for(int i = 0; i < lines.size(); i++) {
+				for(int i = 1; i < lines.size(); i++) {
 					//String array to hold each set of tile data in each line
 					String[] tileDataSet = lines.get(i).split("\\|");
 					
@@ -73,8 +83,8 @@ public class Map {
 						
 						//Getting the x/y of the tile/path point
 						//TODO make it so you don't have to manually enter tile/half tile sizes
-						int x = (((tileNum%n))*horiSpace);// + horiSpace/2; 
-						int y = (((tileNum/n))*vertSpace);// + vertSpace/2;
+						int x = (((tileNum%n))*horiSpace) + (horiSpace/2) + ((p.width/2) - (mapWidth/2));// + horiSpace/2; 
+						int y = (((tileNum/n))*vertSpace) + (vertSpace/2) + (p.height - mapHeight);
 						
 						//Getting the path points
 						for(int k = 0; k < tileData.length; k++) {
