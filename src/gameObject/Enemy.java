@@ -18,6 +18,8 @@ public abstract class Enemy extends GameObject{
 	boolean doneGathering;
 	int wait;
 	
+	int health;
+	
 	Enemy(PApplet p, int x, int y, ArrayList<PVector> path){
 		super(p, x, y);
 		this.path = path;

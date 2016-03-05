@@ -8,6 +8,7 @@ public abstract class Projectile extends GameObject{
 	float angle;
 	Enemy target;
 	PVector o;
+	int damage;
 	
 	Projectile(PApplet p, float x, float y){
 		super(p, x, y);

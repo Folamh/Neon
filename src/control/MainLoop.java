@@ -3,14 +3,9 @@ package control;
 
 import processing.core.*;
 
-import java.util.ArrayList;
-
-import gameObject.*;
-import map.*;
-
 public class MainLoop extends PApplet{
 	
-	//DO NOT CHANGE THIS UNDER ANY CIRCUMSTANCES!!!!!!!!!
+	//DO NOT CHANGE THIS UNDER ANY CIRCUMSTANCES!!!!!!! Actually do, it will be fun!
 	public static void main(String[] args) {
 		String[] a = {"MAIN"};			
 		PApplet.runSketch(a, new MainLoop());
@@ -22,20 +17,24 @@ public class MainLoop extends PApplet{
 		size(1000,1021);
 	}
 	
-	Map map = new Map(this);
-	ArrayList<Tile> tiles;
+	int gameState;
 	
 	//Only use this for initializing variables
 	public void setup() {
 		frameRate(60);
-		map.loadMap("Resources/Maps/map1.txt");
-		tiles = map.getTiles();
+		gameState = 0;
 		imageMode(CENTER);
 	}
 	
 	public void draw() {
-		background(0);
-		map.render();
+		switch(gameState){
+		case 0://Start Menu
+			break;
+		case 1://Main Menu
+			break;
+		case 2://GameLoop
+			break;
+		}
 	}
 
 }
