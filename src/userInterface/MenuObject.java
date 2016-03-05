@@ -19,13 +19,14 @@ public abstract class MenuObject {
 	//Booleans for mouse events
 	boolean hover;
 	boolean pressed;
-	boolean released;
+	boolean clicked;
 	
 	MenuObject(PApplet p, float x, float y, int w, int h) {
+		//Initializing the papplet
+		this.p = p;
+		
 		//Initializing the position of the object
-		//pos = new PVector(x,y);
-		pos.x = x;
-		pos.y = y;
+		pos = new PVector(x,y);
 		
 		//Initializing the height and width of the object
 		objWidth = w;
@@ -37,29 +38,36 @@ public abstract class MenuObject {
 		//Initializing mouse/object state variables
 		hover = false;
 		pressed = false;
-		released = true;
+		clicked = false;
 	}
 	
 	//Function for checking the mouse in relation to the object
 	public void mouseListener() {
 		
 		//Checking if the mouse is within the bounds of the object
-		if((p.mouseX <= pos.x+(objWidth/2)) && (p.mouseX >= pos.x-(objWidth/2)) && (p.mouseY <= pos.y+(objHeight/2)) && (p.mouseY >= pos.y-(objHeight/2))) {
+		if(p.mouseX <= pos.x+(objWidth/2) && p.mouseX >= pos.x-(objWidth/2) && p.mouseY <= pos.y+(objHeight/2) && p.mouseY >= pos.y-(objHeight/2)) {
 			hover = true;
 			
 			//Checking if the mouse is pressed
 			if(p.mousePressed) {
 				pressed = true;
-				released = false;
+				clicked = false;
 			} else {
+				
+				//Checking if mouse was clicked
+				if(pressed) { 
+					clicked = true;
+				} else {
+					clicked = false;
+				}
+				
 				pressed = false;
-				released = true;
 			}
 			
 		} else {
 			hover = false;
 			pressed = false;
-			released = true;
+			clicked = false;
 		}
 	}
 	
@@ -79,6 +87,23 @@ public abstract class MenuObject {
 		objHeight = h;
 	}
 	
+	//Returning the state of hover
+	public boolean getHover() {
+		return hover;
+	}
+	
+	//Returning the state of pressed
+	public boolean getPressed() {
+		return pressed;
+	}
+	
+	//Returning the state of clicked
+	public boolean getClicked() {
+		return clicked;
+	}
+	
+	
+	//Abstarct methods for updating and rendering
 	abstract void update();
 	abstract void render();
 }

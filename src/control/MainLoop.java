@@ -38,7 +38,7 @@ public class MainLoop extends PApplet{
 		frameRate(60);
 		
 		bImage = loadImage("resources/images/menu/2.png");
-		button = new Button(this,250,250,bImage,"Text in the button", 10);
+		button = new Button(this,250,250,bImage,"Spawn", 20);
 		
 		spawn = true;
 		
@@ -63,14 +63,13 @@ public class MainLoop extends PApplet{
 	
 	public void update(){
 		
-		System.out.println(frameRate);
+		//System.out.println(frameRate);
 		
 		button.update();
 		
-		if(PApplet.second() % 4 == 0 && spawn) {
+		if(button.getClicked()) {
 			Enemy enemy =  new BasicEnemy(this, 1000, 409, path);
 			gameEnemies.add(enemy);
-			spawn = !spawn;
 		}
 		
 		if(PApplet.second() % 4 != 0) {
