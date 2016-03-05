@@ -6,6 +6,7 @@ import processing.core.*;
 import java.util.ArrayList;
 
 import animation.*;
+
 import gameObject.*;
 import map.*;
 
@@ -20,7 +21,8 @@ public class MainLoop extends PApplet{
 	
 	//Settings go here
 	public void settings() {
-		size(500,500);
+		//fullScreen();
+		size(1000,1021);
 	}
 	Animation animation;
 	Map map = new Map(this);
@@ -34,10 +36,8 @@ public class MainLoop extends PApplet{
 	}
 	
 	public void draw() {
-		background(255);
+		background(0);
 		map.render();
-		p.image(animation.background,0,0);
-
 	}
 
 }

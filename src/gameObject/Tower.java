@@ -9,30 +9,32 @@ import processing.core.PVector;
 public abstract class Tower extends GameObject{
 	int range;//The range that the tower can shoot at.
 	PVector aim;//Location to the target being shot at.
-	PVector defaultPlane;//0, 0 plane for calculating angles.
-	
+	int fireRate;
+	int shootTimer;
 	ArrayList<Projectile> projectiles;//All projectiles currently in game shot from this tower.
-	public ArrayList<Enemy> targets;//All targets within range.
+	ArrayList<Enemy> targets;//All targets within range.
 	Enemy leadTarget;//Target closest to the it's next path point.
 	
 	Tower(PApplet p, float x, float y){
 		super(p, x, y);
-		defaultPlane = new PVector(0, 0);
+		projectiles = new ArrayList<Projectile>();
+		targets = new ArrayList<Enemy>();
+		aim = new PVector(0, 90);
+		fireRate = 0;
 	}
 	
 	public void calculateTargets(ArrayList<Enemy> gameEnemies){//GameLoop passes all map enemies.
-		if(targets.size() != 0){
-			for(int i = 0; i < targets.size(); i++){
-				if((PVector.dist(targets.get(i).pos, pos) > range) || targets.get(i).inElevator){//If the enemy is out of range remove him or in a elevator.
-					targets.remove(i);//TODO check this for out of bounds
-				}
+		targets.clear();
+		for(int i = 0; i < gameEnemies.size(); i++){
+			if((PVector.dist(pos, gameEnemies.get(i).pos) < range) && !gameEnemies.get(i).inElevator){//If an enemy is in range add him to the list.
+				targets.add(gameEnemies.get(i));
 			}
 		}
 		
-		for(int i = 0; i < gameEnemies.size(); i++){
-			if((PVector.dist(gameEnemies.get(i).pos, pos) < range) && !targets.get(i).inElevator){//If an enemy is in range add him to the list.
-				targets.add(targets.get(i));
-			}
+		if(targets.isEmpty()) {
+			leadTarget = null;
+		} else {
+			calculateLead();
 		}
 	}
 	
@@ -48,14 +50,19 @@ public abstract class Tower extends GameObject{
 				}
 			}
 		}
-		leadTarget = targets.get(0);//Sets the closest to the lead.
+		
+		leadTarget = targets.get(0);
 	}
 	
 	void cleanProjectiles(){
 		for(int i = 0; i < projectiles.size(); i++){
-			if(PVector.dist(projectiles.get(i).pos, projectiles.get(i).target.pos) < projectiles.get(i).speed){
-				projectiles.remove(i);//TODO check this for out of bounds
+			if(PVector.dist(projectiles.get(i).pos, projectiles.get(i).o) <= projectiles.get(i).speed){
+				projectiles.remove(i);
 			}
 		}
+	}
+	
+	public int size(){
+		return targets.size();
 	}
 }
