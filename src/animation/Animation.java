@@ -24,10 +24,6 @@ public class Animation{
 		curFrame = 0;
 	}
 	
-	public void loadBackground(String backgroundPath)
-	{
-		background = p.loadImage(backgroundPath);
-	}
 	public void loadImages()
 	{
 		File path = new File(this.path);
