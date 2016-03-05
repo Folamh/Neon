@@ -13,19 +13,21 @@ public class Animation{
 	public int curFrame;
 	//Total number of frames
 	int fCount;
+	int prevTime;
 	//Taking in papplet and the number of frames
 	public Animation(PApplet p, String path, double frameTime) {
 		this.p = p;
 		this.path = path;
 		this.frameTime = frameTime;
 		curFrame = 0;
+		loadImages();
+		prevTime = 0;
 	}
 	
 	public void loadImages()
 	{
 		File path = new File(this.path);
 		String url;
-		int fCount = 0;
 		f = path.listFiles();
 		images = new PImage[f.length]; 
         //for (File file : f) 
@@ -46,23 +48,33 @@ public class Animation{
             
         }
 		
-		this.fCount = fCount;
+		//fCount--;
+		System.out.println(fCount);
 	}
 	
+	
+	//Frame time is number 10ths of a second the animation will display across
 	//Checking for swapping of next frame
 	public void nextFrame() 
 	{
 		
-		//Calculating number of frames to wait to swap frame
-		int count = (int) (p.frameCount%60);
-		//Making count a multiple of fCount
-		//count -= count%fCount;//TODO fix animation speed
-		count*=frameTime;
+		//Getting the current number of milliseconds
+		int count = p.millis();
+		
+		//Making time accurate to a tenth of a second
+		int time = count/100;
+		
+		//Calculating time to wait for each frame
+		int space = PApplet.round((float) (frameTime/fCount));
+		
 		//Checking if count frames have passed
-		if(count%fCount == 0) 
+		if(time%space == 0 && prevTime != time) 
 		{
+			
 			curFrame++;
 			curFrame = curFrame%fCount;
+			//System.out.println(curFrame);
+			prevTime = time;
 			
 		}
 		
@@ -79,7 +91,7 @@ public class Animation{
 		//System.out.println(curFrame);
 		try
 		{
-			//System.out.println("displaying");
+			//System.out.println(curFrame);
 			p.image(images[curFrame],0,0);
 			nextFrame();
 		}

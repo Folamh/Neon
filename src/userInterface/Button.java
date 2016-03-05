@@ -51,6 +51,20 @@ public class Button extends MenuObject{
 		p.textSize(size);
 	}
 	
+	//Setting the new image and size for the new button
+	public void setImage(PImage bImage, int w, int h) {
+		//Resizing the image
+		bImage.resize(w,h);
+		//Setting the new image
+		this.bImage = bImage;
+	}
+	
+	//Setting a new image for the button(defaulting to old size)
+	public void setImage(PImage bImage) {
+		//Overriding method
+		setImage(bImage, this.bImage.width, this.bImage.height);
+	}
+	
 	//Updating the button
 	public void update(){
 		mouseListener();

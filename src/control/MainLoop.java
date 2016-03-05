@@ -1,12 +1,11 @@
 package control;
 
 import processing.core.*;
-import userInterface.Button;
-
 import java.util.ArrayList;
 
-import gameObject.*;
-import map.*;
+import animation.Animation;
+import gameObject.BasicEnemy;
+import gameObject.Enemy;
 
 public class MainLoop extends PApplet{
 	
@@ -19,91 +18,144 @@ public class MainLoop extends PApplet{
 	//Settings go here
 	public void settings() {
 		//fullScreen();
-		size(1000,1021);
+		//Set to 720p resolution
+		size(1280,720);
 	}
 	
-	Map map = new Map(this);
+	//ABOVE THIS LINE SHOULDNT CHANGE
+	
+	//Variables
+	Animation startMenu;
+	PImage background;
+	Enemy enemy;
 	ArrayList<PVector> path;
-	PImage building, background, bImage;
-	BasicEnemy enemy, enemy1;
-	PlasmaTower tower, t2, t3;
-	ArrayList<Tower> towers;
-	ArrayList<Enemy> gameEnemies;
 	
-	Button button;
+	int gameState;
 	
-	Boolean spawn;
+	
 	//Only use this for initializing variables
 	public void setup() {
+		//Initializing the frame rate and the image mode
 		frameRate(60);
-		
-		bImage = loadImage("resources/images/menu/2.png");
-		button = new Button(this,250,250,bImage,"Spawn", 20);
-		
-		spawn = true;
-		
-		map.loadMap("Resources/Maps/map1.txt");
-		int y = 409;
-		PVector e = new PVector(100, y);
-		path = new ArrayList<PVector>();
-		
-		path.add(e);
-		building = loadImage("Resources\\Images\\Backgrounds\\1.png");
-		background = loadImage("Resources\\Images\\Backgrounds\\0.png");
-		tower = new PlasmaTower(this, 250, 325);
-		t2 = new PlasmaTower(this, 500, 325);
-		t3 = new PlasmaTower(this, 750, 325);
-		towers = new ArrayList<Tower>();
-		gameEnemies = new ArrayList<Enemy>();
-		towers.add(tower);
-		towers.add(t2);
-		towers.add(t3);
 		imageMode(CENTER);
+		
+		path = new ArrayList<PVector>();
+		path.add(new PVector(100,height/2));
+		
+		enemy = new BasicEnemy(this,width-100,height/2,path);
+		
+		gameState = 0;
+		
+		background = loadImage("resources/images/backgrounds/0.png");
+		
+		startMenu = new Animation(this,"resources/images/menu/start", 10);
 	}
 	
 	public void update(){
-		
+		//Printing the framerate of the program
 		//System.out.println(frameRate);
 		
-		button.update();
-		
-		if(button.getClicked()) {
-			Enemy enemy =  new BasicEnemy(this, 1000, 409, path);
-			gameEnemies.add(enemy);
-		}
-		
-		if(PApplet.second() % 4 != 0) {
-			spawn = true;
-		}
-		
-		for(int i = 0; i < gameEnemies.size(); i++){
-			gameEnemies.get(i).update();
-		}
-		
-		for(int i = 0; i < towers.size(); i++){
-			towers.get(i).update();
-			towers.get(i).calculateTargets(gameEnemies);
+		//Resizing the background for the current window size
+		background.resize(width,height);
+		enemy.update();
+		switch(gameState) {
+			case 0:{
+				break;
+			}
+			
+			case 1:{
+			
+				break;
+			}
+			
+			case 2: {
+				
+				break;
+			}
+	
+			case 3: {
+				
+				break;
+			}
+	
+			case 4: {
+				
+				break;
+			}
+	
+			case 5: {
+				
+				break;
+			}
+	
+			case 6: {
+				
+				break;
+			}
+			
+			default: {
+				
+				break;
+			}
 		}
 	}
 	
 	public void render(){
+		//Rendering the background
+		image(background,width/2,height/2);
 		
-		button.render();
-		
-		for(int i = 0; i < towers.size(); i++){
-			towers.get(i).render();
+		switch(gameState) {
+			case 0:{
+				
+				pushMatrix();
+				translate(width/2,(height/2)-100);
+				startMenu.displayAnimation();
+				popMatrix();
+				enemy.render();
+				break;
+			}
+			
+			case 1:{
+			
+				break;
+			}
+			
+			case 2: {
+				
+				break;
+			}
+	
+			case 3: {
+				
+				break;
+			}
+	
+			case 4: {
+				
+				break;
+			}
+	
+			case 5: {
+				
+				break;
+			}
+	
+			case 6: {
+				
+				break;
+			}
+			
+			default: {
+				
+				break;
+			}
 		}
 		
-		for(int i = 0; i < gameEnemies.size(); i++){
-			gameEnemies.get(i).render();
-		}
 	}
 	
 	public void draw() {
 		//background(0);
 		//map.render();
-		image(background, width/2, height/2);
-		image(building, width/2, height/2);
 		update();
 		render();
 	}
