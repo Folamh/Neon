@@ -18,6 +18,7 @@ public class BasicEnemy extends Enemy{
 		moving.loadImages();
 		still.loadImages();
 		mov = false;
+		health = 100;
 	}
 	
 	public void update(){

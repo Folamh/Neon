@@ -11,6 +11,7 @@ public class PlasmaProjectile extends Projectile{
 		bullet = new Animation(p, "resources/Images/Projectiles/Bullet", 1);
 		speed = 10;
 		bullet.loadImages();
+		damage = 10;
 	}
 	
 	public void update(){

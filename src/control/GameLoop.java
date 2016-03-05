@@ -3,20 +3,30 @@ package control;
 import java.util.ArrayList;
 
 import gameObject.*;
+import map.Map;
 import processing.core.*;
 
 public class GameLoop {
 	PApplet p;
-	
+	Map map;
 	ArrayList<Tile> backgroundObjects;
 	ArrayList<Tower> towers;
 	ArrayList<Enemy> gameEnemies;
 	
 	GameLoop(){
+		backgroundObjects = new ArrayList<Tile>();
+		towers = new ArrayList<Tower>();
+		gameEnemies = new ArrayList<Enemy>();
 		
 	}
 	
-	public void update(){
+	public int gameLoop(){
+		update();
+		render();
+		return 2;
+	}
+	
+	void update(){
 		for(int i = 0; i < backgroundObjects.size(); i++){
 			backgroundObjects.get(i).update();
 		}
@@ -34,7 +44,7 @@ public class GameLoop {
 		}
 	}
 	
-	public void render(){
+	void render(){
 		for(int i = 0; i < backgroundObjects.size(); i++){
 			backgroundObjects.get(i).render();
 		}
