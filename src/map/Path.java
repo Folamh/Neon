@@ -104,4 +104,8 @@ public class Path {
 	public PVector getNextPoint() {
 		return path.get(prevPoint).ppLoc;
 	}
+	
+	public int getSize(){
+		return path.size();
+	}
 }

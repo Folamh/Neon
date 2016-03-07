@@ -2,12 +2,13 @@ package gameObject;
 
 import java.util.ArrayList;
 
+import map.Path;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 public abstract class Enemy extends GameObject{
 	PVector nextPathPoint;
-	ArrayList<PVector> path;
+	Path path;
 	int curPoint;
 	float speed;
 	boolean inElevator;
@@ -20,11 +21,11 @@ public abstract class Enemy extends GameObject{
 	
 	int health;
 	
-	Enemy(PApplet p, int x, int y, ArrayList<PVector> path){
+	Enemy(PApplet p, int x, int y, Path path){
 		super(p, x, y);
 		this.path = path;
 		curPoint = 0;
-		nextPathPoint = path.get(curPoint);
+		nextPathPoint = path.getNextPoint();
 		inElevator = false;
 	}
 	
@@ -61,8 +62,8 @@ public abstract class Enemy extends GameObject{
 	}
 	
 	void nextPoint(){
-		if(++curPoint < path.size()){
-			nextPathPoint = path.get(curPoint);
+		if(++curPoint < path.getSize()){
+			nextPathPoint = path.getNextPoint();
 		}
 	}
 	
