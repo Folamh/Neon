@@ -45,14 +45,10 @@ public class Grid {
 		{
 			if(p.mousePressed)
 			{
-				placeTower();
+				
 			}
 		}
 		
-	}
-	public void placeTower()
-	{
-		towerPlace = p.loadImage("resources/Images/Turret/basicTurret/0.png");
 	}
 	
 }
