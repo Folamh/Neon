@@ -25,8 +25,10 @@ public class MainLoop extends PApplet{
 	//ABOVE THIS LINE SHOULDNT CHANGE
 	
 	//Variables
-	Animation startMenu;
 	PImage background;
+	MenuLoop menuLoop;
+	GameLoop gameLoop;
+	
 	Enemy enemy;
 	ArrayList<PVector> path;
 	
@@ -42,13 +44,18 @@ public class MainLoop extends PApplet{
 		path = new ArrayList<PVector>();
 		path.add(new PVector(100,height/2));
 		
+		//This will be removed
 		enemy = new BasicEnemy(this,width-100,height/2,path);
 		
+		//Initializing the gameState to 0
 		gameState = 0;
 		
+		//Loading the background image
 		background = loadImage("resources/images/backgrounds/0.png");
 		
-		startMenu = new Animation(this,"resources/images/menu/start", 10);
+		//Initializing menu and game loops
+		menuLoop = new MenuLoop(this, gameState);
+		gameLoop = new GameLoop(this, gameState);
 	}
 	
 	public void update(){
@@ -58,45 +65,14 @@ public class MainLoop extends PApplet{
 		//Resizing the background for the current window size
 		background.resize(width,height);
 		enemy.update();
-		switch(gameState) {
-			case 0:{
-				break;
-			}
+		
+		menuLoop.update(gameState);
+		//gameLoop.update();
+		
+		gameState = menuLoop.getGameState();
+		
+		if(gameLoop.getGameState() == 5) {
 			
-			case 1:{
-			
-				break;
-			}
-			
-			case 2: {
-				
-				break;
-			}
-	
-			case 3: {
-				
-				break;
-			}
-	
-			case 4: {
-				
-				break;
-			}
-	
-			case 5: {
-				
-				break;
-			}
-	
-			case 6: {
-				
-				break;
-			}
-			
-			default: {
-				
-				break;
-			}
 		}
 	}
 	
@@ -104,52 +80,8 @@ public class MainLoop extends PApplet{
 		//Rendering the background
 		image(background,width/2,height/2);
 		
-		switch(gameState) {
-			case 0:{
-				
-				pushMatrix();
-				translate(width/2,(height/2)-100);
-				startMenu.displayAnimation();
-				popMatrix();
-				enemy.render();
-				break;
-			}
-			
-			case 1:{
-			
-				break;
-			}
-			
-			case 2: {
-				
-				break;
-			}
-	
-			case 3: {
-				
-				break;
-			}
-	
-			case 4: {
-				
-				break;
-			}
-	
-			case 5: {
-				
-				break;
-			}
-	
-			case 6: {
-				
-				break;
-			}
-			
-			default: {
-				
-				break;
-			}
-		}
+		menuLoop.render();
+		//gameLoop.render();
 		
 	}
 	

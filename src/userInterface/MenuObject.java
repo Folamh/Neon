@@ -104,6 +104,6 @@ public abstract class MenuObject {
 	
 	
 	//Abstarct methods for updating and rendering
-	abstract void update();
-	abstract void render();
+	public abstract void update();
+	public abstract void render();
 }

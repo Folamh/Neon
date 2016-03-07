@@ -65,6 +65,11 @@ public class Button extends MenuObject{
 		setImage(bImage, this.bImage.width, this.bImage.height);
 	}
 	
+	//Returns the text inside the button
+	public String getText() {
+		return text;
+	}
+	
 	//Updating the button
 	public void update(){
 		mouseListener();
