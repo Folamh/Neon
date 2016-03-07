@@ -8,8 +8,6 @@ import java.util.*;
 import gameObject.Tile;
 import processing.core.*;
 
-import gameObject.Tile;
-
 public class Map {
 	
 	PApplet p;

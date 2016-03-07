@@ -5,6 +5,7 @@ import processing.core.*;
 
 public class MainLoop extends PApplet{
 	
+	
 	//DO NOT CHANGE THIS UNDER ANY CIRCUMSTANCES!!!!!!! Actually do, it will be fun!
 	public static void main(String[] args) {
 		String[] a = {"MAIN"};			
@@ -36,5 +37,4 @@ public class MainLoop extends PApplet{
 			break;
 		}
 	}
-
 }

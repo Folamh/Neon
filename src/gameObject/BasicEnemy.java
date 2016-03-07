@@ -1,16 +1,14 @@
 package gameObject;
 
-import java.util.ArrayList;
-
 import animation.Animation;
+import map.Path;
 import processing.core.PApplet;
-import processing.core.PVector;
 
 public class BasicEnemy extends Enemy{
 	Animation moving;
 	Animation still;
 	Boolean mov;
-	public BasicEnemy(PApplet p, int x, int y, ArrayList<PVector> path){
+	public BasicEnemy(PApplet p, int x, int y, Path path){
 		super(p, x, y, path);
 		speed = 2;
 		moving = new Animation(p, "Resources/Images/Enemy/Basic Enemy/Moving", 1);

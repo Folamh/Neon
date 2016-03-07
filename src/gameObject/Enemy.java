@@ -67,12 +67,6 @@ public abstract class Enemy extends GameObject{
 		}
 	}
 	
-	public void newPath(ArrayList<PVector> path){
-		curPoint = 0;
-		this.path = path;
-		nextPathPoint = path.get(curPoint);
-	}
-	
 	void collectData(){
 		if(gatherData){
 			if(wait < 60){
