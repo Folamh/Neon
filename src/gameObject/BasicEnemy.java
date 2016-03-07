@@ -13,10 +13,8 @@ public class BasicEnemy extends Enemy{
 	public BasicEnemy(PApplet p, int x, int y, ArrayList<PVector> path){
 		super(p, x, y, path);
 		speed = 2;
-		moving = new Animation(p, "Resources/Images/Enemy/Basic Enemy/Moving", 1);
-		still = new Animation(p, "Resources/Images/Enemy/Basic Enemy/Still", 1);
-		moving.loadImages();
-		still.loadImages();
+		moving = new Animation(p, "Resources/Images/Enemy/Basic Enemy/Moving", 5);
+		still = new Animation(p, "Resources/Images/Enemy/Basic Enemy/Still", 10);
 		mov = false;
 		health = 100;
 	}

@@ -1,42 +1,31 @@
 package map;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.io.*;
 import java.util.*;
-
-import gameObject.Tile;
 import processing.core.*;
-
-import gameObject.Tile;
 
 public class Map {
 	
 	PApplet p;
 	//String for the map name
 	String mapName;
-	//Image to hold the background
-	PImage mapBackground;
 	//Array to hold the mapPaths
 	ArrayList<Path> mapPaths;
-	//ArrayList to hold all of the tiles that will be loaded in
-	ArrayList<Tile> mapTiles;
-	//Width and height of the tiles
-	int tileWidth,tileHeight;
+	
+	//Spacing between the path points
+	int vertSpace, horiSpace;
+	
+	//The width and height of the map
+	int mapWidth, mapHeight;
 	
 	public Map(PApplet p) {
-		//Initalising mapPath arraylist
+		//Initializing mapPath array list
 		mapPaths = new ArrayList<Path>();
-		mapTiles = new ArrayList<Tile>();
 		this.p = p;
 		
-		//Initilising the tiles width and height
-		tileWidth = 0;
-		tileHeight = 0;
-		
-		//Adding for paths to the arraylist(i = greatest number of paths per map)
+		//Adding for paths to the array list(i = greatest number of paths per map)
 		for(int i = 0; i < 4; i++) {
-			mapPaths.add(new Path());
+			mapPaths.add(new Path(p));
 		}
 	}
 	
@@ -46,95 +35,95 @@ public class Map {
 		String backgroundFile;
 		
 		//List to hold all lines of the file
-		List<String> lines = null;
+		ArrayList<String> lines = new ArrayList<String>();
 		
 		//Tile number
 		int tileNum = 0;
 		
 		//Trying to read in the file
 		try {
-			//List that holds every line of the file
-			lines = Files.readAllLines(Paths.get(mapFile), StandardCharsets.US_ASCII);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		if(lines != null) {
-			//Getting the background file name
-			backgroundFile = lines.get(0);
 			
+			//Buffered reader to read in lines from the file
+			BufferedReader reader = new BufferedReader(new FileReader(mapFile));
 			
-			
-			//Going through each line of the file(first line ignored, holds background file name)
-			for(int i = 2; i < lines.size(); i++) {
-				//String array to hold each set of tile data in each line
-				String[] tileDataSet = lines.get(i).split("\\|");
+			try {
+				//String to hold lines
+				String line = "";
 				
-				//Getting the background file name
-				backgroundFile = lines.get(0);
-				
-				//Getting the width and heoght of the tiles
-				String[] tSize = lines.get(1).split(",");
-				tileWidth = Integer.parseInt(tSize[0]);
-				tileHeight = Integer.parseInt(tSize[1]);
-				
-				//Going through each set of tile data
-				for(int j = 0; j < tileDataSet.length; j++) {
-					
-					//Number of cols in the map
-					int n = tileDataSet.length;
-					
-					//Separating the individual bits of data for each tile
-					String[] tileData = tileDataSet[j].split(",");
-					
-					//Getting the tile value
-					int tileVal = Integer.parseInt(tileData[0]);
-					
-					//Getting the x/y of the tile/path point
-					//TODO make it so you dont have to manually enter tile/half tile sizes
-					int x = (((tileNum%n))*tileWidth) + tileWidth/2; 
-					int y = (((tileNum/n))*tileHeight) + tileHeight/2;
-					
-					//Getting the path points
-					for(int k = 1; k < tileData.length; k++) {
-						if(tileData[k] != "") {
-							int num = Integer.parseInt(tileData[k]);
-							mapPaths.get(k-1).addPoint(num, x, y);
-						}
-					}
-					
-					mapTiles.add(new Tile(p,tileNum,tileVal,x,y));
-					tileNum++;
+				//Going through each line of the file and adding it to the array list
+				while((line = reader.readLine()) != null) {
+					lines.add(line);
 				}
+				
+				//Getting the map width and height
+				String[] dim = lines.get(0).split(",");
+				
+				mapWidth = Integer.parseInt(dim[0]);
+				mapHeight = Integer.parseInt(dim[1]);
+				
+				//Getting the spacing of path points for the map
+				String[] temp = lines.get(1).split("\\|");
+				
+				vertSpace = mapHeight/lines.size();
+				horiSpace = mapWidth/temp.length;
+				
+				//Going through each line of the file(first line ignored, holds background file name)
+				for(int i = 1; i < lines.size(); i++) {
+					//String array to hold each set of tile data in each line
+					String[] tileDataSet = lines.get(i).split("\\|");
+					
+					//Going through each set of tile data
+					for(int j = 0; j < tileDataSet.length; j++) {
+						
+						//Number of cols in the map
+						int n = tileDataSet.length;
+						
+						//Separating the individual bits of data for each tile
+						String[] tileData = tileDataSet[j].split(",");
+						
+						//Getting the x/y of the tile/path point
+						//TODO make it so you don't have to manually enter tile/half tile sizes
+						int x = (((tileNum%n))*horiSpace) + (horiSpace/2) + ((p.width/2) - (mapWidth/2));// + horiSpace/2; 
+						int y = (((tileNum/n))*vertSpace) + (vertSpace/2) + (p.height - mapHeight);
+						
+						//Getting the path points
+						for(int k = 0; k < tileData.length; k++) {
+							if(tileData[k] != "") {
+								int num = Integer.parseInt(tileData[k]);
+								mapPaths.get(k).addPoint(num, x, y);
+							}
+						}
+						tileNum++;
+					}
+				}
+			
+			} finally {
+				
+				for(Path path: mapPaths) {
+					path.sortPath();
+				}
+				
+				reader.close();
 			}
+			
+		} catch (IOException e) {
+			//Printing the stack trace for the exception
+			e.printStackTrace();
 		}
 	}
 	
-	//TODO Have no idea if this will actually be used
+	//Returning the map paths
+	public ArrayList<Path> getPaths() {
+		return mapPaths;
+	}
+	
+	//Will be used when editing the map
 	public void saveMap() {
 		
 	}
 	
-	public ArrayList<Tile> getTiles() {
-		return mapTiles;
-	}
-	
-	//TODO dunno if this will be used or not
-	public void render() {
-		
-		for(int i = 0; i < mapTiles.size(); i++) {
-			mapTiles.get(i).render();
-		}
-		
-		for(int i = 0; i < mapPaths.get(0).path.size(); i++) {
-			int x = (int) mapPaths.get(0).path.get(i).ppLoc.x;
-			int y = (int) mapPaths.get(0).path.get(i).ppLoc.y;
-			
-			p.fill(255,0,0);
-			p.textAlign(PApplet.CENTER);
-			p.textSize(15);
-			//p.text(i, x, y);
-			//p.text(mapPaths.get(0).path.get(i).getPPNum(), x, y);
-		}
+	//Only used for editing purposes
+	public void render(int path) {
+		mapPaths.get(path).display();
 	}
 }

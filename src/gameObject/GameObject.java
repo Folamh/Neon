@@ -1,11 +1,16 @@
 package gameObject;
 
-import processing.core.PApplet;
-import processing.core.PVector;
+import java.util.ArrayList;
+import processing.core.*;
 
 public abstract class GameObject{
-	PVector pos;//Position of the object.
-	PApplet p;//The current sketch being drawn.
+	
+	//ArrayList to hold the frames of each object
+	ArrayList<ArrayList<PImage>> idleAnim;
+	ArrayList<ArrayList<PImage>> activeAnim;
+	
+	PVector pos;
+	PApplet p;
 	
 	GameObject(PApplet p, float x, float y) {
 		pos = new PVector(x,y);
