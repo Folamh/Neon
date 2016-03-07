@@ -27,7 +27,8 @@ public class MainLoop extends PApplet{
 	PImage building;
 	Animation animation;
 	Grid grid;
-	PVector location = new PVector (100,100);
+	PVector location = new PVector (4,4);
+	PVector square = new PVector (4,4);
 	Map map = new Map(this);
 	ArrayList<Tile> tiles;
 	//Only use this for initializing variables
@@ -35,17 +36,22 @@ public class MainLoop extends PApplet{
 		frameRate(60);
 		map.loadMap("Resources/Maps/map1.txt");
 		tiles = map.getTiles();
-		grid = new Grid(true,location);
-		grid.loadGrid();
+		grid = new Grid(true,location,square);
+		//grid.loadGrid();
 		building = loadImage("Resources\\Images\\Backgrounds\\Building\\0.png");
 		building.resize(width,height);
+		
 	}
 	
 	public void draw() {
 		background(0);
 		map.render();
-		grid.displayGrid();
+		rect(10,10,10,10);
+		
 		image(building,0,0);
-	}
+		noFill();
+		stroke(0);
+		rect(10,100,10,100);
+		}
 
 }
