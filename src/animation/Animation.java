@@ -42,7 +42,7 @@ public class Animation{
             }
             else
             {
-            	System.out.println("ERROR: File of not png type.");
+            	System.out.println("ERROR: File not of png type.");
             }
             
         }
