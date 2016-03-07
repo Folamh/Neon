@@ -5,6 +5,7 @@ import processing.core.*;
 
 public class Animation{
 	public PImage [] images;
+	public PImage background;
 	PApplet p;
 	File[] f;
 	String path;
@@ -44,7 +45,8 @@ public class Animation{
             }
             else
             {
-            	//System.out.println("File of not png type");
+
+            	System.out.println("ERROR: File not of png type.");
             }
             
         }
