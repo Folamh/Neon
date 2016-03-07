@@ -7,6 +7,7 @@ public class Grid {
 	PApplet p;
 	PVector location;
 	PVector square;
+	PVector mouse;
 	boolean showGrid;
 	
 	//PImage gridImage;
@@ -17,9 +18,6 @@ public class Grid {
 		this.square = square;
 
 		
-	}
-	public void loadGrid()
-	{
 	}
 	
 	public PVector displayGrid()
@@ -39,6 +37,14 @@ public class Grid {
 			}
 		}
 		return square;
+	}
+	public void turretClicked()
+	{
+		if(p.mouseX>square.x&&p.mouseX<square.x+50&&p.mouseY>square.y&&p.mouseY<square.y+50)
+		{
+			placeTower();
+		}
+		
 	}
 	
 }
