@@ -12,12 +12,20 @@ public class GameLoop {
 	ArrayList<Tower> towers;
 	ArrayList<Enemy> gameEnemies;
 	
+	ArrayList<PVector> path;
+	
 	//The current state of the game
 	int gameState;
 	
 	GameLoop(PApplet p, int gameState){
 		this.p = p;
 		this.gameState = gameState;
+		
+		gameEnemies = new ArrayList<Enemy>();
+		towers = new ArrayList<Tower>();
+		
+		path = new ArrayList<PVector>();
+		path.add(new PVector(0,p.height-50));
 	}
 	
 	public void update(int gameState){
@@ -26,6 +34,11 @@ public class GameLoop {
 		
 		//Checking the gameLoop should be updating
 		if(gameState == 4) {
+			
+			if(p.frameCount%60 == 0) {
+				gameEnemies.add(new BasicEnemy(p,p.width,p.height-50,path));
+			}
+			
 			for(int i = 0; i < gameEnemies.size(); i++){
 				gameEnemies.get(i).update();
 			}

@@ -29,9 +29,6 @@ public class MainLoop extends PApplet{
 	MenuLoop menuLoop;
 	GameLoop gameLoop;
 	
-	Enemy enemy;
-	ArrayList<PVector> path;
-	
 	int gameState;
 	
 	
@@ -41,17 +38,14 @@ public class MainLoop extends PApplet{
 		frameRate(60);
 		imageMode(CENTER);
 		
-		path = new ArrayList<PVector>();
-		path.add(new PVector(100,height/2));
-		
-		//This will be removed
-		enemy = new BasicEnemy(this,width-100,height/2,path);
-		
 		//Initializing the gameState to 0
 		gameState = 0;
 		
 		//Loading the background image
 		background = loadImage("resources/images/backgrounds/0.png");
+		
+		//Resizing the background for the current window size
+		background.resize(width,height);
 		
 		//Initializing menu and game loops
 		menuLoop = new MenuLoop(this, gameState);
@@ -59,20 +53,18 @@ public class MainLoop extends PApplet{
 	}
 	
 	public void update(){
-		//Printing the framerate of the program
+		//Printing the frame rate of the program
 		//System.out.println(frameRate);
 		
-		//Resizing the background for the current window size
-		background.resize(width,height);
-		enemy.update();
-		
 		menuLoop.update(gameState);
-		//gameLoop.update();
+		gameLoop.update(gameState);
 		
+		//Updating the game state form the menuLoop
 		gameState = menuLoop.getGameState();
 		
+		//Checking if the player paused the game
 		if(gameLoop.getGameState() == 5) {
-			
+			gameState = gameLoop.getGameState();
 		}
 	}
 	
@@ -81,14 +73,19 @@ public class MainLoop extends PApplet{
 		image(background,width/2,height/2);
 		
 		menuLoop.render();
-		//gameLoop.render();
+		gameLoop.render();
 		
 	}
 	
 	public void draw() {
 		//background(0);
 		//map.render();
-		update();
-		render();
+		System.out.println(gameState);
+		if(gameState != 6) {
+			update();
+			render();
+		} else {
+			exit();
+		}
 	}
 }

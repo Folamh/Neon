@@ -1,7 +1,6 @@
 package control;
 
 import java.util.ArrayList;
-
 import animation.Animation;
 import processing.core.*;
 import userInterface.*;
@@ -35,11 +34,11 @@ public class MenuLoop {
 		//TODO Initialize all the menus here
 		startMenu = new Animation(p,"resources/images/menu/start", 10);
 		
-		mainMenu.add(new Button(p, p.width/2, 100, 300, 150, bImage, "NEON", 40));
-		mainMenu.add(new Button(p, p.width/2, 250, 300, 50, bImage, "PLAY", 15));
-		mainMenu.add(new Button(p, p.width/2, 310, 300, 50, bImage, "SETTINGS", 15));
-		mainMenu.add(new Button(p, p.width/2, 370, 300, 50, bImage, "CREDITS", 15));
-		mainMenu.add(new Button(p, p.width/2, 430, 300, 50, bImage, "EXIT", 15));
+		mainMenu.add(new Button(p, 0, p.width/2, 100, 300, 150, bImage, "NEON", 40));
+		mainMenu.add(new Button(p, 4, p.width/2, 250, 300, 50, bImage, "PLAY", 15));
+		mainMenu.add(new Button(p, 2, p.width/2, 310, 300, 50, bImage, "SETTINGS", 15));
+		mainMenu.add(new Button(p, 3, p.width/2, 370, 300, 50, bImage, "CREDITS", 15));
+		mainMenu.add(new Button(p, 6, p.width/2, 430, 300, 50, bImage, "EXIT", 15));
 	}
 	
 	//Updating menus
@@ -64,7 +63,8 @@ public class MenuLoop {
 					o.update();
 					
 					if(o.getClicked()) {
-						System.out.println(((Button)o).getText());
+						this.gameState = ((Button)o).getValue();
+						break;
 					}
 				}
 				break;
@@ -72,7 +72,11 @@ public class MenuLoop {
 			
 			//Controls menu
 			case 2: {
-				
+				for(int i = 0; i < controlMenu.size(); i++) {
+					MenuObject o = controlMenu.get(i);
+					
+					o.update();
+				}
 				break;
 			}
 	
@@ -93,7 +97,7 @@ public class MenuLoop {
 				
 				break;
 			}
-	
+			//Quit game
 			case 6: {
 				
 				break;

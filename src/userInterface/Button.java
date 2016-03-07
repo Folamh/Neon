@@ -4,6 +4,9 @@ import processing.core.*;
 
 public class Button extends MenuObject{
 	
+	//Value of the button
+	int val;
+	
 	//Image for the button
 	PImage bImage;
 	
@@ -11,9 +14,12 @@ public class Button extends MenuObject{
 	String text;
 	
 	//Button with image
-	public Button(PApplet p, float x, float y, PImage bImage) {
+	public Button(PApplet p, int val, float x, float y, PImage bImage) {
 		//Calling the super constructor
 		super(p,x,y,bImage.width,bImage.height);
+		
+		//Setting the value of the button
+		this.val = val;
 		
 		//Setting the image and the default text
 		this.bImage = bImage;
@@ -21,9 +27,12 @@ public class Button extends MenuObject{
 	}
 	
 	//Button with image and specified width and height
-	public Button(PApplet p, float x, float y, int w, int h, PImage bImage) {
+	public Button(PApplet p, int val, float x, float y, int w, int h, PImage bImage) {
 		//Calling the super constructor
 		super(p,x,y,w,h);
+		//Setting the value of the button
+		this.val = val;
+		
 		//Resizing the button
 		bImage.resize(w,h);
 		//Setting the image and the default text
@@ -32,9 +41,9 @@ public class Button extends MenuObject{
 	}
 	
 	//Button with image and text
-	public Button(PApplet p, float x, float y, PImage bImage, String text, int size) {
+	public Button(PApplet p, int val, float x, float y, PImage bImage, String text, int size) {
 		//Constructor chaining
-		this(p,x,y,bImage);
+		this(p,val,x,y,bImage);
 		
 		//Setting the text for the button
 		this.text = text;
@@ -42,9 +51,9 @@ public class Button extends MenuObject{
 	}
 	
 	//Button with image, specified size and text
-	public Button(PApplet p, float x, float y, int w, int h, PImage bImage, String text, int size) {
+	public Button(PApplet p, int val, float x, float y, int w, int h, PImage bImage, String text, int size) {
 		//Constructor chaining
-		this(p,x,y,w,h,bImage);
+		this(p,val,x,y,w,h,bImage);
 		
 		//Setting the text for the button
 		this.text = text;
@@ -68,6 +77,11 @@ public class Button extends MenuObject{
 	//Returns the text inside the button
 	public String getText() {
 		return text;
+	}
+	
+	//Returning the value of the button
+	public int getValue() {
+		return val;
 	}
 	
 	//Updating the button
