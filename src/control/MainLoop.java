@@ -36,8 +36,6 @@ public class MainLoop extends PApplet{
 		frameRate(60);
 		map.loadMap("Resources/Maps/map1.txt");
 		tiles = map.getTiles();
-		grid = new Grid(true,location,square);
-		//grid.loadGrid();
 		building = loadImage("Resources\\Images\\Backgrounds\\Building\\0.png");
 		building.resize(width,height);
 		

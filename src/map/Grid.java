@@ -8,15 +8,16 @@ public class Grid {
 	PVector location;
 	PVector square;
 	PVector mouse;
+	PImage towerPlace;
 	boolean showGrid;
 	
 	//PImage gridImage;
-	public Grid(boolean showGrid,PVector location,PVector square)
+	public Grid(PApplet p,boolean showGrid,PVector location,PVector square)
 	{
 		this.showGrid = showGrid;
 		this.location = location;
 		this.square = square;
-
+		this.p = p;
 		
 	}
 	
@@ -42,9 +43,16 @@ public class Grid {
 	{
 		if(p.mouseX>square.x&&p.mouseX<square.x+50&&p.mouseY>square.y&&p.mouseY<square.y+50)
 		{
-			placeTower();
+			if(p.mousePressed)
+			{
+				placeTower();
+			}
 		}
 		
+	}
+	public void placeTower()
+	{
+		towerPlace = p.loadImage("resources/Images/Turret/basicTurret/0.png");
 	}
 	
 }
