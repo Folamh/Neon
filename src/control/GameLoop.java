@@ -6,8 +6,8 @@ import gameObject.*;
 import map.Grid;
 import map.Path;
 import processing.core.*;
-import userInterface.Button;
-import userInterface.MenuObject;
+
+import userInterface.*;
 
 public class GameLoop {
 	PApplet p;
@@ -16,24 +16,25 @@ public class GameLoop {
 	Grid grid;
 	ArrayList<PVector> gridUsed;
 	int money;
-	
+	int health;
 	PVector off;
 	Camera camera;
 	
 	//ArrayLists for different game objects
 	ArrayList<Tower> towers;
 	ArrayList<Enemy> gameEnemies;
+	ArrayList<Button> gameMenu;
 	PImage background;
 	PImage building;
 	int spawnRate;
 	boolean placingTower;
 	int data;
-	ArrayList<Button> gameMenu;
 	
 	//The current state of the game
 	int gameState;
 	
-	GameLoop(PApplet p, int gameState){
+	GameLoop(PApplet p, int gameState)
+	{
 		this.p = p;
 		this.gameState = gameState;
 		money = 600000;
@@ -44,14 +45,15 @@ public class GameLoop {
 		gameEnemies = new ArrayList<Enemy>();
 		towers = new ArrayList<Tower>();
 		background = new PImage();
-		background = p.loadImage("resources/images/backgrounds/background/0.png");
+		background = p.loadImage("Resources\\Images\\Backgrounds\\Background\\0.png");
 		building = new PImage();
-		building = p.loadImage("resources/images/backgrounds/building/0.png");
+		building = p.loadImage("Resources\\Images\\Backgrounds\\Building\\0.png");
+		
 		spawnRate = 5*60;
 		gridUsed = new ArrayList<PVector>();
 		placingTower = false;
 		data = 10;
-		towers = new ArrayList<Tower>();
+		
 		
 		//Pause Menu Button Image
 		PImage bImage = p.loadImage("resources/images/menu/button/0.png");
@@ -79,7 +81,8 @@ public class GameLoop {
 		grid = new Grid(p, building, 6, 10);
 	}
 	
-	public void update(int gameState){
+	public void update(int gameState)
+	{
 		//Updating the game state
 		this.gameState = gameState;
 		System.out.println(gameState);
@@ -88,8 +91,10 @@ public class GameLoop {
 		off = camera.getOffSet();
 		
 		//Checking the gameLoop should be updating
-		if(gameState == 4) {
-			for(int i = 0; i < gameEnemies.size(); i++){
+		if(gameState == 4) 
+		{
+			for(int i = 0; i < gameEnemies.size(); i++)
+			{
 				gameEnemies.get(i).update();
 				
 				if(((BasicEnemy) gameEnemies.get(i)).getHealth() == 0) {
@@ -97,7 +102,8 @@ public class GameLoop {
 				}
 			}
 			
-			for(int i = 0; i < towers.size(); i++){
+			for(int i = 0; i < towers.size(); i++)
+			{
 				towers.get(i).update();
 				towers.get(i).calculateTargets(gameEnemies);
 				if(towers.get(i).size() != 0){
@@ -134,7 +140,7 @@ public class GameLoop {
 					placeTower();
 				}
 			}
-			loseData();
+		loseData();
 		}
 	}
 	
@@ -175,6 +181,10 @@ public class GameLoop {
 			}
 		}
 	}
+	public void killEnemy()
+	{
+		
+	}
 	
 	void loseData(){
 		for(int i = 0; i < gameEnemies.size(); i++){
@@ -186,6 +196,7 @@ public class GameLoop {
 		
 	public void render(){
 		//Checking of the gameLoop should be rendered
+		p.text("$: " + money , p.width/8, p.height/8);
 		p.pushMatrix();
 		p.translate(-off.x,-off.y);
 		if(gameState == 4 || gameState == 5) {
@@ -195,7 +206,8 @@ public class GameLoop {
 				towers.get(i).render();
 			}
 			
-			for(int i = 0; i < gameEnemies.size(); i++){
+			for(int i = 0; i < gameEnemies.size(); i++)
+			{
 				gameEnemies.get(i).render();
 			}
 			if(placingTower){

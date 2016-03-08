@@ -18,6 +18,9 @@ public abstract class GameObject{
 	}
 	
 	//Basic functions for all objects:
-	public abstract void update();//Update positions.
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}//Update positions.
 	public abstract void render();//ALl forms of rendering go here.
 }
