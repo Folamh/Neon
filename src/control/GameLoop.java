@@ -164,7 +164,8 @@ public class GameLoop {
 				towers.get(i).render();
 			}
 			
-			for(int i = 0; i < gameEnemies.size(); i++){
+			for(int i = 0; i < gameEnemies.size(); i++)
+			{
 				gameEnemies.get(i).render();
 			}
 		}
