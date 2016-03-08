@@ -15,6 +15,7 @@ public class GameLoop {
 	Path path2;
 	Grid grid;
 	ArrayList<PVector> gridUsed;
+	int money;
 	
 	//ArrayLists for different game objects
 	ArrayList<Tower> towers;
@@ -33,6 +34,7 @@ public class GameLoop {
 		this.p = p;
 		this.gameState = gameState;
 		grid = new Grid(p, 50, 50, 5, 2);
+		money = 600;
 		
 		//Initializing the path lists
 		path1 = new Path(p);
@@ -115,7 +117,12 @@ public class GameLoop {
 			}
 			spawnEnemies();
 			if(placingTower){
-				placeTower();
+				if(money < 200){
+					
+				}
+				else{
+					placeTower();
+				}
 			}
 			loseData();
 		}
@@ -153,6 +160,7 @@ public class GameLoop {
 					PlasmaTower tower = new PlasmaTower(p, point.x, point.y);
 					towers.add(tower);
 					placingTower = false;
+					money -= 200;
 				}
 			}
 		}
