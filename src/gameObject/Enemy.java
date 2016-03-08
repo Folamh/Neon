@@ -8,15 +8,12 @@ import processing.core.PVector;
 
 public abstract class Enemy extends GameObject{
 	PVector nextPathPoint;
-	Path path;
+	public Path path;
 	int curPoint;
 	float speed;
 	boolean inElevator;
 	
-	int data;
-	int maxData;
-	boolean gatherData;
-	boolean doneGathering;
+	public boolean gotData;
 	int wait;
 	
 	int health;
@@ -62,21 +59,14 @@ public abstract class Enemy extends GameObject{
 	}
 	
 	void nextPoint(){
-		if(++curPoint < path.getSize()){
-			nextPathPoint = path.getNextPoint();
+		if(gotData){
+			if(++curPoint < path.getSize()){
+				nextPathPoint = path.getPrevPoint();
+			}
 		}
-	}
-	
-	void collectData(){
-		if(gatherData){
-			if(wait < 60){
-				wait++;
-			}
-			else if(data < maxData){
-				data++;
-			}
-			else{
-				doneGathering = true;
+		else{
+			if(++curPoint < path.getSize()){
+				nextPathPoint = path.getNextPoint();
 			}
 		}
 	}

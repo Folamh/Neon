@@ -1,13 +1,11 @@
 package gameObject;
 
-import java.util.ArrayList;
-
+import map.Path;
 import processing.core.PApplet;
-import processing.core.PVector;
 
 public class FastEnemy extends Enemy{
 	
-	FastEnemy(PApplet p, int x, int y, ArrayList<PVector> path){
+	FastEnemy(PApplet p, int x, int y, Path path){
 		super(p, x, y, path);
 	}
 	

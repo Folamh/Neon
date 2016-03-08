@@ -108,4 +108,14 @@ public class Path {
 	public int getSize(){
 		return path.size();
 	}
+	
+	//Returns the last point in the path
+	public PVector getLastPoint() {
+		return path.get(path.size()-1).ppLoc;
+	}
+	
+	//Returns the first point in the path
+		public PVector getFirstPoint() {
+			return path.get(0).ppLoc;
+		}
 }
