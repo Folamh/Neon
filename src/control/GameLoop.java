@@ -83,6 +83,7 @@ public class GameLoop {
 	{
 		//Updating the game state
 		this.gameState = gameState;
+		System.out.println(gameState);
 		camera.update(off,1);
 		
 		off = camera.getOffSet();
@@ -193,7 +194,6 @@ public class GameLoop {
 		p.pushMatrix();
 		p.translate(-off.x,-off.y);
 		if(gameState == 4 || gameState == 5) {
-			
 			p.image(building,p.width/2,p.height/2);
 			
 			for(int i = 0; i < towers.size(); i++){
@@ -205,12 +205,14 @@ public class GameLoop {
 				gameEnemies.get(i).render();
 			}
 			
-			for(int i = 0; i < gameMenu.size(); i++){
-				gameMenu.get(i).render();
-			}
 			grid.showGrid();
 		}
 		p.popMatrix();
+		if(gameState == 4) {
+			for(int i = 0; i < gameMenu.size(); i++){
+				gameMenu.get(i).render();
+			}
+		}
 	}
 	
 	//Returning the current state of the game
