@@ -3,11 +3,9 @@ package control;
 import java.util.ArrayList;
 
 import gameObject.*;
-import map.Grid;
-import map.Map;
-import map.Path;
+import map.*;
 import processing.core.*;
-
+import userInterface.*;
 public class GameLoop {
 	PApplet p;
 	Path path1;
@@ -18,6 +16,7 @@ public class GameLoop {
 	//ArrayLists for different game objects
 	ArrayList<Tower> towers;
 	ArrayList<Enemy> gameEnemies;
+	ArrayList<Button> gameMenu;
 	PImage background;
 	PImage building;
 	int wait;
@@ -28,46 +27,80 @@ public class GameLoop {
 	//The current state of the game
 	int gameState;
 	
-	GameLoop(PApplet p, int gameState){
+	GameLoop(PApplet p, int gameState)
+	{
 		this.p = p;
 		this.gameState = gameState;
 		
 		gameEnemies = new ArrayList<Enemy>();
 		background = new PImage();
-		background = p.loadImage("Resources\\Images\\Backgrounds\\0.png");
+		background = p.loadImage("Resources\\Images\\Backgrounds\\Background\\0.png");
 		building = new PImage();
-		building = p.loadImage("Resources\\Images\\Backgrounds\\1.png");
+		building = p.loadImage("Resources\\Images\\Backgrounds\\Building\\0.png");
 		wait = 0;
 		spawnRate = 5*60;
 		gridUsed = new ArrayList<PVector>();
 		placingTower = false;
 		data = 10;
 		towers = new ArrayList<Tower>();
+		//Pause Menu Button Image
+		PImage bImage = p.loadImage("resources/images/menu/button/0.png");
+		//Turret Button Image
+		PImage tImage = p.loadImage("resources/images/turret/basicTurret/0.png");
+		gameMenu = new ArrayList<Button>();
+		gameMenu.add(new Button(p, 5, p.width-50, p.height-50, 300, 150, bImage, "Pause", 20));
+		gameMenu.add(new Button(p, 4, p.width-100, 100, 300, 150, tImage, " ",10));
 	}
 	
-	public void update(int gameState){
+	public void update(int gameState)
+	{
 		//Updating the game state
 		this.gameState = gameState;
 		
 		//Checking the gameLoop should be updating
-		if(gameState == 4) {
-			for(int i = 0; i < gameEnemies.size(); i++){
+		if(gameState == 4) 
+		{
+			for(int i = 0; i < gameEnemies.size(); i++)
+			{
 				gameEnemies.get(i).update();
 			}
 			
-			for(int i = 0; i < towers.size(); i++){
+			for(int i = 0; i < towers.size(); i++)
+			{
 				towers.get(i).update();
 				towers.get(i).calculateTargets(gameEnemies);
 				if(towers.get(i).size() != 0){
 					towers.get(i).calculateLead();
 				}
 			}
-		}
+			for(int i = 0; i < gameMenu.size(); i++) 
+			{
+				MenuObject o = gameMenu.get(i);
+				
+				o.update();
+				
+				if(o.getClicked())
+				{
+					this.gameState = ((Button)o).getValue();
+					for(int j = 0; j<gameMenu.size();j++)
+					{
+						
+						Button b = gameMenu.get(j);
+						if((b).getValue() == 4)
+						{
+							placingTower = true;
+						}
+					}
+					break;
+				}
+			}
 		spawnEnemies();
-		if(placingTower){
-			placeTower();
-		}
+			if(placingTower)
+			{
+				placeTower();
+			}
 		loseData();
+		}
 	}
 	
 	void spawnEnemies(){
