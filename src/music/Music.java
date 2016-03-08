@@ -41,49 +41,49 @@ public class Music {
 		game[8] = 14;
 
 		// Add songs to class
-		song = this.minim.loadFile("Resources/Music/AmplitudeProblem_IntoTheNight.mp3");
+		song = this.minim.loadFile("Resources/Music/AmplitudeProblem_IntoTheNight.wav");
 		songs.add(song);// 0
 		System.out.println("0");
-		song = this.minim.loadFile("Resources/Music/BadassWolfShirt_EverythingWillBeJustFire.mp3");
+		song = this.minim.loadFile("Resources/Music/BadassWolfShirt_EverythingWillBeJustFire.wav");
 		songs.add(song);// 1
 		System.out.println("1");
-		song = this.minim.loadFile("Resources/Music/Home_Pyxis.mp3");
+		song = this.minim.loadFile("Resources/Music/Home_Pyxis.wav");
 		songs.add(song);// 2
 		System.out.println("2");
-		song = this.minim.loadFile("Resources/Music/Home_WereFinallyLanding.mp3");
+		song = this.minim.loadFile("Resources/Music/Home_WereFinallyLanding.wav");
 		songs.add(song);// 3
 		System.out.println("3");
-		song = this.minim.loadFile("Resources/Music/Megalopolis_Love.mp3");
+		song = this.minim.loadFile("Resources/Music/Megalopolis_Love.wav");
 		songs.add(song);// 4
 		System.out.println("4");
-		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_CrackedStreetsAndBrokenWindows.mp3");
+		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_CrackedStreetsAndBrokenWindows.wav");
 		songs.add(song);// 5
 		System.out.println("5");
-		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_DanceHarder.mp3");
+		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_DanceHarder.wav");
 		songs.add(song);// 6
 		System.out.println("6");
-		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_DriftingOff.mp3");
+		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_DriftingOff.wav");
 		songs.add(song);// 7
 		System.out.println("7");
-		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_DriveFast.mp3");
+		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_DriveFast.wav");
 		songs.add(song);// 8
 		System.out.println("8");
-		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_HappiestDays.mp3");
+		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_HappiestDays.wav");
 		songs.add(song);// 9
 		System.out.println("9");
-		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_HeavyTraffic.mp3");
+		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_HeavyTraffic.wav");
 		songs.add(song);// 10
 		System.out.println("10");
-		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_HotNightsInLosAngeles.mp3");
+		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_HotNightsInLosAngeles.wav");
 		songs.add(song);// 11
 		System.out.println("11");
-		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_ItCan'tBeBargainedWith.mp3");
+		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_ItCan'tBeBargainedWith.wav");
 		songs.add(song);// 12
 		System.out.println("12");
-		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_Labyrinth.mp3");
+		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_Labyrinth.wav");
 		songs.add(song);// 13
 		System.out.println("13");
-		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_RagingStreets.mp3");
+		song = this.minim.loadFile("Resources/Music/ThreeChainLinks_RagingStreets.wav");
 		songs.add(song);// 14
 		System.out.println("14");
 	}
