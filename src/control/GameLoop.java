@@ -33,7 +33,7 @@ public class GameLoop {
 		this.gameState = gameState;
 		
 		//Checking the gameLoop should be updating
-		if(gameState == 4) {
+		if(this.gameState == 4) {
 			
 			if(p.frameCount%60 == 0) {
 				gameEnemies.add(new BasicEnemy(p,p.width,p.height-50,path));

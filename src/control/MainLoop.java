@@ -78,9 +78,6 @@ public class MainLoop extends PApplet{
 	}
 	
 	public void draw() {
-		//background(0);
-		//map.render();
-		System.out.println(gameState);
 		if(gameState != 6) {
 			update();
 			render();

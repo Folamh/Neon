@@ -36,7 +36,7 @@ public class Path {
 	int curPoint; //Point traveling from
 	int nextPoint; //Point traveling to
 	
-	Path(PApplet p) {
+	public Path(PApplet p) {
 		this.p = p;
 		//Initializing the array list
 		path = new ArrayList<PathPoint>();
@@ -107,6 +107,11 @@ public class Path {
 	//Returns the previous point(Previous current point)
 	public PVector getNextPoint() {
 		return path.get(prevPoint).ppLoc;
+	}
+	
+	//Returns the last point in the path
+	public PVector getLastPoint() {
+		return path.get(path.size()-1).ppLoc;
 	}
 	
 	//Displaying the path
