@@ -36,7 +36,7 @@ public class GameLoop {
 	GameLoop(PApplet p, int gameState){
 		this.p = p;
 		this.gameState = gameState;
-		money = 600;
+		money = 600000;
 		
 		//Initializing the path lists
 		path1 = new Path(p);
@@ -76,7 +76,7 @@ public class GameLoop {
 		towers.add(new PlasmaTower(p,100,100));
 		
 
-		grid = new Grid(p, building, 6, 4);
+		grid = new Grid(p, building, 6, 10);
 	}
 	
 	public void update(int gameState){
@@ -144,12 +144,12 @@ public class GameLoop {
 			int rand = (int) p.random(0,1);
 			BasicEnemy enemy;
 			if(rand == 0){
-				//enemy = new BasicEnemy(p, 50, 50, path1);
-				//gameEnemies.add(enemy);
+				enemy = new BasicEnemy(p, 50, 50, path1);
+				gameEnemies.add(enemy);
 			}
 			else{
-				//enemy = new BasicEnemy(p, p.width-50, 50, path1);
-				//gameEnemies.add(enemy);
+				enemy = new BasicEnemy(p, p.width-50, 50, path1);
+				gameEnemies.add(enemy);
 			}
 		}
 	}

@@ -1,3 +1,4 @@
+
 package control;
 
 import ddf.minim.Minim;
@@ -65,11 +66,6 @@ public class MainLoop extends PApplet{
 		gameLoop.update(gameState);
 		
 		System.out.println(gameState);
-		
-		/*
-		 * The gameLoop state is still 5, after the menu Loop updates it
-		 * Then
-		 */
 		
 		//Checking if the player paused the game
 		if(gameLoop.getGameState() == 5) {
