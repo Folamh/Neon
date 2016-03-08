@@ -1,12 +1,10 @@
 package control;
 
 import java.util.ArrayList;
-
 import gameObject.*;
 import map.Grid;
 import map.Path;
 import processing.core.*;
-
 import userInterface.*;
 
 public class GameLoop {
@@ -44,9 +42,8 @@ public class GameLoop {
 		
 		gameEnemies = new ArrayList<Enemy>();
 		towers = new ArrayList<Tower>();
-		background = new PImage();
+		
 		background = p.loadImage("Resources\\Images\\Backgrounds\\Background\\0.png");
-		building = new PImage();
 		building = p.loadImage("Resources\\Images\\Backgrounds\\Building\\0.png");
 		
 		spawnRate = 5*60;
@@ -74,11 +71,8 @@ public class GameLoop {
 		off = new PVector(0,0);
 		
 		gameEnemies.add(new BasicEnemy(p,500,500,path1));
-		//gameEnemies.add(new BasicEnemy(p,700,700,path1));
-		towers.add(new PlasmaTower(p,100,100));
-		
 
-		grid = new Grid(p, building, 6, 10);
+		grid = new Grid(p, building, 50);
 	}
 	
 	public void update(int gameState)
@@ -181,10 +175,6 @@ public class GameLoop {
 			}
 		}
 	}
-	public void killEnemy()
-	{
-		
-	}
 	
 	void loseData(){
 		for(int i = 0; i < gameEnemies.size(); i++){
@@ -196,11 +186,13 @@ public class GameLoop {
 		
 	public void render(){
 		//Checking of the gameLoop should be rendered
-		p.text("$: " + money , p.width/8, p.height/8);
 		p.pushMatrix();
 		p.translate(-off.x,-off.y);
 		if(gameState == 4 || gameState == 5) {
-			p.image(building,p.width/2,p.height/2);
+			p.pushMatrix();
+			p.translate(p.width/2, p.height/2);
+			p.image(building,0,0);
+			p.popMatrix();
 			
 			for(int i = 0; i < towers.size(); i++){
 				towers.get(i).render();
@@ -218,6 +210,14 @@ public class GameLoop {
 		if(gameState == 4) {
 			for(int i = 0; i < gameMenu.size(); i++){
 				gameMenu.get(i).render();
+				p.noStroke();
+				p.fill(255);
+				p.rectMode(PApplet.CENTER);
+				p.rect(p.width-100, 150, 150, 50);
+				p.textSize(20);
+				p.textAlign(PApplet.CENTER);
+				p.fill(0);
+				p.text("$: " + money , p.width-100, 150);
 			}
 		}
 	}

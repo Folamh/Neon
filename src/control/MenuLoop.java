@@ -34,21 +34,23 @@ public class MenuLoop {
 		PImage creditsImage = p.loadImage("resources/images/menu/button/2.png");
 		PImage exitImage = p.loadImage("resources/images/menu/button/3.png");
 		PImage backImage = p.loadImage("resources/images/menu/button/4.png");
+		PImage titleImage = p.loadImage("resources/images/menu/button/5.png");
 		
 		//TODO Initialize all the menus here
 		//Start Menu
 		startMenu = new Animation(p,"resources/images/menu/start", 10);
 		
 		//Main menu
-		mainMenu.add(new Button(p, 4, p.width/2, 275, 200, 100, playImage, "", 15));
-		mainMenu.add(new Button(p, 2, p.width/2, 400, 200, 100, settingImage, "", 15));
-		mainMenu.add(new Button(p, 3, p.width/2, 525, 200, 100, creditsImage, "", 15));
-		mainMenu.add(new Button(p, 6, p.width/2, 650, 200, 100, exitImage, "", 15));
+		mainMenu.add(new Button(p, 0, p.width/2, 100, titleImage));
+		mainMenu.add(new Button(p, 4, p.width/2, 275, 200, 100, playImage));
+		mainMenu.add(new Button(p, 2, p.width/2, 400, 200, 100, settingImage));
+		mainMenu.add(new Button(p, 3, p.width/2, 525, 200, 100, creditsImage));
+		mainMenu.add(new Button(p, 6, p.width/2, 650, 200, 100, exitImage));
 		
 		//Pause menu
-		pauseMenu.add(new Button(p, 0, p.width/2, 100, 200, 100, settingImage, "", 15));
-		pauseMenu.add(new Button(p, 4, p
-				.width/2, p.height-100, 200, 100, backImage, "", 15));
+		pauseMenu.add(new Button(p, 0, p.width/2, 100, 200, 100, settingImage));
+		pauseMenu.add(new Button(p, 1, p.width/2, 200, 200, 100, settingImage));
+		pauseMenu.add(new Button(p, 4, p.width/2, p.height-100, 200, 100, backImage));
 		
 		//settings menu
 		settingsMenu.add(new Button(p, 0, p.width/2, 100, settingImage, "", 15));
