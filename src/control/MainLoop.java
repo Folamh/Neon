@@ -44,13 +44,13 @@ public class MainLoop extends PApplet{
 		//Resizing the background for the current window size
 		background.resize(width,height);
 		
-		//Initializing menu and game loops
-		menuLoop = new MenuLoop(this);
-		gameLoop = new GameLoop(this, gameState);
-		
 		//Setting up music
 		minim = new Minim(this);
 		music = new Music(this);
+
+		//Initializing menu and game loops
+		menuLoop = new MenuLoop(this, minim);
+		gameLoop = new GameLoop(this, gameState);
 	}
 	
 	public void update(){

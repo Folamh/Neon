@@ -2,13 +2,18 @@ package control;
 
 import java.util.ArrayList;
 import animation.Animation;
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import processing.core.*;
 import userInterface.*;
 
 public class MenuLoop {
 	
 	PApplet p;
+	Minim minim;
 	int gameState;
+	AudioPlayer select;
+	AudioPlayer back;
 	
 	Animation startMenu;
 	
@@ -17,10 +22,15 @@ public class MenuLoop {
 	ArrayList<MenuObject> settingsMenu;
 	ArrayList<MenuObject> creditsMenu;
 	
-	public MenuLoop(PApplet p) {
+	public MenuLoop(PApplet p, Minim minim) {
 		//Disambiguating variables
+		this.minim = minim;
 		this.p = p;
 		gameState = 0;
+		
+		//SFX
+		select = this.minim.loadFile("Resources/Audio/SELECT.wav");
+		back = this.minim.loadFile("Resources/Audio/BACK.wav");
 		
 		//Initializing the array lists
 		mainMenu = new ArrayList<MenuObject>();
@@ -58,6 +68,18 @@ public class MenuLoop {
 		creditsMenu.add(new Button(p, 0, p.width/2, 100, creditsImage, "", 15));
 		creditsMenu.add(new Button(p, 1, p.width/2, p.height-100, 200, 100, backImage, "", 15));
 	}
+	
+	//Play SELECT.wav
+	void playSelect(){
+		select.rewind();
+		select.play();
+	}
+	
+	//Play BACK.wav
+		void playBack(){
+			back.rewind();
+			back.play();
+		}
 	
 	//Updating menus
 	public void update(int gameState) {
