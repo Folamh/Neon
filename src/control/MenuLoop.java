@@ -47,7 +47,8 @@ public class MenuLoop {
 		
 		//Pause menu
 		pauseMenu.add(new Button(p, 0, p.width/2, 100, 200, 100, settingImage, "", 15));
-		pauseMenu.add(new Button(p, 4, p.width/2, p.height-100, 200, 100, backImage, "", 15));
+		pauseMenu.add(new Button(p, 4, p
+				.width/2, p.height-100, 200, 100, backImage, "", 15));
 		
 		//settings menu
 		settingsMenu.add(new Button(p, 0, p.width/2, 100, settingImage, "", 15));
@@ -65,6 +66,7 @@ public class MenuLoop {
 		//System.out.println(gameState);
 		switch(this.gameState) {
 			
+			//Start menu
 			case 0:{
 				if(p.keyPressed) {
 					if(p.key == ' ') this.gameState = 1;
