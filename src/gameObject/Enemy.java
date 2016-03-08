@@ -9,7 +9,7 @@ public abstract class Enemy extends GameObject{
 	Path path;
 	
 	//Position of next path point
-	PVector nextPathPoint;
+	PVector nextPathPoint, vel;
 	
 	//If the enemy is in an elevator
 	boolean inElevator;
@@ -42,6 +42,14 @@ public abstract class Enemy extends GameObject{
 		stoleData = false;
 		
 		curPoint = 0;
+		
+		//Initializing vel
+		vel = PVector.sub(nextPathPoint, pos);
+		
+		//Normalizing velocity to 1
+		vel.normalize();
+		//Multiplying the velocity by the enemie's speed
+		vel.mult(speed);
 	}
 	
 	//Moves enemy towards the next path point
@@ -61,7 +69,7 @@ public abstract class Enemy extends GameObject{
 			System.out.println(curPoint);
 		} else {
 			//Calculating the velocity vector for moving the enemy
-			PVector vel = PVector.sub(nextPathPoint, pos);
+			vel = PVector.sub(nextPathPoint, pos);
 			
 			//Normalizing velocity to 1
 			vel.normalize();
