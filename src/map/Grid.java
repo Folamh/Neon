@@ -3,52 +3,36 @@ package map;
 
 import processing.core.*;
 public class Grid {
-	
 	PApplet p;
-	PVector location;
-	PVector square;
-	PVector mouse;
-	PImage towerPlace;
-	boolean showGrid;
+	int startX;
+	int startY;
+	int widthNo;
+	int heightNo;
+	int gridWidth;
+	int gridHeight;
 	
 	//PImage gridImage;
-	public Grid(PApplet p,boolean showGrid,PVector location,PVector square)
+	public Grid(PApplet p, int x, int y, int widthNo, int heightNo)
 	{
-		this.showGrid = showGrid;
-		this.location = location;
-		this.square = square;
 		this.p = p;
-		
+		startX = x;
+		startY = y;
+		this.widthNo = widthNo;
+		this.heightNo = heightNo;
+		gridWidth = 100;
+		gridHeight = 100;
 	}
 	
-	public PVector displayGrid()
-	{
-		
-		for(int i = 0;i < location.x; i++)
-		{
-			
-			for(int j = 0; j< location.y;j++)
-			{
-				if(square.x > i*100)
-				{
-					square.y += 100;
-					
+	public PVector returnGrid(){
+		PVector point = new PVector();
+		point.set(0, 0);
+		for(int i = 0; i < widthNo; i++){
+			for(int j = 0; j < heightNo; j++){
+				if((p.mouseX > (startX + i*gridWidth)) && (p.mouseX < (startX + gridWidth + i*gridWidth)) && (p.mouseY > (startY + j*gridHeight)) && (p.mouseY < (startY + gridHeight+ j*gridHeight))){
+					point.set((startX + i*gridWidth + gridWidth/2), (startY + j*gridHeight + gridHeight/2));
 				}
-				square.x += 100;
 			}
 		}
-		return square;
+		return point;
 	}
-	public void turretClicked()
-	{
-		if(p.mouseX>square.x&&p.mouseX<square.x+50&&p.mouseY>square.y&&p.mouseY<square.y+50)
-		{
-			if(p.mousePressed)
-			{
-				
-			}
-		}
-		
-	}
-	
 }

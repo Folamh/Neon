@@ -2,29 +2,27 @@ package gameObject;
 
 import java.util.ArrayList;
 
+import map.Path;
 import processing.core.PApplet;
 import processing.core.PVector;
 
 public abstract class Enemy extends GameObject{
 	PVector nextPathPoint;
-	ArrayList<PVector> path;
+	public Path path;
 	int curPoint;
 	float speed;
 	boolean inElevator;
 	
-	int data;
-	int maxData;
-	boolean gatherData;
-	boolean doneGathering;
+	public boolean gotData;
 	int wait;
 	
 	int health;
 	
-	Enemy(PApplet p, int x, int y, ArrayList<PVector> path){
+	Enemy(PApplet p, int x, int y, Path path){
 		super(p, x, y);
 		this.path = path;
 		curPoint = 0;
-		nextPathPoint = path.get(curPoint);
+		nextPathPoint = path.getNextPoint();
 		inElevator = false;
 	}
 	
@@ -61,27 +59,14 @@ public abstract class Enemy extends GameObject{
 	}
 	
 	void nextPoint(){
-		if(++curPoint < path.size()){
-			nextPathPoint = path.get(curPoint);
+		if(gotData){
+			if(++curPoint < path.getSize()){
+				nextPathPoint = path.getPrevPoint();
+			}
 		}
-	}
-	
-	public void newPath(ArrayList<PVector> path){
-		curPoint = 0;
-		this.path = path;
-		nextPathPoint = path.get(curPoint);
-	}
-	
-	void collectData(){
-		if(gatherData){
-			if(wait < 60){
-				wait++;
-			}
-			else if(data < maxData){
-				data++;
-			}
-			else{
-				doneGathering = true;
+		else{
+			if(++curPoint < path.getSize()){
+				nextPathPoint = path.getNextPoint();
 			}
 		}
 	}
