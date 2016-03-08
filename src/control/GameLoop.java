@@ -182,6 +182,7 @@ public class GameLoop {
 		
 	public void render(){
 		//Checking of the gameLoop should be rendered
+		p.text("Credits: " + money , p.width*0.2, p.height*0.2);
 		p.pushMatrix();
 		if(gameState == 4 || gameState == 5) {
 			for(int i = 0; i < towers.size(); i++){
