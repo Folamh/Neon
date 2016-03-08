@@ -3,16 +3,26 @@ package control;
 import java.util.ArrayList;
 
 import gameObject.*;
+import map.Grid;
+import map.Path;
 import processing.core.*;
 
 public class GameLoop {
 	PApplet p;
+	Path path1;
+	Path path2;
+	Grid grid;
+	ArrayList<PVector> gridUsed;
 	
 	//ArrayLists for different game objects
 	ArrayList<Tower> towers;
 	ArrayList<Enemy> gameEnemies;
-	
-	ArrayList<PVector> path;
+	PImage background;
+	PImage building;
+	int wait;
+	int spawnRate;
+	boolean placingTower;
+	int data;
 	
 	//The current state of the game
 	int gameState;
@@ -21,11 +31,28 @@ public class GameLoop {
 		this.p = p;
 		this.gameState = gameState;
 		
+		//Initializing the path lists
+		path1 = new Path(p);
+		path2 = new Path(p);
+		
 		gameEnemies = new ArrayList<Enemy>();
+		background = new PImage();
+		background = p.loadImage("resources/images/backgrounds/background/0.png");
+		building = new PImage();
+		building = p.loadImage("resources/images/backgrounds/building/0.png");
+		wait = 0;
+		spawnRate = 5*60;
+		gridUsed = new ArrayList<PVector>();
+		placingTower = false;
+		data = 10;
 		towers = new ArrayList<Tower>();
 		
-		path = new ArrayList<PVector>();
-		path.add(new PVector(0,p.height-50));
+		path1.addPoint(0, 100, p.height-50);
+		path1.addPoint(0, p.width-100, p.height-50);
+		path1.addPoint(0, p.width-100, 200);
+		path1.addPoint(0, 100, 200);
+		
+		gameEnemies.add(new BasicEnemy(p,500,500,path1));
 	}
 	
 	public void update(int gameState){
@@ -33,12 +60,7 @@ public class GameLoop {
 		this.gameState = gameState;
 		
 		//Checking the gameLoop should be updating
-		if(this.gameState == 4) {
-			
-			if(p.frameCount%60 == 0) {
-				gameEnemies.add(new BasicEnemy(p,p.width,p.height-50,path));
-			}
-			
+		if(gameState == 4) {
 			for(int i = 0; i < gameEnemies.size(); i++){
 				gameEnemies.get(i).update();
 			}
@@ -50,11 +72,67 @@ public class GameLoop {
 					towers.get(i).calculateLead();
 				}
 			}
+			spawnEnemies();
+			if(placingTower){
+				placeTower();
+			}
+			loseData();
 		}
 	}
 	
+	void spawnEnemies(){
+		if(p.millis()%spawnRate == 0){
+			p.randomSeed(p.millis());
+			int rand = (int) p.random(0,1);
+			BasicEnemy enemy;
+			if(rand == 0){
+				enemy = new BasicEnemy(p, 50, 50, path1);
+				gameEnemies.add(enemy);
+			}
+			else{
+				enemy = new BasicEnemy(p, p.width-50, 50, path1);
+				gameEnemies.add(enemy);
+			}
+		}
+	}
+	
+	void placeTower(){
+		PVector point = new PVector();
+		boolean ok = true;
+		if(p.mousePressed){
+			point = grid.returnGrid();
+			if(point.x != 0 && point.y != 0){
+				for(int i = 0; i < gridUsed.size(); i++){
+					if(point == gridUsed.get(i)){
+						ok = false;
+					}
+				}
+				if(ok == true){
+					gridUsed.add(point);
+					PlasmaTower tower = new PlasmaTower(p, point.x, point.y);
+					towers.add(tower);
+					placingTower = false;
+				}
+			}
+		}
+	}
+	
+	void loseData(){
+		for(int i = 0; i < gameEnemies.size(); i++){
+			if(gameEnemies.get(i).path.getCurPoint() == gameEnemies.get(i).path.getLastPoint()){
+				gameEnemies.get(i).gotData = true;
+			}
+			if(gameEnemies.get(i).gotData){
+				if(gameEnemies.get(i).path.getCurPoint() == gameEnemies.get(i).path.getFirstPoint()){
+					data--;
+				}
+			}
+		}
+	}
+		
 	public void render(){
 		//Checking of the gameLoop should be rendered
+		p.pushMatrix();
 		if(gameState == 4 || gameState == 5) {
 			for(int i = 0; i < towers.size(); i++){
 				towers.get(i).render();
@@ -64,6 +142,7 @@ public class GameLoop {
 				gameEnemies.get(i).render();
 			}
 		}
+		p.popMatrix();
 	}
 	
 	//Returning the current state of the game

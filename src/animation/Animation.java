@@ -5,6 +5,7 @@ import processing.core.*;
 
 public class Animation{
 	public PImage [] images;
+	public PImage background;
 	PApplet p;
 	File[] f;
 	String path;
@@ -36,20 +37,22 @@ public class Animation{
             if (f[i] != null && f[i].getName().endsWith(".png"))
             {
             	url = this.path + "//" + i + ".png";
+
             	//System.out.println("image " + i + " loaded successfully");
             	images[i] = p.loadImage(url, "png");
             	fCount++;
-            	//System.out.println(images[i]);
+            	System.out.println(images[i]);
             }
             else
             {
-            	//System.out.println("File of not png type");
+
+            	System.out.println("ERROR: File not of png type.");
             }
             
         }
 		
 		//fCount--;
-		System.out.println(fCount);
+		//System.out.println(fCount);
 	}
 	
 	

@@ -12,17 +12,15 @@ public class PlasmaTower extends Tower{
 	PImage base;
 	PImage head;
 	
-	int wait;
-	
 	public PlasmaTower(PApplet p, float x, float y){
 		super(p, x, y);
 		base = p.loadImage("Resources\\Images\\Turret\\Basic Turret\\0.png");
 		head = p.loadImage("Resources\\Images\\Turret\\Basic Turret\\1.png");
+		fireRate = 30;
 		headPoint = new PVector(pos.x, pos.y - 10);
 		range = 250;
 		projectiles = new ArrayList<Projectile>();
 		targets = new ArrayList<Enemy>();//The game loop should check and add to this list
-		wait = 0;
 	}
 	
 	public void update(){
@@ -62,11 +60,11 @@ public class PlasmaTower extends Tower{
 	
 	void shoot(){
 		aim.set(leadTarget.pos);
-		if(wait < 30) {
-			wait++; 
+		if(shootTimer < fireRate) {
+			shootTimer++; 
 		} else {
 			projectiles.add(new PlasmaProjectile(p, headPoint.x, headPoint.y));
-			wait = 0;
+			shootTimer = 0;
 		}
 		
 	}

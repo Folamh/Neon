@@ -1,11 +1,6 @@
 package control;
 
 import processing.core.*;
-import java.util.ArrayList;
-
-import animation.Animation;
-import gameObject.BasicEnemy;
-import gameObject.Enemy;
 
 public class MainLoop extends PApplet{
 	
@@ -42,7 +37,7 @@ public class MainLoop extends PApplet{
 		gameState = 0;
 		
 		//Loading the background image
-		background = loadImage("resources/images/backgrounds/0.png");
+		background = loadImage("resources/images/backgrounds/background/0.png");
 		
 		//Resizing the background for the current window size
 		background.resize(width,height);

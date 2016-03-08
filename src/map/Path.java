@@ -1,7 +1,6 @@
 package map;
 
 import java.util.ArrayList;
-
 import processing.core.*;
 
 //Class for holding paths to for game objects to follow
@@ -101,12 +100,17 @@ public class Path {
 	
 	//Returns the next point(Currently traveling to)
 	public PVector getPrevPoint() {
-		return path.get(nextPoint).ppLoc;
+		return path.get(prevPoint).ppLoc;
 	}
 	
 	//Returns the previous point(Previous current point)
 	public PVector getNextPoint() {
-		return path.get(prevPoint).ppLoc;
+		return path.get(nextPoint).ppLoc;
+	}
+	
+	//Returns the size of the path
+	public int getPathSize(){
+		return path.size();
 	}
 	
 	//Returns the last point in the path
@@ -114,6 +118,11 @@ public class Path {
 		return path.get(path.size()-1).ppLoc;
 	}
 	
+	//Returns the first point in the path
+	public PVector getFirstPoint() {
+		return path.get(0).ppLoc;
+	}
+		
 	//Displaying the path
 	public void display() {
 		for(PathPoint pp: path) {
