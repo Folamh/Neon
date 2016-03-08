@@ -1,5 +1,7 @@
 package control;
 
+import ddf.minim.Minim;
+import music.Music;
 import processing.core.*;
 
 public class MainLoop extends PApplet{
@@ -23,9 +25,9 @@ public class MainLoop extends PApplet{
 	PImage background;
 	MenuLoop menuLoop;
 	GameLoop gameLoop;
-	
+	Minim minim;
 	int gameState;
-	
+	Music music;
 	
 	//Only use this for initializing variables
 	public void setup() {
@@ -45,6 +47,10 @@ public class MainLoop extends PApplet{
 		//Initializing menu and game loops
 		menuLoop = new MenuLoop(this, gameState);
 		gameLoop = new GameLoop(this, gameState);
+		
+		//Setting up music
+		minim = new Minim(this);
+		music = new Music(this);
 	}
 	
 	public void update(){
@@ -61,6 +67,9 @@ public class MainLoop extends PApplet{
 		if(gameLoop.getGameState() == 5) {
 			gameState = gameLoop.getGameState();
 		}
+		
+		//Music player
+		music.doShit(gameState);
 	}
 	
 	public void render(){
