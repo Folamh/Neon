@@ -1,6 +1,7 @@
 package control;
 
 import ddf.minim.Minim;
+import music.Music;
 import processing.core.*;
 
 public class MainLoop extends PApplet{
@@ -26,7 +27,7 @@ public class MainLoop extends PApplet{
 	GameLoop gameLoop;
 	Minim minim;
 	int gameState;
-	
+	Music music;
 	
 	//Only use this for initializing variables
 	public void setup() {
@@ -49,6 +50,7 @@ public class MainLoop extends PApplet{
 		
 		//Setting up music
 		minim = new Minim(this);
+		music = new Music(minim, this);
 	}
 	
 	public void update(){
@@ -65,6 +67,9 @@ public class MainLoop extends PApplet{
 		if(gameLoop.getGameState() == 5) {
 			gameState = gameLoop.getGameState();
 		}
+		
+		//Music player
+		music.doShit(gameState);
 	}
 	
 	public void render(){
