@@ -1,7 +1,5 @@
 package gameObject;
 
-import java.util.ArrayList;
-
 import map.Path;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -26,18 +24,19 @@ public abstract class Enemy extends GameObject{
 		inElevator = false;
 	}
 	
+	//Moves the enemy towards their next path point
 	void moveToPathPoint(){
 		if((pos.x != nextPathPoint.x) && (pos.y == nextPathPoint.y)){
-			inElevator = false;
-			if((pos.x - nextPathPoint.x) > 0){
+			inElevator = false;//Takes them out of the elevator
+			if((pos.x - nextPathPoint.x) > 0){//Left or right movement
 				pos.sub(speed, 0);
 			}
 			else{
 				pos.add(speed, 0);
 			}
-			if(Math.abs(pos.x - nextPathPoint.x) <= speed){
-				pos.x = nextPathPoint.x;
-				nextPoint();
+			if(Math.abs(pos.x - nextPathPoint.x) <= speed){//If they are near there next point
+				pos.x = nextPathPoint.x;//Move onto point
+				nextPoint();//Change next point
 			}
 		}
 	}

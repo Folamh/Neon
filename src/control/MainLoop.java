@@ -1,5 +1,6 @@
 package control;
 
+import ddf.minim.Minim;
 import processing.core.*;
 
 public class MainLoop extends PApplet{
@@ -23,7 +24,7 @@ public class MainLoop extends PApplet{
 	PImage background;
 	MenuLoop menuLoop;
 	GameLoop gameLoop;
-	
+	Minim minim;
 	int gameState;
 	
 	
@@ -45,6 +46,9 @@ public class MainLoop extends PApplet{
 		//Initializing menu and game loops
 		menuLoop = new MenuLoop(this, gameState);
 		gameLoop = new GameLoop(this, gameState);
+		
+		//Setting up music
+		minim = new Minim(this);
 	}
 	
 	public void update(){
