@@ -10,20 +10,20 @@ public class BasicEnemy extends Enemy{
 	Boolean mov;
 	public BasicEnemy(PApplet p, int x, int y, Path path){
 		super(p, x, y, path);
-		speed = 2;
-		moving = new Animation(p, "Resources/Images/Enemy/Basic Enemy/Moving", 5);
-		still = new Animation(p, "Resources/Images/Enemy/Basic Enemy/Still", 10);
+		speed = 10;
+		moving = new Animation(p, "Resources/Images/Enemy/BasicEnemy/Moving", 5);
+		still = new Animation(p, "Resources/Images/Enemy/BasicEnemy/Still", 10);
 		mov = false;
 		health = 100;
 	}
 	
 	public void update(){
-		if(pos.x != nextPathPoint.x){
-			moveToPathPoint();
+		moveToPathPoint();
+		
+		if(!inElevator){
 			mov = true;
 		}
 		else{
-			takeElevator();
 			mov = false;
 		}
 		

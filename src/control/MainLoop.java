@@ -39,7 +39,7 @@ public class MainLoop extends PApplet{
 		gameState = 0;
 		
 		//Loading the background image
-		background = loadImage("resources/images/backgrounds/0.png");
+		background = loadImage("resources/images/backgrounds/background/0.png");
 		
 		//Resizing the background for the current window size
 		background.resize(width,height);
@@ -50,7 +50,7 @@ public class MainLoop extends PApplet{
 		
 		//Setting up music
 		minim = new Minim(this);
-		music = new Music(minim, this);
+		music = new Music(this);
 	}
 	
 	public void update(){
@@ -82,9 +82,6 @@ public class MainLoop extends PApplet{
 	}
 	
 	public void draw() {
-		//background(0);
-		//map.render();
-		System.out.println(gameState);
 		if(gameState != 6) {
 			update();
 			render();

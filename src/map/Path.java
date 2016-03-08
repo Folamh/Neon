@@ -1,7 +1,6 @@
 package map;
 
 import java.util.ArrayList;
-
 import processing.core.*;
 
 //Class for holding paths to for game objects to follow
@@ -15,7 +14,7 @@ public class Path {
 		PVector ppLoc;
 		
 		//Taking in the order num and position of the path point
-		PathPoint(int ppNum, int x, int y) {
+		private PathPoint(int ppNum, int x, int y) {
 			this.ppNum = ppNum;
 			ppLoc = new PVector(x,y);
 		}
@@ -32,18 +31,10 @@ public class Path {
 	//ArrayList to hold the path
 	ArrayList<PathPoint> path;
 	
-	int prevPoint; //Previous current point
-	int curPoint; //Point traveling from
-	int nextPoint; //Point traveling to
-	
-	Path(PApplet p) {
+	public Path(PApplet p) {
 		this.p = p;
 		//Initializing the array list
 		path = new ArrayList<PathPoint>();
-		
-		curPoint = 0;
-		prevPoint = curPoint - 1;
-		nextPoint = curPoint + 1;
 	}
 	
 	//Sorts the path to be in order(low->high)
@@ -81,35 +72,32 @@ public class Path {
 	}
 	
 	//Increments curPoint(updates prev and next point)
-	public void nextPoint() {
-		curPoint ++;
-		prevPoint = curPoint - 1;
-		nextPoint = curPoint + 1;
+	public int nextPoint(int curPoint) {
+		return curPoint++;
 	}
 	
 	//Decrements curPoint(updates prev and next point)
-	public void prevPoint() {
-		curPoint --;
-		prevPoint = curPoint - 1;
-		nextPoint = curPoint + 1;
+	public int prevPoint(int curPoint) {
+		return curPoint--;
 	}
 	
 	//Returns the current point(Currently traveling from)
-	public PVector getCurPoint() {
+	public PVector getCurPoint(int curPoint) {
 		return path.get(curPoint).ppLoc;
 	}
 	
 	//Returns the next point(Currently traveling to)
-	public PVector getPrevPoint() {
-		return path.get(nextPoint).ppLoc;
+	public PVector getPrevPoint(int curPoint) {
+		return path.get(curPoint-1).ppLoc;
 	}
 	
 	//Returns the previous point(Previous current point)
-	public PVector getNextPoint() {
-		return path.get(prevPoint).ppLoc;
+	public PVector getNextPoint(int curPoint) {
+		return path.get(curPoint+1).ppLoc;
 	}
 	
-	public int getSize(){
+	//Returns the size of the path
+	public int getPathSize(){
 		return path.size();
 	}
 	
@@ -119,9 +107,9 @@ public class Path {
 	}
 	
 	//Returns the first point in the path
-		public PVector getFirstPoint() {
-			return path.get(0).ppLoc;
-		}
+	public PVector getFirstPoint() {
+		return path.get(0).ppLoc;
+	}
 		
 	//Displaying the path
 	public void display() {

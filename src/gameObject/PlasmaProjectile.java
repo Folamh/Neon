@@ -6,8 +6,8 @@ import processing.core.PApplet;
 public class PlasmaProjectile extends Projectile{
 	Animation bullet;
 	
-	PlasmaProjectile(PApplet p, float x, float y){
-		super(p, x, y);
+	PlasmaProjectile(PApplet p, float x, float y, Enemy target){
+		super(p, x, y, target);
 		bullet = new Animation(p, "resources/Images/Projectiles/Bullet", 1);
 		speed = 10;
 		bullet.loadImages();

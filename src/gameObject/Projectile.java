@@ -10,12 +10,12 @@ public abstract class Projectile extends GameObject{
 	PVector o;
 	int damage;
 	
-	Projectile(PApplet p, float x, float y){
+	Projectile(PApplet p, float x, float y, Enemy target){
 		super(p, x, y);
+		this.target = target;
 	}
 	
-	void moveToTarget(Enemy target){
-		this.target = target;
+	void moveToTarget(){
 		if(target != null) {
 			o = target.pos;
 		}

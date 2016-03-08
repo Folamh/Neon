@@ -14,8 +14,8 @@ public class PlasmaTower extends Tower{
 	
 	public PlasmaTower(PApplet p, float x, float y){
 		super(p, x, y);
-		base = p.loadImage("Resources\\Images\\Turret\\Basic Turret\\0.png");
-		head = p.loadImage("Resources\\Images\\Turret\\Basic Turret\\1.png");
+		base = p.loadImage("resources/images/turret/basicturret/0.png");
+		head = p.loadImage("resources/images/turret/basicturret/1.png");
 		fireRate = 30;
 		headPoint = new PVector(pos.x, pos.y - 10);
 		range = 250;
@@ -39,7 +39,7 @@ public class PlasmaTower extends Tower{
 		}
 		
 		for(int i = 0; i < projectiles.size(); i++){
-				projectiles.get(i).moveToTarget(leadTarget);
+				projectiles.get(i).moveToTarget();
 		}
 		
 		cleanProjectiles();
@@ -63,7 +63,7 @@ public class PlasmaTower extends Tower{
 		if(shootTimer < fireRate) {
 			shootTimer++; 
 		} else {
-			projectiles.add(new PlasmaProjectile(p, headPoint.x, headPoint.y));
+			projectiles.add(new PlasmaProjectile(p, headPoint.x, headPoint.y, leadTarget));
 			shootTimer = 0;
 		}
 		
