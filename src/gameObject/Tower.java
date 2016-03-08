@@ -57,6 +57,7 @@ public abstract class Tower extends GameObject{
 	void cleanProjectiles(){
 		for(int i = 0; i < projectiles.size(); i++){
 			if(PVector.dist(projectiles.get(i).pos, projectiles.get(i).o) <= projectiles.get(i).speed){
+				((Enemy) projectiles.get(i).target).damage(10);
 				projectiles.remove(i);
 			}
 		}

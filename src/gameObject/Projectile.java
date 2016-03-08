@@ -27,4 +27,9 @@ public abstract class Projectile extends GameObject{
 		
 		pos.add(vel);
 	}
+	
+	//Returns the damage of the projectile
+	public int getDamage() {
+		return damage;
+	}
 }

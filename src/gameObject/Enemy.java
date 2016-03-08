@@ -118,6 +118,10 @@ public abstract class Enemy extends GameObject{
 		}
 	}
 	
+	//Damages the enemy
+	public void damage(int damage) {
+		health -= damage;
+	}
 	//Returning weather the enemy has stolen the data
 	public boolean getStoleData() {
 		return stoleData;

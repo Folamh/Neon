@@ -58,7 +58,7 @@ public class PlasmaTower extends Tower{
 		p.popMatrix();
 	}
 	
-	void shoot(){
+	public void shoot(){
 		aim.set(leadTarget.pos);
 		if(shootTimer < fireRate) {
 			shootTimer++; 

@@ -16,7 +16,7 @@ public class GameLoop {
 	Grid grid;
 	ArrayList<PVector> gridUsed;
 	int money;
-	
+	int health;
 	PVector off;
 	Camera camera;
 	
@@ -174,6 +174,10 @@ public class GameLoop {
 			}
 		}
 	}
+	public void killEnemy()
+	{
+		
+	}
 	
 	void loseData(){
 		for(int i = 0; i < gameEnemies.size(); i++){
@@ -185,7 +189,7 @@ public class GameLoop {
 		
 	public void render(){
 		//Checking of the gameLoop should be rendered
-		p.text("Credits: " + money , p.width*0.2, p.height*0.2);
+		p.text("$: " + money , p.width/8, p.height/8);
 		p.pushMatrix();
 		p.translate(-off.x,-off.y);
 		if(gameState == 4 || gameState == 5) {
