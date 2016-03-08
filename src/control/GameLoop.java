@@ -49,6 +49,7 @@ public class GameLoop {
 		PImage tImage = p.loadImage("resources/images/turret/basicTurret/0.png");
 		gameMenu = new ArrayList<Button>();
 		gameMenu.add(new Button(p, 5, p.width-50, p.height-50, 300, 150, bImage, "Pause", 20));
+		
 		gameMenu.add(new Button(p, 4, p.width-100, 100, 300, 150, tImage, " ",10));
 	}
 	
