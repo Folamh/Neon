@@ -57,6 +57,7 @@ public abstract class Enemy extends GameObject{
 		//Setting the current speed
 		curSpeed = speed;
 		
+		
 		//Halving the speed if in elevator
 		if(inElevator) {
 			curSpeed /= 2;
@@ -79,6 +80,8 @@ public abstract class Enemy extends GameObject{
 			//Moving the enemy by the speed
 			pos.add(vel);
 		}
+		
+		
 	}
 	
 	//Checking if the enemy is in an elevator

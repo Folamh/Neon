@@ -16,7 +16,7 @@ public class MainLoop extends PApplet{
 	public void settings() {
 		//fullScreen();
 		//Set to 720p resolution
-		size(1280,720);
+		size(1664,936, JAVA2D);
 	}
 	
 	//ABOVE THIS LINE SHOULDNT CHANGE
