@@ -37,7 +37,7 @@ public class MainLoop extends PApplet{
 		gameState = 0;
 		
 		//Loading the background image
-		background = loadImage("resources/images/backgrounds/0.png");
+		background = loadImage("resources/images/backgrounds/building/0.png");
 		
 		//Resizing the background for the current window size
 		background.resize(width,height);
