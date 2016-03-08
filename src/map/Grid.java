@@ -35,4 +35,15 @@ public class Grid {
 		}
 		return point;
 	}
+	
+	public void showGrid(){
+		for(int i = 0; i < widthNo; i++){
+			for(int j = 0; j < heightNo; j++){
+				p.noFill();
+				p.stroke(255);
+				p.rectMode(PConstants.CORNERS);
+				p.rect(startX + i*gridWidth, startY + j*gridHeight, startX + gridWidth + i*gridWidth, startY + gridHeight+ j*gridHeight);
+			}
+		}
+	}
 }

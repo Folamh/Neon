@@ -32,6 +32,7 @@ public class GameLoop {
 	GameLoop(PApplet p, int gameState){
 		this.p = p;
 		this.gameState = gameState;
+		grid = new Grid(p, 50, 50, 5, 2);
 		
 		//Initializing the path lists
 		path1 = new Path(p);
@@ -180,6 +181,7 @@ public class GameLoop {
 			for(int i = 0; i < gameMenu.size(); i++){
 				gameMenu.get(i).render();
 			}
+			grid.showGrid();
 		}
 		p.popMatrix();
 	}
