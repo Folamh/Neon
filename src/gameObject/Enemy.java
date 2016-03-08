@@ -23,7 +23,7 @@ public abstract class Enemy extends GameObject{
 	//Wait period for spawning enemies
 	int wait;
 	//Health of the enemy
-	int health;
+	int health,maxHealth;
 	//Current point of the enemy
 	int curPoint;
 	
@@ -121,5 +121,15 @@ public abstract class Enemy extends GameObject{
 	//Returning weather the enemy has stolen the data
 	public boolean getStoleData() {
 		return stoleData;
+	}
+	
+	//Damages the enemies health
+	public void damage(int dmg) {
+		health -= dmg;
+	}
+	
+	//Returns the health of the enemy
+	public int getHealth() {
+		return health;
 	}
 }
