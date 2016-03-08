@@ -89,6 +89,10 @@ public class GameLoop {
 		if(gameState == 4) {
 			for(int i = 0; i < gameEnemies.size(); i++){
 				gameEnemies.get(i).update();
+				
+				if(((BasicEnemy) gameEnemies.get(i)).getHealth() == 0) {
+					gameEnemies.remove(i);
+				}
 			}
 			
 			for(int i = 0; i < towers.size(); i++){
