@@ -35,5 +35,4 @@ public class Grid {
 		}
 		return point;
 	}
-	
 }

@@ -26,6 +26,9 @@ public class Path {
 		}
 	}
 	
+	//For drawing and shit
+	PApplet p;
+	
 	//ArrayList to hold the path
 	ArrayList<PathPoint> path;
 	
@@ -33,7 +36,8 @@ public class Path {
 	int curPoint; //Point traveling from
 	int nextPoint; //Point traveling to
 	
-	Path() {
+	Path(PApplet p) {
+		this.p = p;
 		//Initializing the array list
 		path = new ArrayList<PathPoint>();
 		
@@ -118,4 +122,16 @@ public class Path {
 		public PVector getFirstPoint() {
 			return path.get(0).ppLoc;
 		}
+		
+	//Displaying the path
+	public void display() {
+		for(PathPoint pp: path) {
+			p.pushMatrix();
+			p.translate(pp.ppLoc.x, pp.ppLoc.y);
+			p.fill(255);
+			p.noStroke();
+			p.rect(0,0,10,10);
+			p.popMatrix();
+		}
+	}
 }
