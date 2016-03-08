@@ -2,6 +2,8 @@ package gameObject;
 
 import java.util.ArrayList;
 
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -14,13 +16,22 @@ public abstract class Tower extends GameObject{
 	ArrayList<Projectile> projectiles;//All projectiles currently in game shot from this tower.
 	ArrayList<Enemy> targets;//All targets within range.
 	Enemy leadTarget;//Target closest to the it's next path point.
+	Minim minim;
+	AudioPlayer shoot;
 	
-	Tower(PApplet p, float x, float y){
+	Tower(PApplet p, Minim minim, float x, float y){
 		super(p, x, y);
+		this.minim = minim;
+		shoot = this.minim.loadFile("Resources/Audio/Shoot.wav");
 		projectiles = new ArrayList<Projectile>();
 		targets = new ArrayList<Enemy>();
 		aim = new PVector(0, 90);
 		fireRate = 0;
+	}
+	
+	void playShoot(){
+		shoot.rewind();
+		shoot.play();
 	}
 	
 	public void calculateTargets(ArrayList<Enemy> gameEnemies){//GameLoop passes all map enemies.
