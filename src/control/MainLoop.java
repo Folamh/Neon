@@ -45,7 +45,7 @@ public class MainLoop extends PApplet{
 		background.resize(width,height);
 		
 		//Initializing menu and game loops
-		menuLoop = new MenuLoop(this, gameState);
+		menuLoop = new MenuLoop(this);
 		gameLoop = new GameLoop(this, gameState);
 		
 		//Setting up music
@@ -62,6 +62,7 @@ public class MainLoop extends PApplet{
 		
 		//Updating the game state form the menuLoop
 		gameState = menuLoop.getGameState();
+		System.out.println(gameState);
 		
 		//Checking if the player paused the game
 		if(gameLoop.getGameState() == 5) {
@@ -75,6 +76,8 @@ public class MainLoop extends PApplet{
 	public void render(){
 		//Rendering the background
 		image(background,width/2,height/2);
+		
+	
 		
 		gameLoop.render();
 		menuLoop.render();

@@ -17,10 +17,10 @@ public class MenuLoop {
 	ArrayList<MenuObject> settingsMenu;
 	ArrayList<MenuObject> creditsMenu;
 	
-	public MenuLoop(PApplet p, int gameState) {
+	public MenuLoop(PApplet p) {
 		//Disambiguating variables
 		this.p = p;
-		this.gameState = gameState;
+		gameState = 0;
 		
 		//Initializing the array lists
 		mainMenu = new ArrayList<MenuObject>();
@@ -62,8 +62,8 @@ public class MenuLoop {
 	public void update(int gameState) {
 		this.gameState = gameState;
 		
-		
-		switch(gameState) {
+		//System.out.println(gameState);
+		switch(this.gameState) {
 			
 			case 0:{
 				if(p.keyPressed) {
@@ -81,6 +81,7 @@ public class MenuLoop {
 					
 					if(o.getClicked()) {
 						this.gameState = ((Button)o).getValue();
+						System.out.println(gameState);
 						break;
 					}
 				}
@@ -129,7 +130,9 @@ public class MenuLoop {
 					o.update();
 					
 					if(o.getClicked()) {
-						if(((Button)o).getValue() == 4) this.gameState = ((Button)o).getValue();
+						if(((Button)o).getValue() == 4) { 
+							this.gameState = ((Button)o).getValue();
+						}
 					}
 				}
 				break;
@@ -152,7 +155,7 @@ public class MenuLoop {
 	public void render() {
 		
 		
-		switch(gameState) {
+		switch(this.gameState) {
 		
 			case 0:{
 				p.pushMatrix();
