@@ -6,6 +6,8 @@ import gameObject.*;
 import map.Grid;
 import map.Path;
 import processing.core.*;
+import userInterface.Button;
+import userInterface.MenuObject;
 
 public class GameLoop {
 	PApplet p;
@@ -22,6 +24,7 @@ public class GameLoop {
 	int spawnRate;
 	boolean placingTower;
 	int data;
+	ArrayList<Button> gameMenu;
 	
 	//The current state of the game
 	int gameState;
@@ -45,6 +48,14 @@ public class GameLoop {
 		placingTower = false;
 		data = 10;
 		towers = new ArrayList<Tower>();
+		
+		//Pause Menu Button Image
+		PImage bImage = p.loadImage("resources/images/menu/button/0.png");
+		//Turret Button Image
+		PImage tImage = p.loadImage("resources/images/turret/basicTurret/0.png");
+		gameMenu = new ArrayList<Button>();
+		gameMenu.add(new Button(p, 5, p.width-50, p.height-50, 300, 150, bImage, "Pause", 20));
+		gameMenu.add(new Button(p, 4, p.width-100, 100, 300, 150, tImage, " ",10));
 		
 		//Adding points to the path
 		path1.addPoint(0, 100, p.height-50);
@@ -78,6 +89,27 @@ public class GameLoop {
 				towers.get(i).calculateTargets(gameEnemies);
 				if(towers.get(i).size() != 0){
 					towers.get(i).calculateLead();
+				}
+			}
+			for(int i = 0; i < gameMenu.size(); i++) 
+			{
+				MenuObject o = gameMenu.get(i);
+				
+				o.update();
+				
+				if(o.getClicked())
+				{
+					this.gameState = ((Button)o).getValue();
+					for(int j = 0; j<gameMenu.size();j++)
+					{
+						
+						Button b = gameMenu.get(j);
+						if((b).getValue() == 4)
+						{
+							placingTower = true;
+						}
+					}
+					break;
 				}
 			}
 			spawnEnemies();
@@ -143,6 +175,10 @@ public class GameLoop {
 			
 			for(int i = 0; i < gameEnemies.size(); i++){
 				gameEnemies.get(i).render();
+			}
+			
+			for(int i = 0; i < gameMenu.size(); i++){
+				gameMenu.get(i).render();
 			}
 		}
 		p.popMatrix();
