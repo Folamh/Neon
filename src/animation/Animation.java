@@ -41,7 +41,7 @@ public class Animation{
             	//System.out.println("image " + i + " loaded successfully");
             	images[i] = p.loadImage(url, "png");
             	fCount++;
-            	//System.out.println(images[i]);
+            	System.out.println(images[i]);
             }
             else
             {
@@ -52,7 +52,7 @@ public class Animation{
         }
 		
 		//fCount--;
-		System.out.println(fCount);
+		//System.out.println(fCount);
 	}
 	
 	

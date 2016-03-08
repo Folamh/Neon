@@ -5,68 +5,110 @@ import processing.core.PApplet;
 import processing.core.PVector;
 
 public abstract class Enemy extends GameObject{
+	//Path object
+	Path path;
+	
+	//Position of next path point
 	PVector nextPathPoint;
-	public Path path;
-	int curPoint;
-	float speed;
+	
+	//If the enemy is in an elevator
 	boolean inElevator;
 	
-	public boolean gotData;
+	//If the enemy has stolen some data
+	boolean gotData;
+	boolean stoleData;
+	
+	//Max speed and current speed of the enemy
+	float speed, curSpeed;
+	//Wait period for spawning enemies
 	int wait;
-	
+	//Health of the enemy
 	int health;
+	//Current point of the enemy
+	int curPoint;
 	
+	//Constructor
 	Enemy(PApplet p, int x, int y, Path path){
+		//Calling game object constructor
 		super(p, x, y);
+		//Setting the path
 		this.path = path;
-		curPoint = 0;
-		nextPathPoint = path.getNextPoint();
+		//Setting the first pathPoint
+		nextPathPoint = path.getFirstPoint();
+		//Setting enemy state to not in elevator
 		inElevator = false;
+		
+		gotData = false;
+		stoleData = false;
+		
+		curPoint = 0;
 	}
 	
-	//Moves the enemy towards their next path point
+	//Moves enemy towards the next path point
 	void moveToPathPoint(){
-		if((pos.x != nextPathPoint.x) && (pos.y == nextPathPoint.y)){
-			inElevator = false;//Takes them out of the elevator
-			if((pos.x - nextPathPoint.x) > 0){//Left or right movement
-				pos.sub(speed, 0);
-			}
-			else{
-				pos.add(speed, 0);
-			}
-			if(Math.abs(pos.x - nextPathPoint.x) <= speed){//If they are near there next point
-				pos.x = nextPathPoint.x;//Move onto point
-				nextPoint();//Change next point
-			}
+		//Setting the current speed
+		curSpeed = speed;
+		
+		//Halving the speed if in elevator
+		if(inElevator) {
+			curSpeed /= 2;
+		}
+		
+		//Checking if enemy is at next path point
+		if(pos.x <= nextPathPoint.x + speed && pos.x >= nextPathPoint.x - speed && pos.y <= nextPathPoint.y + speed && pos.y >= nextPathPoint.y - speed) {
+			//Setting the next point
+			nextPoint();
+			System.out.println(curPoint);
+		} else {
+			//Calculating the velocity vector for moving the enemy
+			PVector vel = PVector.sub(nextPathPoint, pos);
+			
+			//Normalizing velocity to 1
+			vel.normalize();
+			//Multiplying the velocity by the enemie's speed
+			vel.mult(speed);
+			
+			//Moving the enemy by the speed
+			pos.add(vel);
 		}
 	}
 	
+	//Checking if the enemy is in an elevator
 	void takeElevator(){
-		if((pos.x == nextPathPoint.x) && (pos.y != nextPathPoint.y)){
+		if(pos.x <= nextPathPoint.x + speed && pos.x >= nextPathPoint.x - speed){
 			inElevator = true;
-			if((pos.y - nextPathPoint.y) > 0){
-				pos.sub(0, speed - ((speed/100)*50));
-			}
-			else{
-				pos.add(0, speed - ((speed/100)*50));
-			}
-			if(Math.abs(pos.y - nextPathPoint.y) <= speed){
-				pos.y = nextPathPoint.y;
-				nextPoint();
-			}
+		} else {
+			inElevator = false;
 		}
 	}
 	
+	//Setting the next point for the enemy to go to
 	void nextPoint(){
+		//Checking if the enemy has data
 		if(gotData){
-			if(++curPoint < path.getSize()){
-				nextPathPoint = path.getPrevPoint();
+			//Checking if the enemy is back at start of path
+			if(curPoint > 0) {
+				nextPathPoint = path.getPrevPoint(curPoint);
+				curPoint--;
+			} else {
+				//TODO change this to do something useful
+				gotData = false;
+				stoleData = true;
 			}
 		}
 		else{
-			if(++curPoint < path.getSize()){
-				nextPathPoint = path.getNextPoint();
+			//Checking if enemy is at the end of the path
+			if(curPoint < path.getPathSize()-1) { 
+				nextPathPoint = path.getNextPoint(curPoint);
+				curPoint++;
+			} else {
+				gotData = true;
 			}
 		}
+	}
+	
+	//Returning weather the enemy has stolen the data
+	public boolean getStoleData() {
+		return stoleData;
 	}
 }
