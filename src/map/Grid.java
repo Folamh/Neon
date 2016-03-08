@@ -1,6 +1,7 @@
 package map;
 
 
+import control.Camera;
 import processing.core.*;
 public class Grid {
 	PApplet p;
@@ -10,25 +11,28 @@ public class Grid {
 	int heightNo;
 	int gridWidth;
 	int gridHeight;
+	PVector off;
 	
 	//PImage gridImage;
-	public Grid(PApplet p, int x, int y, int widthNo, int heightNo)
+	public Grid(PApplet p, PImage image, int widthNo, int heightNo)
 	{
 		this.p = p;
-		startX = x;
-		startY = y;
+		startX = (p.width/2)-(image.width/2); 
+		startY = (p.height/2)-(image.height/2);
 		this.widthNo = widthNo;
 		this.heightNo = heightNo;
-		gridWidth = 100;
-		gridHeight = 100;
+		gridWidth = image.width/widthNo;
+		gridHeight = image.height/heightNo;
+		off = new PVector();
+		off.set(0, 0);
 	}
 	
-	public PVector returnGrid(){
+	public PVector returnGrid(PVector off){
 		PVector point = new PVector();
 		point.set(0, 0);
 		for(int i = 0; i < widthNo; i++){
 			for(int j = 0; j < heightNo; j++){
-				if((p.mouseX > (startX + i*gridWidth)) && (p.mouseX < (startX + gridWidth + i*gridWidth)) && (p.mouseY > (startY + j*gridHeight)) && (p.mouseY < (startY + gridHeight+ j*gridHeight))){
+				if((p.mouseX+off.x > (startX + i*gridWidth)) && (p.mouseX+off.x < (startX + gridWidth + i*gridWidth)) && (p.mouseY+off.y > (startY + j*gridHeight)) && (p.mouseY+off.y < (startY + gridHeight+ j*gridHeight))){
 					point.set((startX + i*gridWidth + gridWidth/2), (startY + j*gridHeight + gridHeight/2));
 				}
 			}

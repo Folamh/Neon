@@ -37,7 +37,6 @@ public class GameLoop {
 	{
 		this.p = p;
 		this.gameState = gameState;
-		grid = new Grid(p, 50, 50, 5, 2);
 		money = 600;
 		
 		//Initializing the path lists
@@ -77,6 +76,9 @@ public class GameLoop {
 		gameEnemies.add(new BasicEnemy(p,500,500,path1));
 		//gameEnemies.add(new BasicEnemy(p,700,700,path1));
 		towers.add(new PlasmaTower(p,100,100));
+		
+
+		grid = new Grid(p, building, 6, 4);
 	}
 	
 	public void update(int gameState)
@@ -158,7 +160,7 @@ public class GameLoop {
 		PVector point = new PVector();
 		boolean ok = true;
 		if(p.mousePressed){
-			point = grid.returnGrid();
+			point = grid.returnGrid(off);
 			if(point.x != 0 && point.y != 0){
 				for(int i = 0; i < gridUsed.size(); i++){
 					if(point == gridUsed.get(i)){
@@ -198,8 +200,9 @@ public class GameLoop {
 			for(int i = 0; i < gameEnemies.size(); i++){
 				gameEnemies.get(i).render();
 			}
-			
-			grid.showGrid();
+			if(placingTower){
+				grid.showGrid();
+			}
 		}
 		p.popMatrix();
 		if(gameState == 4) {
