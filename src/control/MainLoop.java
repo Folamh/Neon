@@ -58,11 +58,18 @@ public class MainLoop extends PApplet{
 		//System.out.println(frameRate);
 		
 		menuLoop.update(gameState);
-		gameLoop.update(gameState);
 		
 		//Updating the game state form the menuLoop
 		gameState = menuLoop.getGameState();
+		
+		gameLoop.update(gameState);
+		
 		System.out.println(gameState);
+		
+		/*
+		 * The gameLoop state is still 5, after the menu Loop updates it
+		 * Then
+		 */
 		
 		//Checking if the player paused the game
 		if(gameLoop.getGameState() == 5) {
