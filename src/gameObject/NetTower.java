@@ -27,7 +27,7 @@ public class NetTower extends Tower{
 		}
 		
 		for(int i = 0; i < projectiles.size(); i++){
-				projectiles.get(i).moveToTarget(leadTarget);
+				projectiles.get(i).moveToTarget();
 		}
 		
 		cleanProjectiles();
@@ -49,7 +49,7 @@ public class NetTower extends Tower{
 		if(shootTimer < fireRate) {
 			shootTimer++; 
 		} else {
-			projectiles.add(new PlasmaProjectile(p, headPoint.x, headPoint.y));
+			projectiles.add(new NetProjectile(p, headPoint.x, headPoint.y, leadTarget));
 			shootTimer = 0;
 		}
 		

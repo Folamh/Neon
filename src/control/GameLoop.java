@@ -6,6 +6,8 @@ import gameObject.*;
 import map.Grid;
 import map.Path;
 import processing.core.*;
+import userInterface.Button;
+import userInterface.MenuObject;
 
 public class GameLoop {
 	PApplet p;
@@ -13,6 +15,7 @@ public class GameLoop {
 	Path path2;
 	Grid grid;
 	ArrayList<PVector> gridUsed;
+	int money;
 	
 	PVector off;
 	Camera camera;
@@ -25,6 +28,7 @@ public class GameLoop {
 	int spawnRate;
 	boolean placingTower;
 	int data;
+	ArrayList<Button> gameMenu;
 	
 	//The current state of the game
 	int gameState;
@@ -32,6 +36,8 @@ public class GameLoop {
 	GameLoop(PApplet p, int gameState){
 		this.p = p;
 		this.gameState = gameState;
+		grid = new Grid(p, 50, 50, 5, 2);
+		money = 600;
 		
 		//Initializing the path lists
 		path1 = new Path(p);
@@ -47,6 +53,14 @@ public class GameLoop {
 		placingTower = false;
 		data = 10;
 		towers = new ArrayList<Tower>();
+		
+		//Pause Menu Button Image
+		PImage bImage = p.loadImage("resources/images/menu/button/0.png");
+		//Turret Button Image
+		PImage tImage = p.loadImage("resources/images/turret/basicTurret/0.png");
+		gameMenu = new ArrayList<Button>();
+		gameMenu.add(new Button(p, 5, p.width-50, p.height-50, 300, 150, bImage, "Pause", 20));
+		gameMenu.add(new Button(p, 4, p.width-100, 100, 300, 150, tImage, " ",10));
 		
 		//Adding points to the path
 		path1.addPoint(0, 100, p.height-50);
@@ -83,9 +97,35 @@ public class GameLoop {
 					towers.get(i).calculateLead();
 				}
 			}
+			for(int i = 0; i < gameMenu.size(); i++) 
+			{
+				MenuObject o = gameMenu.get(i);
+				
+				o.update();
+				
+				if(o.getClicked())
+				{
+					this.gameState = ((Button)o).getValue();
+					for(int j = 0; j<gameMenu.size();j++)
+					{
+						
+						Button b = gameMenu.get(j);
+						if((b).getValue() == 4)
+						{
+							placingTower = true;
+						}
+					}
+					break;
+				}
+			}
 			spawnEnemies();
 			if(placingTower){
-				placeTower();
+				if(money < 200){
+					
+				}
+				else{
+					placeTower();
+				}
 			}
 			loseData();
 		}
@@ -123,6 +163,7 @@ public class GameLoop {
 					PlasmaTower tower = new PlasmaTower(p, point.x, point.y);
 					towers.add(tower);
 					placingTower = false;
+					money -= 200;
 				}
 			}
 		}
@@ -151,6 +192,11 @@ public class GameLoop {
 			for(int i = 0; i < gameEnemies.size(); i++){
 				gameEnemies.get(i).render();
 			}
+			
+			for(int i = 0; i < gameMenu.size(); i++){
+				gameMenu.get(i).render();
+			}
+			grid.showGrid();
 		}
 		p.popMatrix();
 	}
