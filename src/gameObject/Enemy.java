@@ -32,6 +32,7 @@ public abstract class Enemy extends GameObject{
 	//SFX
 	Minim minim;
 	AudioPlayer hack;
+	AudioPlayer hurt;
 	
 	//Constructor
 	Enemy(PApplet p, Minim minim, int x, int y, Path path){
@@ -42,6 +43,7 @@ public abstract class Enemy extends GameObject{
 		//Setting up Minim and SFX
 		this.minim = minim;
 		hack = this.minim.loadFile("Resources/Audio/HACKED.wav");
+		hurt = this.minim.loadFile("Resources/Audio/Hurt.wav");
 		//Setting the first pathPoint
 		nextPathPoint = path.getFirstPoint();
 		//Setting enemy state to not in elevator
@@ -65,6 +67,12 @@ public abstract class Enemy extends GameObject{
 	void playHack(){
 		hack.rewind();
 		hack.play();
+	}
+	
+	//play hurt noise
+	void playHurt(){
+		hurt.rewind();
+		hurt.play();
 	}
 	
 	//Moves enemy towards the next path point
@@ -142,6 +150,7 @@ public abstract class Enemy extends GameObject{
 	//Damages the enemies health
 	public void damage(int dmg) {
 		health -= dmg;
+		playHurt();
 	}
 	
 	//Returns the health of the enemy
