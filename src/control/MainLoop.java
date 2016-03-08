@@ -76,8 +76,8 @@ public class MainLoop extends PApplet{
 		//Rendering the background
 		image(background,width/2,height/2);
 		
-		menuLoop.render();
 		gameLoop.render();
+		menuLoop.render();
 		
 	}
 	

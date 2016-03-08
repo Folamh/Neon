@@ -45,6 +45,10 @@ public class MenuLoop {
 		mainMenu.add(new Button(p, 3, p.width/2, 525, 200, 100, creditsImage, "", 15));
 		mainMenu.add(new Button(p, 6, p.width/2, 650, 200, 100, exitImage, "", 15));
 		
+		//Pause menu
+		pauseMenu.add(new Button(p, 0, p.width/2, 100, 200, 100, settingImage, "", 15));
+		pauseMenu.add(new Button(p, 4, p.width/2, p.height-100, 200, 100, backImage, "", 15));
+		
 		//settings menu
 		settingsMenu.add(new Button(p, 0, p.width/2, 100, settingImage, "", 15));
 		settingsMenu.add(new Button(p, 1, p.width/2, p.height-100, 200, 100, backImage, "", 15));
@@ -119,7 +123,15 @@ public class MenuLoop {
 			
 			//pause menu
 			case 5: {
-				
+				for(int i = 0; i < pauseMenu.size(); i++) {
+					MenuObject o = pauseMenu.get(i);
+					
+					o.update();
+					
+					if(o.getClicked()) {
+						if(((Button)o).getValue() == 4) this.gameState = ((Button)o).getValue();
+					}
+				}
 				break;
 			}
 			//Quit game
@@ -186,7 +198,11 @@ public class MenuLoop {
 			
 			//pause menu
 			case 5: {
-				
+				for(int i = 0; i < pauseMenu.size(); i++) {
+					MenuObject o = pauseMenu.get(i);
+					
+					o.render();
+				}
 				break;
 			}
 	

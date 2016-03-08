@@ -193,12 +193,12 @@ public class GameLoop {
 				gameEnemies.get(i).render();
 			}
 			
-			for(int i = 0; i < gameMenu.size(); i++){
-				gameMenu.get(i).render();
-			}
 			grid.showGrid();
 		}
 		p.popMatrix();
+		for(int i = 0; i < gameMenu.size(); i++){
+			gameMenu.get(i).render();
+		}
 	}
 	
 	//Returning the current state of the game
