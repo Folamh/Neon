@@ -2,6 +2,7 @@ package gameObject;
 
 import java.util.ArrayList;
 
+import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.core.PImage;
 import processing.core.PVector;
@@ -12,8 +13,8 @@ public class PlasmaTower extends Tower{
 	PImage base;
 	PImage head;
 	
-	public PlasmaTower(PApplet p, float x, float y){
-		super(p, x, y);
+	public PlasmaTower(PApplet p, Minim minim, float x, float y){
+		super(p, minim, x, y);
 		base = p.loadImage("resources/images/turret/basicturret/0.png");
 		head = p.loadImage("resources/images/turret/basicturret/1.png");
 		fireRate = 30;
@@ -65,6 +66,7 @@ public class PlasmaTower extends Tower{
 		} else {
 			projectiles.add(new PlasmaProjectile(p, headPoint.x, headPoint.y, leadTarget));
 			shootTimer = 0;
+			playShoot();
 		}
 		
 	}

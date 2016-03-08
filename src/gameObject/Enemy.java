@@ -1,5 +1,7 @@
 package gameObject;
 
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import map.Path;
 import processing.core.PApplet;
 import processing.core.PVector;
@@ -26,13 +28,20 @@ public abstract class Enemy extends GameObject{
 	int health,maxHealth;
 	//Current point of the enemy
 	int curPoint;
+
+	//SFX
+	Minim minim;
+	AudioPlayer hack;
 	
 	//Constructor
-	Enemy(PApplet p, int x, int y, Path path){
+	Enemy(PApplet p, Minim minim, int x, int y, Path path){
 		//Calling game object constructor
 		super(p, x, y);
 		//Setting the path
 		this.path = path;
+		//Setting up Minim and SFX
+		this.minim = minim;
+		hack = this.minim.loadFile("Resources/Audio/HACKED.wav");
 		//Setting the first pathPoint
 		nextPathPoint = path.getFirstPoint();
 		//Setting enemy state to not in elevator
@@ -50,6 +59,12 @@ public abstract class Enemy extends GameObject{
 		vel.normalize();
 		//Multiplying the velocity by the enemie's speed
 		vel.mult(speed);
+	}
+	
+	//play hacking noise
+	void playHack(){
+		hack.rewind();
+		hack.play();
 	}
 	
 	//Moves enemy towards the next path point
@@ -113,6 +128,7 @@ public abstract class Enemy extends GameObject{
 				nextPathPoint = path.getNextPoint(curPoint);
 				curPoint++;
 			} else {
+				playHack();
 				gotData = true;
 			}
 		}

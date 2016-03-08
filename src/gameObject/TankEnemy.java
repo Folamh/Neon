@@ -1,12 +1,13 @@
 package gameObject;
 
+import ddf.minim.Minim;
 import map.Path;
 import processing.core.PApplet;
 
 public class TankEnemy extends Enemy{
 	
-	TankEnemy(PApplet p, int x, int y, Path path){
-		super(p, x, y, path);
+	TankEnemy(PApplet p, Minim minim, int x, int y, Path path){
+		super(p, minim, x, y, path);
 	}
 	
 	public void update(){

@@ -2,6 +2,8 @@ package control;
 
 import java.util.ArrayList;
 
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import gameObject.*;
 import map.Grid;
 import map.Path;
@@ -19,6 +21,8 @@ public class GameLoop {
 	int health;
 	PVector off;
 	Camera camera;
+	Minim minim;
+	AudioPlayer place;
 	
 	//ArrayLists for different game objects
 	ArrayList<Tower> towers;
@@ -33,12 +37,14 @@ public class GameLoop {
 	//The current state of the game
 	int gameState;
 	
-	GameLoop(PApplet p, int gameState)
+	GameLoop(PApplet p, Minim minim, int gameState)
 	{
 		this.p = p;
+		this.minim = minim;
 		this.gameState = gameState;
 		money = 600000;
 		
+		place = this.minim.loadFile("Resources/Audio/PlaceTurret.wav");
 		//Initializing the path lists
 		path1 = new Path(p);
 		
@@ -73,12 +79,18 @@ public class GameLoop {
 		camera.setCameraBounds((building.height/2 - p.height/2), -building.height/5, -building.width/8, building.width/8);
 		off = new PVector(0,0);
 		
-		gameEnemies.add(new BasicEnemy(p,500,500,path1));
+		gameEnemies.add(new BasicEnemy(p,minim,500,500,path1));
 		//gameEnemies.add(new BasicEnemy(p,700,700,path1));
-		towers.add(new PlasmaTower(p,100,100));
+		towers.add(new PlasmaTower(p,minim, 100,100));
 		
 
 		grid = new Grid(p, building, 6, 10);
+	}
+	
+	//Play placing turret noise
+	void playPlace(){
+		place.rewind();
+		place.play();
 	}
 	
 	public void update(int gameState)
@@ -138,6 +150,7 @@ public class GameLoop {
 				}
 				else{
 					placeTower();
+					playPlace();
 				}
 			}
 		loseData();
@@ -150,11 +163,11 @@ public class GameLoop {
 			int rand = (int) p.random(0,1);
 			BasicEnemy enemy;
 			if(rand == 0){
-				enemy = new BasicEnemy(p, 50, 50, path1);
+				enemy = new BasicEnemy(p, minim, 50, 50, path1);
 				gameEnemies.add(enemy);
 			}
 			else{
-				enemy = new BasicEnemy(p, p.width-50, 50, path1);
+				enemy = new BasicEnemy(p, minim, p.width-50, 50, path1);
 				gameEnemies.add(enemy);
 			}
 		}
@@ -173,7 +186,7 @@ public class GameLoop {
 				}
 				if(ok == true){
 					gridUsed.add(point);
-					PlasmaTower tower = new PlasmaTower(p, point.x, point.y);
+					PlasmaTower tower = new PlasmaTower(p, minim, point.x, point.y);
 					towers.add(tower);
 					placingTower = false;
 					money -= 200;

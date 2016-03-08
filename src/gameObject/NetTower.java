@@ -1,5 +1,6 @@
 package gameObject;
 
+import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.core.PVector;
 
@@ -7,8 +8,8 @@ public class NetTower extends Tower{
 	PVector headPoint;
 	float angle;
 	
-	NetTower(PApplet p, int x, int y){
-		super(p, x, y);
+	NetTower(PApplet p, Minim minim, int x, int y){
+		super(p, minim, x, y);
 	}
 	
 	public void update(){
