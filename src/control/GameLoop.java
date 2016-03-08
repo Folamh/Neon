@@ -19,7 +19,6 @@ public class GameLoop {
 	ArrayList<Enemy> gameEnemies;
 	PImage background;
 	PImage building;
-	int wait;
 	int spawnRate;
 	boolean placingTower;
 	int data;
@@ -36,23 +35,32 @@ public class GameLoop {
 		path2 = new Path(p);
 		
 		gameEnemies = new ArrayList<Enemy>();
+		towers = new ArrayList<Tower>();
 		background = new PImage();
 		background = p.loadImage("resources/images/backgrounds/background/0.png");
 		building = new PImage();
 		building = p.loadImage("resources/images/backgrounds/building/0.png");
-		wait = 0;
 		spawnRate = 5*60;
 		gridUsed = new ArrayList<PVector>();
 		placingTower = false;
 		data = 10;
 		towers = new ArrayList<Tower>();
 		
+		//Adding points to the path
 		path1.addPoint(0, 100, p.height-50);
 		path1.addPoint(0, p.width-100, p.height-50);
 		path1.addPoint(0, p.width-100, 200);
 		path1.addPoint(0, 100, 200);
 		
+		path2.addPoint(0, 100, p.height-50);
+		path2.addPoint(0, p.width-100, p.height-50);
+		path2.addPoint(0, p.width-100, 200);
+		path2.addPoint(0, 100, 200);
+		
+		
 		gameEnemies.add(new BasicEnemy(p,500,500,path1));
+		gameEnemies.add(new BasicEnemy(p,700,700,path1));
+		towers.add(new PlasmaTower(p,100,100));
 	}
 	
 	public void update(int gameState){
@@ -86,12 +94,12 @@ public class GameLoop {
 			int rand = (int) p.random(0,1);
 			BasicEnemy enemy;
 			if(rand == 0){
-				enemy = new BasicEnemy(p, 50, 50, path1);
-				gameEnemies.add(enemy);
+				//enemy = new BasicEnemy(p, 50, 50, path1);
+				//gameEnemies.add(enemy);
 			}
 			else{
-				enemy = new BasicEnemy(p, p.width-50, 50, path1);
-				gameEnemies.add(enemy);
+				//enemy = new BasicEnemy(p, p.width-50, 50, path1);
+				//gameEnemies.add(enemy);
 			}
 		}
 	}
@@ -119,13 +127,8 @@ public class GameLoop {
 	
 	void loseData(){
 		for(int i = 0; i < gameEnemies.size(); i++){
-			if(gameEnemies.get(i).path.getCurPoint() == gameEnemies.get(i).path.getLastPoint()){
-				gameEnemies.get(i).gotData = true;
-			}
-			if(gameEnemies.get(i).gotData){
-				if(gameEnemies.get(i).path.getCurPoint() == gameEnemies.get(i).path.getFirstPoint()){
-					data--;
-				}
+			if(gameEnemies.get(i).getStoleData()){
+				data--;
 			}
 		}
 	}

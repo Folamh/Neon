@@ -23,7 +23,7 @@ public class Button extends MenuObject{
 		
 		//Setting the image and the default text
 		this.bImage = bImage;
-		text = "DEFAULT";
+		text = "";
 	}
 	
 	//Button with image and specified width and height
@@ -37,7 +37,7 @@ public class Button extends MenuObject{
 		bImage.resize(w,h);
 		//Setting the image and the default text
 		this.bImage = bImage;
-		text = "DEFAULT";
+		text = "";
 	}
 	
 	//Button with image and text

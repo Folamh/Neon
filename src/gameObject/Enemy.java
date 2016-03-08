@@ -6,7 +6,7 @@ import processing.core.PVector;
 
 public abstract class Enemy extends GameObject{
 	//Path object
-	public Path path;
+	Path path;
 	
 	//Position of next path point
 	PVector nextPathPoint;
@@ -15,7 +15,8 @@ public abstract class Enemy extends GameObject{
 	boolean inElevator;
 	
 	//If the enemy has stolen some data
-	public boolean gotData;
+	boolean gotData;
+	boolean stoleData;
 	
 	//Max speed and current speed of the enemy
 	float speed, curSpeed;
@@ -23,6 +24,8 @@ public abstract class Enemy extends GameObject{
 	int wait;
 	//Health of the enemy
 	int health;
+	//Current point of the enemy
+	int curPoint;
 	
 	//Constructor
 	Enemy(PApplet p, int x, int y, Path path){
@@ -34,6 +37,11 @@ public abstract class Enemy extends GameObject{
 		nextPathPoint = path.getFirstPoint();
 		//Setting enemy state to not in elevator
 		inElevator = false;
+		
+		gotData = false;
+		stoleData = false;
+		
+		curPoint = 0;
 	}
 	
 	//Moves enemy towards the next path point
@@ -50,6 +58,7 @@ public abstract class Enemy extends GameObject{
 		if(pos.x <= nextPathPoint.x + speed && pos.x >= nextPathPoint.x - speed && pos.y <= nextPathPoint.y + speed && pos.y >= nextPathPoint.y - speed) {
 			//Setting the next point
 			nextPoint();
+			System.out.println(curPoint);
 		} else {
 			//Calculating the velocity vector for moving the enemy
 			PVector vel = PVector.sub(nextPathPoint, pos);
@@ -78,22 +87,28 @@ public abstract class Enemy extends GameObject{
 		//Checking if the enemy has data
 		if(gotData){
 			//Checking if the enemy is back at start of path
-			if(nextPathPoint != path.getFirstPoint()) {
-				nextPathPoint = path.getPrevPoint();
-				path.prevPoint();
+			if(curPoint > 0) {
+				nextPathPoint = path.getPrevPoint(curPoint);
+				curPoint--;
 			} else {
 				//TODO change this to do something useful
 				gotData = false;
+				stoleData = true;
 			}
 		}
 		else{
 			//Checking if enemy is at the end of the path
-			if(nextPathPoint != path.getLastPoint()) { 
-				nextPathPoint = path.getNextPoint();
-				path.nextPoint();
+			if(curPoint < path.getPathSize()-1) { 
+				nextPathPoint = path.getNextPoint(curPoint);
+				curPoint++;
 			} else {
 				gotData = true;
 			}
 		}
+	}
+	
+	//Returning weather the enemy has stolen the data
+	public boolean getStoleData() {
+		return stoleData;
 	}
 }
