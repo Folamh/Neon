@@ -8,6 +8,8 @@ public class BasicEnemy extends Enemy{
 	Animation moving;
 	Animation still;
 	Boolean mov;
+	float curX;
+	
 	public BasicEnemy(PApplet p, int x, int y, Path path){
 		super(p, x, y, path);
 		speed = 10;
@@ -15,9 +17,11 @@ public class BasicEnemy extends Enemy{
 		still = new Animation(p, "Resources/Images/Enemy/BasicEnemy/Still", 10);
 		mov = false;
 		health = 100;
+		curX = 0;
 	}
 	
 	public void update(){
+		
 		moveToPathPoint();
 		
 		if(!inElevator){
@@ -33,6 +37,11 @@ public class BasicEnemy extends Enemy{
 		p.pushMatrix();
 		p.translate(pos.x,pos.y);
 		if(mov){
+			if(vel.x > 0) {
+				p.scale(-1.0f,1.0f);
+			} else if(vel.x < 0) {
+				p.scale(1.0f,1.0f);
+			}
 			moving.displayAnimation();
 		}
 		else{

@@ -11,6 +11,8 @@ public class Camera {
 	int curX, offSetX, setX;
 	int curY, offSetY, setY;
 	
+	int bTop, bBot, bLeft, bRight;
+	
 	//mCam used for check for initial click, yMove for if y axis camera movement is enabled
 	boolean mCam, yMove;
 	
@@ -102,21 +104,44 @@ public class Camera {
 			//System.out.println(p.mouseX + "    " + (p.width-50));
 			
 			if(p.mouseX < 50) {
-				offSetX -= PApplet.abs(curX - p.mouseX);
+				if(offSetX > bLeft) {
+					offSetX -= PApplet.abs(curX - p.mouseX)/2;
+				} else {
+					offSetX = bLeft;
+				}
 			} else if(p.mouseX > (p.width - 50)) {
-				offSetX += PApplet.abs(curX - p.mouseX);
+				if(offSetX < bRight) {
+					offSetX += PApplet.abs(curX - p.mouseX)/2;
+				} else {
+					offSetX = bRight;
+				}
 			}
 			
 			//Checking if y-axis movement is enabled
 			if(yMove) {
 				if(p.mouseY < 50) {
-					offSetY -= PApplet.abs(curY - p.mouseY);
+					if(offSetY > bBot) {
+						offSetY -= PApplet.abs(curY - p.mouseY);
+					} else {
+						offSetY = bBot;
+					}
 				} else if(p.mouseY > (p.height - 50)) {
-					offSetY += PApplet.abs(curY - p.mouseY);
+					if(offSetY < bTop) {
+						offSetY += PApplet.abs(curY - p.mouseY);
+					} else {
+						offSetY = bTop;
+					}
 				}
 			}
-			
 		}
+	}
+	
+	//Sets the bounds of the camera
+	public void setCameraBounds(int bTop, int bBot, int bLeft, int bRight) {
+		this.bTop = bTop;
+		this.bBot = bBot;
+		this.bLeft = bLeft;
+		this.bRight = bRight;
 	}
 	
 	//Returning the off set

@@ -17,6 +17,9 @@ public class GameLoop {
 	ArrayList<PVector> gridUsed;
 	int money;
 	
+	PVector off;
+	Camera camera;
+	
 	//ArrayLists for different game objects
 	ArrayList<Tower> towers;
 	ArrayList<Enemy> gameEnemies;
@@ -39,7 +42,6 @@ public class GameLoop {
 		
 		//Initializing the path lists
 		path1 = new Path(p);
-		path2 = new Path(p);
 		
 		gameEnemies = new ArrayList<Enemy>();
 		towers = new ArrayList<Tower>();
@@ -68,14 +70,12 @@ public class GameLoop {
 		path1.addPoint(0, p.width-100, 200);
 		path1.addPoint(0, 100, 200);
 		
-		path2.addPoint(0, 100, p.height-50);
-		path2.addPoint(0, p.width-100, p.height-50);
-		path2.addPoint(0, p.width-100, 200);
-		path2.addPoint(0, 100, 200);
-		
+		camera = new Camera(p, true);
+		camera.setCameraBounds((building.height/2 - p.height/2), -building.height/5, -building.width/8, building.width/8);
+		off = new PVector(0,0);
 		
 		gameEnemies.add(new BasicEnemy(p,500,500,path1));
-		gameEnemies.add(new BasicEnemy(p,700,700,path1));
+		//gameEnemies.add(new BasicEnemy(p,700,700,path1));
 		towers.add(new PlasmaTower(p,100,100));
 	}
 	
@@ -83,6 +83,10 @@ public class GameLoop {
 	{
 		//Updating the game state
 		this.gameState = gameState;
+		System.out.println(gameState);
+		camera.update(off,1);
+		
+		off = camera.getOffSet();
 		
 		//Checking the gameLoop should be updating
 		if(gameState == 4) 
@@ -183,7 +187,10 @@ public class GameLoop {
 	public void render(){
 		//Checking of the gameLoop should be rendered
 		p.pushMatrix();
+		p.translate(-off.x,-off.y);
 		if(gameState == 4 || gameState == 5) {
+			p.image(building,p.width/2,p.height/2);
+			
 			for(int i = 0; i < towers.size(); i++){
 				towers.get(i).render();
 			}
@@ -192,12 +199,14 @@ public class GameLoop {
 				gameEnemies.get(i).render();
 			}
 			
-			for(int i = 0; i < gameMenu.size(); i++){
-				gameMenu.get(i).render();
-			}
 			grid.showGrid();
 		}
 		p.popMatrix();
+		if(gameState == 4) {
+			for(int i = 0; i < gameMenu.size(); i++){
+				gameMenu.get(i).render();
+			}
+		}
 	}
 	
 	//Returning the current state of the game

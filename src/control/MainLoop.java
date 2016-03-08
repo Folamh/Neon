@@ -16,7 +16,7 @@ public class MainLoop extends PApplet{
 	public void settings() {
 		//fullScreen();
 		//Set to 720p resolution
-		size(1280,720);
+		size(1664,936, JAVA2D);
 	}
 	
 	//ABOVE THIS LINE SHOULDNT CHANGE
@@ -45,7 +45,7 @@ public class MainLoop extends PApplet{
 		background.resize(width,height);
 		
 		//Initializing menu and game loops
-		menuLoop = new MenuLoop(this, gameState);
+		menuLoop = new MenuLoop(this);
 		gameLoop = new GameLoop(this, gameState);
 		
 		//Setting up music
@@ -58,10 +58,18 @@ public class MainLoop extends PApplet{
 		//System.out.println(frameRate);
 		
 		menuLoop.update(gameState);
-		gameLoop.update(gameState);
 		
 		//Updating the game state form the menuLoop
 		gameState = menuLoop.getGameState();
+		
+		gameLoop.update(gameState);
+		
+		System.out.println(gameState);
+		
+		/*
+		 * The gameLoop state is still 5, after the menu Loop updates it
+		 * Then
+		 */
 		
 		//Checking if the player paused the game
 		if(gameLoop.getGameState() == 5) {
@@ -76,8 +84,10 @@ public class MainLoop extends PApplet{
 		//Rendering the background
 		image(background,width/2,height/2);
 		
-		menuLoop.render();
+	
+		
 		gameLoop.render();
+		menuLoop.render();
 		
 	}
 	
