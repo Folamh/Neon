@@ -37,7 +37,7 @@ public abstract class Tower extends GameObject{
 	public void calculateTargets(ArrayList<Enemy> gameEnemies){//GameLoop passes all map enemies.
 		targets.clear();
 		for(int i = 0; i < gameEnemies.size(); i++){
-			if((PVector.dist(pos, gameEnemies.get(i).pos) < range) && !gameEnemies.get(i).inElevator){//If an enemy is in range add him to the list.
+			if((PVector.dist(pos, gameEnemies.get(i).pos) < range) && !gameEnemies.get(i).inElevator && gameEnemies.get(i).pos.y > pos.y){//If an enemy is in range add him to the list.
 				targets.add(gameEnemies.get(i));
 			}
 		}

@@ -14,7 +14,10 @@ public class BasicEnemy extends Enemy{
 	public BasicEnemy(PApplet p, Minim minim, int x, int y, Path path){
 		super(p, minim, x, y, path);
 		speed = 4;
+<<<<<<< HEAD
 
+=======
+>>>>>>> c2d16385d275e78a008d9d0bda8361a2f1077140
 		moving = new Animation(p, "Resources/Images/Enemy/BasicEnemy/Moving", 5);
 		still = new Animation(p, "Resources/Images/Enemy/BasicEnemy/Still", 10);
 		mov = false;
@@ -34,9 +37,8 @@ public class BasicEnemy extends Enemy{
 	}
 	
 	public void update(){
-		
 		moveToPathPoint();
-		
+		takeElevator();
 		if(!inElevator){
 			mov = true;
 		}

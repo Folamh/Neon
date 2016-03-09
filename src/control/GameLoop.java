@@ -1,6 +1,10 @@
 package control;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c2d16385d275e78a008d9d0bda8361a2f1077140
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import gameObject.*;
@@ -32,6 +36,9 @@ public class GameLoop {
 	boolean placingTower;
 	int data;
 	
+	//Elevators
+	PImage e;
+	
 	//The current state of the game
 	int gameState;
 	
@@ -40,11 +47,12 @@ public class GameLoop {
 		this.p = p;
 		this.minim = minim;
 		this.gameState = gameState;
-		money = 600000;
+		money = 600;
 		
 		place = this.minim.loadFile("Resources/Audio/PlaceTurret.wav");
 		//Initializing the path lists
 		path1 = new Path(p);
+		path2 = new Path(p);
 		
 		gameEnemies = new ArrayList<Enemy>();
 		towers = new ArrayList<Tower>();
@@ -57,7 +65,6 @@ public class GameLoop {
 		placingTower = false;
 		data = 10;
 		
-		
 		//Pause Menu Button Image
 		PImage bImage = p.loadImage("resources/images/menu/button/0.png");
 		//Turret Button Image
@@ -66,15 +73,33 @@ public class GameLoop {
 		gameMenu.add(new Button(p, 5, p.width-50, p.height-50, 300, 150, bImage, "Pause", 20));
 		gameMenu.add(new Button(p, 4, p.width-100, 100, 300, 150, tImage, " ",10));
 		
+		//Elevators
+		e = p.loadImage("Resources/Images/Backgrounds/Building/1.png");
+	
 		//Adding points to the path
-		path1.addPoint(0, 100, p.height-50);
-		path1.addPoint(0, p.width-100, p.height-50);
-		path1.addPoint(0, p.width-100, 200);
-		path1.addPoint(0, 100, 200);
+		path1.addPoint(0, 0, p.height + 40);
+		path1.addPoint(0, p.width/2 - 65, p.height + 40);
+		path1.addPoint(0, p.width/2 - 65, p.height - 212);
+		path1.addPoint(0, p.width/2 - 585, p.height - 212);
+		path1.addPoint(0, p.width/2 - 585, p.height - 463);
+		path1.addPoint(0, p.width/2 - 440, p.height - 463);
+		path1.addPoint(0, p.width/2 - 440, p.height - 713);
+		path1.addPoint(0, p.width/2 + 585, p.height - 713);
+		
+		path2.addPoint(0, p.width, p.height + 40);
+		path2.addPoint(0, p.width/2 + 65, p.height + 40);
+		path2.addPoint(0, p.width/2 + 65, p.height - 212);
+		path2.addPoint(0, p.width/2 + 585, p.height - 212);
+		path2.addPoint(0, p.width/2 + 585, p.height - 463);
+		path2.addPoint(0, p.width/2 - 440, p.height - 463);
+		path2.addPoint(0, p.width/2 - 440, p.height - 713);
+		path2.addPoint(0, p.width/2 + 585, p.height - 713);
+		
 		
 		camera = new Camera(p, true);
 		camera.setCameraBounds((building.height/2 - p.height/2), -building.height/5, -building.width/8, building.width/8);
 		off = new PVector(0,0);
+<<<<<<< HEAD
 		
 		gameEnemies.add(new BasicEnemy(p,minim,500,500,path1));
 		//gameEnemies.add(new BasicEnemy(p,700,700,path1));
@@ -84,6 +109,9 @@ public class GameLoop {
 		
 		
 		
+=======
+		grid = new Grid(p, building, 250);
+>>>>>>> c2d16385d275e78a008d9d0bda8361a2f1077140
 	}
 	
 	//Play placing turret noise
@@ -108,7 +136,8 @@ public class GameLoop {
 			{
 				gameEnemies.get(i).update();
 				
-				if(((BasicEnemy) gameEnemies.get(i)).getHealth() == 0) {
+				if(((BasicEnemy) gameEnemies.get(i)).getHealth() <= 0) {
+					money += 50;
 					gameEnemies.remove(i);
 				}
 			}
@@ -162,11 +191,11 @@ public class GameLoop {
 			int rand = (int) p.random(0,1);
 			BasicEnemy enemy;
 			if(rand == 0){
-				enemy = new BasicEnemy(p, minim, 50, 50, path1);
+				enemy = new BasicEnemy(p, minim, 0, p.height + 40, path1);
 				gameEnemies.add(enemy);
 			}
 			else{
-				enemy = new BasicEnemy(p, minim, p.width-50, 50, path1);
+				enemy = new BasicEnemy(p, minim, p.width, p.height + 40, path2);
 				gameEnemies.add(enemy);
 			}
 		}
@@ -210,6 +239,19 @@ public class GameLoop {
 			p.pushMatrix();
 			p.translate(p.width/2, p.height/2);
 			p.image(building,0,0);
+			//Elevator
+			p.image(e, -65, 412);
+			p.image(e, 65, 412);
+			p.image(e, -65, 161);
+			p.image(e, 65, 161);
+			
+			p.image(e, 585, 161);
+			p.image(e, -585, 161);
+			p.image(e, 585, -89);
+			p.image(e, -585, -89);
+			
+			p.image(e, -440, -338);
+			p.image(e, -440, -89);
 			p.popMatrix();
 			
 			for(int i = 0; i < towers.size(); i++){
@@ -218,7 +260,9 @@ public class GameLoop {
 			
 			for(int i = 0; i < gameEnemies.size(); i++)
 			{
-				gameEnemies.get(i).render();
+				if(!gameEnemies.get(i).inElevator){
+					gameEnemies.get(i).render();
+				}
 			}
 			if(placingTower){
 				grid.showGrid(gridUsed);
