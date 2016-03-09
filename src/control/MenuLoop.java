@@ -46,6 +46,8 @@ public class MenuLoop {
 		PImage backImage = p.loadImage("resources/images/menu/button/4.png");
 		PImage titleImage = p.loadImage("resources/images/menu/button/5.png");
 		
+		PImage credits = p.loadImage("resources/images/menu/button/credits.png");
+		
 		//TODO Initialize all the menus here
 		//Start Menu
 		startMenu = new Animation(p,"resources/images/menu/start", 10);
@@ -63,12 +65,13 @@ public class MenuLoop {
 		pauseMenu.add(new Button(p, 4, p.width/2, p.height-100, 200, 100, backImage));
 		
 		//settings menu
-		settingsMenu.add(new Button(p, 0, p.width/2, 100, settingImage, "", 15));
-		settingsMenu.add(new Button(p, 1, p.width/2, p.height-100, 200, 100, backImage, "", 15));
+		settingsMenu.add(new Button(p, 0, p.width/2, 100, settingImage));
+		settingsMenu.add(new Button(p, 1, p.width/2, p.height-100, 200, 100, backImage));
 		
 		//settings menu
-		creditsMenu.add(new Button(p, 0, p.width/2, 100, creditsImage, "", 15));
-		creditsMenu.add(new Button(p, 1, p.width/2, p.height-100, 200, 100, backImage, "", 15));
+		creditsMenu.add(new Button(p, 0, p.width/2, 100, creditsImage));
+		creditsMenu.add(new Button(p, 0, p.width/2, p.height/2, 700, 700, credits));
+		creditsMenu.add(new Button(p, 1, p.width/2, p.height-100, 200, 100, backImage));
 	}
 	
 	//Play SELECT.wav

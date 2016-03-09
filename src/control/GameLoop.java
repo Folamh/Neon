@@ -1,12 +1,8 @@
 package control;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
-
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
->>>>>>> cb64c19dde3f2e143a57c9d65be1a605c746d402
 import gameObject.*;
 import map.Grid;
 import map.Path;
@@ -65,7 +61,7 @@ public class GameLoop {
 		//Pause Menu Button Image
 		PImage bImage = p.loadImage("resources/images/menu/button/0.png");
 		//Turret Button Image
-		PImage tImage = p.loadImage("resources/images/turret/basicTurret/0.png");
+		PImage tImage = p.loadImage("resources/images/menu/button/buy.png");
 		gameMenu = new ArrayList<Button>();
 		gameMenu.add(new Button(p, 5, p.width-50, p.height-50, 300, 150, bImage, "Pause", 20));
 		gameMenu.add(new Button(p, 4, p.width-100, 100, 300, 150, tImage, " ",10));
@@ -80,16 +76,14 @@ public class GameLoop {
 		camera.setCameraBounds((building.height/2 - p.height/2), -building.height/5, -building.width/8, building.width/8);
 		off = new PVector(0,0);
 		
-<<<<<<< HEAD
-		gameEnemies.add(new BasicEnemy(p,500,500,path1));
-=======
 		gameEnemies.add(new BasicEnemy(p,minim,500,500,path1));
 		//gameEnemies.add(new BasicEnemy(p,700,700,path1));
 		towers.add(new PlasmaTower(p,minim, 100,100));
-		
->>>>>>> cb64c19dde3f2e143a57c9d65be1a605c746d402
 
-		grid = new Grid(p, building, 50);
+		grid = new Grid(p, building, 250);
+		
+		
+		
 	}
 	
 	//Play placing turret noise
@@ -227,7 +221,7 @@ public class GameLoop {
 				gameEnemies.get(i).render();
 			}
 			if(placingTower){
-				grid.showGrid();
+				grid.showGrid(gridUsed);
 			}
 		}
 		p.popMatrix();
