@@ -1,10 +1,6 @@
 package control;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
-
->>>>>>> c2d16385d275e78a008d9d0bda8361a2f1077140
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import gameObject.*;
@@ -99,19 +95,7 @@ public class GameLoop {
 		camera = new Camera(p, true);
 		camera.setCameraBounds((building.height/2 - p.height/2), -building.height/5, -building.width/8, building.width/8);
 		off = new PVector(0,0);
-<<<<<<< HEAD
-		
-		gameEnemies.add(new BasicEnemy(p,minim,500,500,path1));
-		//gameEnemies.add(new BasicEnemy(p,700,700,path1));
-		towers.add(new PlasmaTower(p,minim, 100,100));
-
 		grid = new Grid(p, building, 250);
-		
-		
-		
-=======
-		grid = new Grid(p, building, 250);
->>>>>>> c2d16385d275e78a008d9d0bda8361a2f1077140
 	}
 	
 	//Play placing turret noise
