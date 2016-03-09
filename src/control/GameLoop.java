@@ -44,7 +44,7 @@ public class GameLoop {
 		this.p = p;
 		this.minim = minim;
 		this.gameState = gameState;
-		money = 600000;
+		money = 600;
 		
 		place = this.minim.loadFile("Resources/Audio/PlaceTurret.wav");
 		//Initializing the path lists
@@ -72,21 +72,7 @@ public class GameLoop {
 		
 		//Elevators
 		e = p.loadImage("Resources/Images/Backgrounds/Building/1.png");
-		
-
-		p.image(e, -65, 412);
-		p.image(e, 65, 412);
-		p.image(e, -65, 161);
-		p.image(e, 65, 161);
-		
-		p.image(e, 585, 161);
-		p.image(e, -585, 161);
-		p.image(e, 585, -89);
-		p.image(e, -585, -89);
-		
-		p.image(e, -440, -338);
-		p.image(e, -440, -89);
-		
+	
 		//Adding points to the path
 		path1.addPoint(0, 0, p.height + 40);
 		path1.addPoint(0, p.width/2 - 65, p.height + 40);
@@ -110,10 +96,6 @@ public class GameLoop {
 		camera = new Camera(p, true);
 		camera.setCameraBounds((building.height/2 - p.height/2), -building.height/5, -building.width/8, building.width/8);
 		off = new PVector(0,0);
-		gameEnemies.add(new BasicEnemy(p,minim,500,500,path2));
-		//gameEnemies.add(new BasicEnemy(p,700,700,path1));
-		towers.add(new PlasmaTower(p,minim, 100,100));
-		
 		grid = new Grid(p, building, 50);
 	}
 	
@@ -139,7 +121,7 @@ public class GameLoop {
 			{
 				gameEnemies.get(i).update();
 				
-				if(((BasicEnemy) gameEnemies.get(i)).getHealth() == 0) {
+				if(((BasicEnemy) gameEnemies.get(i)).getHealth() <= 0) {
 					gameEnemies.remove(i);
 				}
 			}
@@ -193,11 +175,11 @@ public class GameLoop {
 			int rand = (int) p.random(0,1);
 			BasicEnemy enemy;
 			if(rand == 0){
-				enemy = new BasicEnemy(p, minim, 50, 50, path1);
+				enemy = new BasicEnemy(p, minim, 0, p.height + 40, path1);
 				gameEnemies.add(enemy);
 			}
 			else{
-				enemy = new BasicEnemy(p, minim, p.width-50, 50, path1);
+				enemy = new BasicEnemy(p, minim, p.width, p.height + 40, path2);
 				gameEnemies.add(enemy);
 			}
 		}

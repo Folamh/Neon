@@ -89,6 +89,7 @@ public abstract class Enemy extends GameObject{
 		//Checking if enemy is at next path point
 		if(pos.x <= nextPathPoint.x + speed && pos.x >= nextPathPoint.x - speed && pos.y <= nextPathPoint.y + speed && pos.y >= nextPathPoint.y - speed) {
 			//Setting the next point
+			pos = nextPathPoint;
 			nextPoint();
 			System.out.println(curPoint);
 		} else {
@@ -109,7 +110,7 @@ public abstract class Enemy extends GameObject{
 	
 	//Checking if the enemy is in an elevator
 	void takeElevator(){
-		if(pos.x <= nextPathPoint.x + speed || pos.x >= nextPathPoint.x - speed){
+		if(pos.x == nextPathPoint.x && pos.y != nextPathPoint.y){
 			inElevator = true;
 		} else {
 			inElevator = false;
