@@ -45,14 +45,13 @@ public abstract class Enemy extends GameObject{
 		hack = this.minim.loadFile("Resources/Audio/HACKED.wav");
 		hurt = this.minim.loadFile("Resources/Audio/Hurt.wav");
 		//Setting the first pathPoint
-		nextPathPoint = path.getFirstPoint();
+		curPoint = 0;
+		nextPathPoint = path.getCurPoint(curPoint);
 		//Setting enemy state to not in elevator
 		inElevator = false;
 		
 		gotData = false;
 		stoleData = false;
-		
-		curPoint = 0;
 		
 		//Initializing vel
 		vel = PVector.sub(nextPathPoint, pos);
@@ -138,6 +137,7 @@ public abstract class Enemy extends GameObject{
 			} else {
 				playHack();
 				gotData = true;
+				stoleData = true;
 			}
 		}
 	}

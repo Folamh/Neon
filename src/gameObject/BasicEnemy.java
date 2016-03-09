@@ -13,12 +13,12 @@ public class BasicEnemy extends Enemy{
 
 	public BasicEnemy(PApplet p, Minim minim, int x, int y, Path path){
 		super(p, minim, x, y, path);
-		speed = 4;
+		speed = 2;
 		moving = new Animation(p, "Resources/Images/Enemy/BasicEnemy/Moving", 5);
 		still = new Animation(p, "Resources/Images/Enemy/BasicEnemy/Still", 10);
 		mov = false;
-		maxHealth = 100;
-		health = 100;
+		maxHealth = 250;
+		health = maxHealth;
 		curX = 0;
 	}
 	

@@ -68,7 +68,7 @@ public class MainLoop extends PApplet{
 		System.out.println(gameState);
 		
 		//Checking if the player paused the game
-		if(gameLoop.getGameState() == 5) {
+		if(gameLoop.getGameState() == 5 || gameLoop.getGameState() == 7) {
 			gameState = gameLoop.getGameState();
 		}
 		
@@ -79,9 +79,6 @@ public class MainLoop extends PApplet{
 	public void render(){
 		//Rendering the background
 		image(background,width/2,height/2);
-		
-	
-		
 		gameLoop.render();
 		menuLoop.render();
 		

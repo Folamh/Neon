@@ -1,11 +1,7 @@
 package control;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
-
 import animation.Animation;
->>>>>>> 8bee8fb948f2cf3e3bdc83aedf4d5cfa605abfa2
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import gameObject.*;
@@ -35,7 +31,7 @@ public class GameLoop {
 	PImage building;
 	int spawnRate;
 	boolean placingTower, left;
-	int data, prevTime;
+	int data, maxData, prevTime, killCount;
 	
 	//Elevators
 	PImage e;
@@ -51,7 +47,7 @@ public class GameLoop {
 		this.p = p;
 		this.minim = minim;
 		this.gameState = gameState;
-		money = 600;
+		money = 1000;
 		
 		place = this.minim.loadFile("Resources/Audio/PlaceTurret.wav");
 		//Initializing the path lists
@@ -64,11 +60,13 @@ public class GameLoop {
 		background = p.loadImage("Resources\\Images\\Backgrounds\\Background\\0.png");
 		building = p.loadImage("Resources\\Images\\Backgrounds\\Building\\0.png");
 		
-		spawnRate = 50;
+		spawnRate = 40;
 		gridUsed = new ArrayList<PVector>();
 		placingTower = false;
-		data = 10;
+		maxData = 10;
+		data = maxData;
 		prevTime = 0;
+		killCount = 0;
 		
 		//Pause Menu Button Image
 		PImage bImage = p.loadImage("resources/images/menu/button/0.png");
@@ -80,33 +78,13 @@ public class GameLoop {
 		
 		//Elevators
 		e = p.loadImage("Resources/Images/Backgrounds/Building/1.png");
-		
-<<<<<<< HEAD
-		left = true;
 	
-=======
+		left = true;
 		//Server 
-		s = new Animation(p, "Resources/Images/Backgrounds/Server", gameState);
+		s = new Animation(p, "Resources/Images/Backgrounds/Server", 10);
 		
->>>>>>> 8bee8fb948f2cf3e3bdc83aedf4d5cfa605abfa2
 		//Adding points to the path
-		path1.addPoint(0, 1, p.height + 40);
-		path1.addPoint(1, p.width/2 - 65, p.height + 40);
-		path1.addPoint(2, p.width/2 - 65, p.height - 212);
-		path1.addPoint(3, p.width/2 - 585, p.height - 212);
-		path1.addPoint(4, p.width/2 - 585, p.height - 463);
-		path1.addPoint(5, p.width/2 - 440, p.height - 463);
-		path1.addPoint(6, p.width/2 - 440, p.height - 713);
-		path1.addPoint(7, p.width/2 + 585, p.height - 713);
 		
-		path2.addPoint(0, p.width, p.height + 40);
-		path2.addPoint(1, p.width/2 + 65, p.height + 40);
-		path2.addPoint(2, p.width/2 + 65, p.height - 212);
-		path2.addPoint(3, p.width/2 + 585, p.height - 212);
-		path2.addPoint(4, p.width/2 + 585, p.height - 463);
-		path2.addPoint(5, p.width/2 - 440, p.height - 463);
-		path2.addPoint(6, p.width/2 - 440, p.height - 713);
-		path2.addPoint(7, p.width/2 + 585, p.height - 713);
 		
 		
 		camera = new Camera(p, true);
@@ -138,7 +116,8 @@ public class GameLoop {
 				gameEnemies.get(i).update();
 				
 				if(((BasicEnemy) gameEnemies.get(i)).getHealth() <= 0) {
-					money += 50;
+					money += 100;
+					killCount++;
 					gameEnemies.remove(i);
 				}
 			}
@@ -183,11 +162,18 @@ public class GameLoop {
 				}
 			}
 		loseData();
+		
+		if(data <= 0) {
+			this.gameState = 7;
+			data = maxData;
+			gameEnemies.clear();
+			towers.clear();
+			money = 1000;
+		}
 		}
 	}
 	
 	void spawnEnemies(){
-<<<<<<< HEAD
 		
 		//Getting the current number of milliseconds
 		int count = p.millis();
@@ -195,19 +181,30 @@ public class GameLoop {
 		
 		Enemy enemy;
 		
+		Path path1 = new Path(p);
+		Path path2 = new Path(p);
+		
+		path1.addPoint(0, 1, p.height + 40);
+		path1.addPoint(1, p.width/2 - 65, p.height + 40);
+		path1.addPoint(2, p.width/2 - 65, p.height - 212);
+		path1.addPoint(3, p.width/2 - 585, p.height - 212);
+		path1.addPoint(4, p.width/2 - 585, p.height - 463);
+		path1.addPoint(5, p.width/2 - 440, p.height - 463);
+		path1.addPoint(6, p.width/2 - 440, p.height - 713);
+		path1.addPoint(7, p.width/2 + 585, p.height - 713);
+		
+		path2.addPoint(0, p.width, p.height + 40);
+		path2.addPoint(1, p.width/2 + 65, p.height + 40);
+		path2.addPoint(2, p.width/2 + 65, p.height - 212);
+		path2.addPoint(3, p.width/2 + 585, p.height - 212);
+		path2.addPoint(4, p.width/2 + 585, p.height - 463);
+		path2.addPoint(5, p.width/2 - 440, p.height - 463);
+		path2.addPoint(6, p.width/2 - 440, p.height - 713);
+		path2.addPoint(7, p.width/2 + 585, p.height - 713);
+		
 		//Checking if count frames have passed
-		if(time%spawnRate == 0 && prevTime != time) 
-		{
+		if(time%spawnRate == 0 && prevTime != time) {	
 			if(left){
-=======
-		if(p.millis()%spawnRate == 0){
-			Path path1 = this.path1;
-			Path path2 = this.path2;
-			p.randomSeed(p.millis());
-			int rand = (int) p.random(0,1);
-			BasicEnemy enemy;
-			if(rand == 0){
->>>>>>> 8bee8fb948f2cf3e3bdc83aedf4d5cfa605abfa2
 				enemy = new BasicEnemy(p, minim, 0, p.height + 40, path1);
 				gameEnemies.add(enemy);
 				left = false;
@@ -218,11 +215,6 @@ public class GameLoop {
 				left = true;
 			}
 			prevTime = time;
-			
-		}
-		if(p.millis()%spawnRate == 0){
-			
-			
 		}
 	}
 	
@@ -243,6 +235,7 @@ public class GameLoop {
 					towers.add(tower);
 					placingTower = false;
 					money -= 200;
+					killCount = 0;
 				}
 			}
 		}
@@ -252,6 +245,7 @@ public class GameLoop {
 		for(int i = 0; i < gameEnemies.size(); i++){
 			if(gameEnemies.get(i).getStoleData()){
 				data--;
+				gameEnemies.remove(i);
 			}
 		}
 	}
@@ -310,6 +304,7 @@ public class GameLoop {
 				p.fill(255);
 				p.text("Data: " + data, p.width-100, 20);
 				p.text("$: " + money , p.width-100, 50);
+				p.text("Kill Count: " + killCount, p.width-100, 80);
 			}
 		}
 	}

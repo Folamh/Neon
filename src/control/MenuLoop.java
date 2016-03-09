@@ -21,6 +21,7 @@ public class MenuLoop {
 	ArrayList<MenuObject> pauseMenu;
 	ArrayList<MenuObject> settingsMenu;
 	ArrayList<MenuObject> creditsMenu;
+	ArrayList<MenuObject> endScreen;
 	
 	public MenuLoop(PApplet p, Minim minim) {
 		//Disambiguating variables
@@ -37,6 +38,7 @@ public class MenuLoop {
 		pauseMenu = new ArrayList<MenuObject>();
 		settingsMenu = new ArrayList<MenuObject>();
 		creditsMenu = new ArrayList<MenuObject>();
+		endScreen = new ArrayList<MenuObject>();
 		
 		//Loading the image for buttons
 		PImage playImage = p.loadImage("resources/images/menu/button/0.png");
@@ -47,6 +49,7 @@ public class MenuLoop {
 		PImage titleImage = p.loadImage("resources/images/menu/button/5.png");
 		
 		PImage credits = p.loadImage("resources/images/menu/button/credits.png");
+		PImage blanc = p.loadImage("resources/images/menu/button/gameover.png");
 		
 		//TODO Initialize all the menus here
 		//Start Menu
@@ -60,8 +63,11 @@ public class MenuLoop {
 		
 		//Pause menu
 		pauseMenu.add(new Button(p, 0, p.width/2, 100, 200, 100, settingImage));
-		pauseMenu.add(new Button(p, 1, p.width/2, 200, 200, 100, settingImage));
 		pauseMenu.add(new Button(p, 4, p.width/2, p.height-100, 200, 100, backImage));
+		
+		//Pause menu
+		endScreen.add(new Button(p, 0, p.width/2, p.height/2, p.width, p.height, blanc));
+		endScreen.add(new Button(p, 1, p.width/2, p.height-100, 200, 100, backImage));
 		
 		//settings menu
 		settingsMenu.add(new Button(p, 0, p.width/2, 100, settingImage));
@@ -165,8 +171,9 @@ public class MenuLoop {
 					o.update();
 					
 					if(o.getClicked()) {
-						if(((Button)o).getValue() == 4) { 
+						if(((Button)o).getValue() == 4) {
 							this.gameState = ((Button)o).getValue();
+							playBack();
 						}
 					}
 				}
@@ -175,6 +182,22 @@ public class MenuLoop {
 			//Quit game
 			case 6: {
 				
+				break;
+			}
+			
+			case 7: {
+				for(int i = 0; i < endScreen.size(); i++) {
+					MenuObject o = endScreen.get(i);
+					
+					o.update();
+					
+					if(o.getClicked()) {
+						if(((Button)o).getValue() == 1) { 
+							this.gameState = ((Button)o).getValue();
+							playBack();
+						}
+					}
+				}
 				break;
 			}
 			
@@ -246,6 +269,15 @@ public class MenuLoop {
 	
 			case 6: {
 				
+				break;
+			}
+			
+			case 7: {
+				for(int i = 0; i < endScreen.size(); i++) {
+					MenuObject o = endScreen.get(i);
+					
+					o.render();
+				}
 				break;
 			}
 			

@@ -53,9 +53,9 @@ public class PlasmaTower extends Tower{
 		}
 		p.image(base, headPoint.x, headPoint.y);
 		
-		p.translate(headPoint.x, headPoint.y);
+		p.translate(headPoint.x, headPoint.y-10);
 		p.rotate(angle);
-		p.image(head, 0, 0);
+		p.image(head, 0, 10);
 		p.popMatrix();
 	}
 	
