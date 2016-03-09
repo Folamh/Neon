@@ -1,6 +1,11 @@
 package control;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
+=======
+
+import animation.Animation;
+>>>>>>> 8bee8fb948f2cf3e3bdc83aedf4d5cfa605abfa2
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import gameObject.*;
@@ -34,6 +39,9 @@ public class GameLoop {
 	
 	//Elevators
 	PImage e;
+	
+	//Servers
+	Animation s;
 	
 	//The current state of the game
 	int gameState;
@@ -73,8 +81,14 @@ public class GameLoop {
 		//Elevators
 		e = p.loadImage("Resources/Images/Backgrounds/Building/1.png");
 		
+<<<<<<< HEAD
 		left = true;
 	
+=======
+		//Server 
+		s = new Animation(p, "Resources/Images/Backgrounds/Server", gameState);
+		
+>>>>>>> 8bee8fb948f2cf3e3bdc83aedf4d5cfa605abfa2
 		//Adding points to the path
 		path1.addPoint(0, 1, p.height + 40);
 		path1.addPoint(1, p.width/2 - 65, p.height + 40);
@@ -173,6 +187,7 @@ public class GameLoop {
 	}
 	
 	void spawnEnemies(){
+<<<<<<< HEAD
 		
 		//Getting the current number of milliseconds
 		int count = p.millis();
@@ -184,6 +199,15 @@ public class GameLoop {
 		if(time%spawnRate == 0 && prevTime != time) 
 		{
 			if(left){
+=======
+		if(p.millis()%spawnRate == 0){
+			Path path1 = this.path1;
+			Path path2 = this.path2;
+			p.randomSeed(p.millis());
+			int rand = (int) p.random(0,1);
+			BasicEnemy enemy;
+			if(rand == 0){
+>>>>>>> 8bee8fb948f2cf3e3bdc83aedf4d5cfa605abfa2
 				enemy = new BasicEnemy(p, minim, 0, p.height + 40, path1);
 				gameEnemies.add(enemy);
 				left = false;
@@ -268,19 +292,24 @@ public class GameLoop {
 			if(placingTower){
 				grid.showGrid(gridUsed);
 			}
+			p.pushMatrix();
+			p.translate(p.width/2 + 585, p.height/2 - 338);
+			p.scale(3);
+			s.displayAnimation();
+			p.translate(-50, 0);
+			s.displayAnimation();
+			p.popMatrix();
 		}
 		p.popMatrix();
 		if(gameState == 4) {
 			for(int i = 0; i < gameMenu.size(); i++){
 				gameMenu.get(i).render();
 				p.noStroke();
-				p.fill(255);
-				p.rectMode(PApplet.CENTER);
-				p.rect(p.width-100, 150, 150, 50);
 				p.textSize(20);
 				p.textAlign(PApplet.CENTER);
-				p.fill(0);
-				p.text("$: " + money , p.width-100, 150);
+				p.fill(255);
+				p.text("Data: " + data, p.width-100, 20);
+				p.text("$: " + money , p.width-100, 50);
 			}
 		}
 	}
