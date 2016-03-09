@@ -78,7 +78,7 @@ public class GameLoop {
 		e = p.loadImage("Resources/Images/Backgrounds/Building/1.png");
 		
 		//Server 
-		
+		s = new Animation(p, "Resources/Images/Backgrounds/Server", gameState);
 		
 		//Adding points to the path
 		path1.addPoint(0, 0, p.height + 40);
@@ -261,6 +261,13 @@ public class GameLoop {
 			if(placingTower){
 				grid.showGrid();
 			}
+			p.pushMatrix();
+			p.translate(p.width/2 + 585, p.height/2 - 338);
+			p.scale(3);
+			s.displayAnimation();
+			p.translate(-50, 0);
+			s.displayAnimation();
+			p.popMatrix();
 		}
 		p.popMatrix();
 		if(gameState == 4) {
