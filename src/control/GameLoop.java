@@ -74,22 +74,22 @@ public class GameLoop {
 	
 		//Adding points to the path
 		path1.addPoint(0, 0, p.height + 40);
-		path1.addPoint(0, p.width/2 - 65, p.height + 40);
-		path1.addPoint(0, p.width/2 - 65, p.height - 212);
-		path1.addPoint(0, p.width/2 - 585, p.height - 212);
-		path1.addPoint(0, p.width/2 - 585, p.height - 463);
-		path1.addPoint(0, p.width/2 - 440, p.height - 463);
-		path1.addPoint(0, p.width/2 - 440, p.height - 713);
-		path1.addPoint(0, p.width/2 + 585, p.height - 713);
+		path1.addPoint(1, p.width/2 - 65, p.height + 40);
+		path1.addPoint(2, p.width/2 - 65, p.height - 212);
+		path1.addPoint(3, p.width/2 - 585, p.height - 212);
+		path1.addPoint(4, p.width/2 - 585, p.height - 463);
+		path1.addPoint(5, p.width/2 - 440, p.height - 463);
+		path1.addPoint(6, p.width/2 - 440, p.height - 713);
+		path1.addPoint(7, p.width/2 + 585, p.height - 713);
 		
 		path2.addPoint(0, p.width, p.height + 40);
-		path2.addPoint(0, p.width/2 + 65, p.height + 40);
-		path2.addPoint(0, p.width/2 + 65, p.height - 212);
-		path2.addPoint(0, p.width/2 + 585, p.height - 212);
-		path2.addPoint(0, p.width/2 + 585, p.height - 463);
-		path2.addPoint(0, p.width/2 - 440, p.height - 463);
-		path2.addPoint(0, p.width/2 - 440, p.height - 713);
-		path2.addPoint(0, p.width/2 + 585, p.height - 713);
+		path2.addPoint(1, p.width/2 + 65, p.height + 40);
+		path2.addPoint(2, p.width/2 + 65, p.height - 212);
+		path2.addPoint(3, p.width/2 + 585, p.height - 212);
+		path2.addPoint(4, p.width/2 + 585, p.height - 463);
+		path2.addPoint(5, p.width/2 - 440, p.height - 463);
+		path2.addPoint(6, p.width/2 - 440, p.height - 713);
+		path2.addPoint(7, p.width/2 + 585, p.height - 713);
 		
 		
 		camera = new Camera(p, true);

@@ -129,7 +129,7 @@ public class Music {
 			break;
 		case 3:
 			reset();
-			curSong = 4;
+			curSong = 7;
 			play();
 			break;
 		case 4:
@@ -140,7 +140,7 @@ public class Music {
 			break;
 		case 5:
 			reset();
-			curSong = 7;
+			curSong = 4;
 			play();
 			break;
 		}

@@ -91,7 +91,6 @@ public abstract class Enemy extends GameObject{
 			//Setting the next point
 			pos = nextPathPoint;
 			nextPoint();
-			System.out.println(curPoint);
 		} else {
 			//Calculating the velocity vector for moving the enemy
 			vel = PVector.sub(nextPathPoint, pos);
