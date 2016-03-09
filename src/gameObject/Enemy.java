@@ -14,7 +14,7 @@ public abstract class Enemy extends GameObject{
 	PVector nextPathPoint, vel;
 	
 	//If the enemy is in an elevator
-	boolean inElevator;
+	public boolean inElevator;
 	
 	//If the enemy has stolen some data
 	boolean gotData;
@@ -109,7 +109,7 @@ public abstract class Enemy extends GameObject{
 	
 	//Checking if the enemy is in an elevator
 	void takeElevator(){
-		if(pos.x <= nextPathPoint.x + speed && pos.x >= nextPathPoint.x - speed){
+		if(pos.x <= nextPathPoint.x + speed || pos.x >= nextPathPoint.x - speed){
 			inElevator = true;
 		} else {
 			inElevator = false;

@@ -262,7 +262,9 @@ public class GameLoop {
 			
 			for(int i = 0; i < gameEnemies.size(); i++)
 			{
-				gameEnemies.get(i).render();
+				if(!gameEnemies.get(i).inElevator){
+					gameEnemies.get(i).render();
+				}
 			}
 			if(placingTower){
 				grid.showGrid();

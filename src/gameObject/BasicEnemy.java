@@ -35,7 +35,6 @@ public class BasicEnemy extends Enemy{
 	public void update(){
 		
 		moveToPathPoint();
-		
 		if(!inElevator){
 			mov = true;
 		}
