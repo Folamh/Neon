@@ -122,6 +122,7 @@ public class GameLoop {
 				gameEnemies.get(i).update();
 				
 				if(((BasicEnemy) gameEnemies.get(i)).getHealth() <= 0) {
+					money += 50;
 					gameEnemies.remove(i);
 				}
 			}
