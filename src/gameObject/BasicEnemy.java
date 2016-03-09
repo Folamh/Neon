@@ -10,16 +10,10 @@ public class BasicEnemy extends Enemy{
 	Animation still;
 	Boolean mov;
 	float curX;
-	
-<<<<<<< HEAD
-	public BasicEnemy(PApplet p, int x, int y, Path path){
-		super(p, x, y, path);
-		speed = 4;
-=======
+
 	public BasicEnemy(PApplet p, Minim minim, int x, int y, Path path){
 		super(p, minim, x, y, path);
-		speed = 10;
->>>>>>> cb64c19dde3f2e143a57c9d65be1a605c746d402
+		speed = 4;
 		moving = new Animation(p, "Resources/Images/Enemy/BasicEnemy/Moving", 5);
 		still = new Animation(p, "Resources/Images/Enemy/BasicEnemy/Still", 10);
 		mov = false;

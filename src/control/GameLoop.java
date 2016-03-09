@@ -1,12 +1,9 @@
 package control;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
 
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
->>>>>>> cb64c19dde3f2e143a57c9d65be1a605c746d402
 import gameObject.*;
 import map.Grid;
 import map.Path;
@@ -36,6 +33,9 @@ public class GameLoop {
 	boolean placingTower;
 	int data;
 	
+	//Elevators
+	PImage e;
+	
 	//The current state of the game
 	int gameState;
 	
@@ -49,6 +49,7 @@ public class GameLoop {
 		place = this.minim.loadFile("Resources/Audio/PlaceTurret.wav");
 		//Initializing the path lists
 		path1 = new Path(p);
+		path2 = new Path(p);
 		
 		gameEnemies = new ArrayList<Enemy>();
 		towers = new ArrayList<Tower>();
@@ -61,7 +62,6 @@ public class GameLoop {
 		placingTower = false;
 		data = 10;
 		
-		
 		//Pause Menu Button Image
 		PImage bImage = p.loadImage("resources/images/menu/button/0.png");
 		//Turret Button Image
@@ -70,25 +70,50 @@ public class GameLoop {
 		gameMenu.add(new Button(p, 5, p.width-50, p.height-50, 300, 150, bImage, "Pause", 20));
 		gameMenu.add(new Button(p, 4, p.width-100, 100, 300, 150, tImage, " ",10));
 		
+		//Elevators
+		e = p.loadImage("Resources/Images/Backgrounds/Building/1.png");
+		
+
+		p.image(e, -65, 412);
+		p.image(e, 65, 412);
+		p.image(e, -65, 161);
+		p.image(e, 65, 161);
+		
+		p.image(e, 585, 161);
+		p.image(e, -585, 161);
+		p.image(e, 585, -89);
+		p.image(e, -585, -89);
+		
+		p.image(e, -440, -338);
+		p.image(e, -440, -89);
+		
 		//Adding points to the path
-		path1.addPoint(0, 100, p.height-50);
-		path1.addPoint(0, p.width-100, p.height-50);
-		path1.addPoint(0, p.width-100, 200);
-		path1.addPoint(0, 100, 200);
+		path1.addPoint(0, 0, p.height + 40);
+		path1.addPoint(0, p.width/2 - 65, p.height + 40);
+		path1.addPoint(0, p.width/2 - 65, p.height - 212);
+		path1.addPoint(0, p.width/2 - 585, p.height - 212);
+		path1.addPoint(0, p.width/2 - 585, p.height - 463);
+		path1.addPoint(0, p.width/2 - 440, p.height - 463);
+		path1.addPoint(0, p.width/2 - 440, p.height - 713);
+		path1.addPoint(0, p.width/2 + 585, p.height - 713);
+		
+		path2.addPoint(0, p.width, p.height + 40);
+		path2.addPoint(0, p.width/2 + 65, p.height + 40);
+		path2.addPoint(0, p.width/2 + 65, p.height - 212);
+		path2.addPoint(0, p.width/2 + 585, p.height - 212);
+		path2.addPoint(0, p.width/2 + 585, p.height - 463);
+		path2.addPoint(0, p.width/2 - 440, p.height - 463);
+		path2.addPoint(0, p.width/2 - 440, p.height - 713);
+		path2.addPoint(0, p.width/2 + 585, p.height - 713);
+		
 		
 		camera = new Camera(p, true);
 		camera.setCameraBounds((building.height/2 - p.height/2), -building.height/5, -building.width/8, building.width/8);
 		off = new PVector(0,0);
-		
-<<<<<<< HEAD
-		gameEnemies.add(new BasicEnemy(p,500,500,path1));
-=======
-		gameEnemies.add(new BasicEnemy(p,minim,500,500,path1));
+		gameEnemies.add(new BasicEnemy(p,minim,500,500,path2));
 		//gameEnemies.add(new BasicEnemy(p,700,700,path1));
 		towers.add(new PlasmaTower(p,minim, 100,100));
 		
->>>>>>> cb64c19dde3f2e143a57c9d65be1a605c746d402
-
 		grid = new Grid(p, building, 50);
 	}
 	
@@ -216,6 +241,19 @@ public class GameLoop {
 			p.pushMatrix();
 			p.translate(p.width/2, p.height/2);
 			p.image(building,0,0);
+			//Elevator
+			p.image(e, -65, 412);
+			p.image(e, 65, 412);
+			p.image(e, -65, 161);
+			p.image(e, 65, 161);
+			
+			p.image(e, 585, 161);
+			p.image(e, -585, 161);
+			p.image(e, 585, -89);
+			p.image(e, -585, -89);
+			
+			p.image(e, -440, -338);
+			p.image(e, -440, -89);
 			p.popMatrix();
 			
 			for(int i = 0; i < towers.size(); i++){
