@@ -53,11 +53,10 @@ public class MenuLoop {
 		startMenu = new Animation(p,"resources/images/menu/start", 10);
 		
 		//Main menu
-		mainMenu.add(new Button(p, 0, p.width/2, 100, titleImage));
 		mainMenu.add(new Button(p, 4, p.width/2, 275, 200, 100, playImage));
-		mainMenu.add(new Button(p, 2, p.width/2, 400, 200, 100, settingImage));
-		mainMenu.add(new Button(p, 3, p.width/2, 525, 200, 100, creditsImage));
-		mainMenu.add(new Button(p, 6, p.width/2, 650, 200, 100, exitImage));
+		mainMenu.add(new Button(p, 0, p.width/2, 100, titleImage));
+		mainMenu.add(new Button(p, 3, p.width/2, 425, 200, 100, creditsImage));
+		mainMenu.add(new Button(p, 6, p.width/2, 575, 200, 100, exitImage));
 		
 		//Pause menu
 		pauseMenu.add(new Button(p, 0, p.width/2, 100, 200, 100, settingImage));
@@ -68,10 +67,9 @@ public class MenuLoop {
 		settingsMenu.add(new Button(p, 0, p.width/2, 100, settingImage));
 		settingsMenu.add(new Button(p, 1, p.width/2, p.height-100, 200, 100, backImage));
 		
-		//settings menu
-		creditsMenu.add(new Button(p, 0, p.width/2, 100, creditsImage));
+		//credits menu
 		creditsMenu.add(new Button(p, 0, p.width/2, p.height/2, 700, 700, credits));
-		creditsMenu.add(new Button(p, 1, p.width/2, p.height-100, 200, 100, backImage));
+		creditsMenu.add(new Button(p, 1, p.width/2, p.height-50, 100, 50, backImage));
 	}
 	
 	//Play SELECT.wav
@@ -109,8 +107,10 @@ public class MenuLoop {
 					o.update();
 					
 					if(o.getClicked()) {
-						this.gameState = ((Button)o).getValue();
-						System.out.println(gameState);
+						if(((Button)o).getValue() != 0) {	
+							this.gameState = ((Button)o).getValue();
+							playSelect();
+						}
 						break;
 					}
 				}
@@ -125,7 +125,10 @@ public class MenuLoop {
 					o.update();
 					
 					if(o.getClicked()) {
-						if(((Button)o).getValue() == 1) this.gameState = ((Button)o).getValue();
+						if(((Button)o).getValue() == 1) {
+							this.gameState = ((Button)o).getValue();
+							playBack();
+						}
 					}
 				}
 				break;
@@ -139,7 +142,10 @@ public class MenuLoop {
 					o.update();
 					
 					if(o.getClicked()) {
-						if(((Button)o).getValue() == 1) this.gameState = ((Button)o).getValue();
+						if(((Button)o).getValue() == 1) {
+							this.gameState = ((Button)o).getValue();
+							playBack();
+						}
 					}
 				}
 				break;

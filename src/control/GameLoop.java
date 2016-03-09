@@ -29,8 +29,8 @@ public class GameLoop {
 	PImage background;
 	PImage building;
 	int spawnRate;
-	boolean placingTower;
-	int data;
+	boolean placingTower, left;
+	int data, prevTime;
 	
 	//Elevators
 	PImage e;
@@ -56,24 +56,27 @@ public class GameLoop {
 		background = p.loadImage("Resources\\Images\\Backgrounds\\Background\\0.png");
 		building = p.loadImage("Resources\\Images\\Backgrounds\\Building\\0.png");
 		
-		spawnRate = 5*60;
+		spawnRate = 50;
 		gridUsed = new ArrayList<PVector>();
 		placingTower = false;
 		data = 10;
+		prevTime = 0;
 		
 		//Pause Menu Button Image
 		PImage bImage = p.loadImage("resources/images/menu/button/0.png");
 		//Turret Button Image
 		PImage tImage = p.loadImage("resources/images/menu/button/buy.png");
 		gameMenu = new ArrayList<Button>();
-		gameMenu.add(new Button(p, 5, p.width-50, p.height-50, 300, 150, bImage, "Pause", 20));
-		gameMenu.add(new Button(p, 4, p.width-100, 100, 300, 150, tImage, " ",10));
+		gameMenu.add(new Button(p, 5, p.width-250, p.height-50, 150, 75, bImage));
+		gameMenu.add(new Button(p, 4, p.width-90, p.height-50, 150, 75, tImage));
 		
 		//Elevators
 		e = p.loadImage("Resources/Images/Backgrounds/Building/1.png");
+		
+		left = true;
 	
 		//Adding points to the path
-		path1.addPoint(0, 0, p.height + 40);
+		path1.addPoint(0, 1, p.height + 40);
 		path1.addPoint(1, p.width/2 - 65, p.height + 40);
 		path1.addPoint(2, p.width/2 - 65, p.height - 212);
 		path1.addPoint(3, p.width/2 - 585, p.height - 212);
@@ -170,18 +173,32 @@ public class GameLoop {
 	}
 	
 	void spawnEnemies(){
-		if(p.millis()%spawnRate == 0){
-			p.randomSeed(p.millis());
-			int rand = (int) p.random(0,1);
-			BasicEnemy enemy;
-			if(rand == 0){
+		
+		//Getting the current number of milliseconds
+		int count = p.millis();
+		int time = count/100;
+		
+		Enemy enemy;
+		
+		//Checking if count frames have passed
+		if(time%spawnRate == 0 && prevTime != time) 
+		{
+			if(left){
 				enemy = new BasicEnemy(p, minim, 0, p.height + 40, path1);
 				gameEnemies.add(enemy);
+				left = false;
 			}
 			else{
 				enemy = new BasicEnemy(p, minim, p.width, p.height + 40, path2);
 				gameEnemies.add(enemy);
+				left = true;
 			}
+			prevTime = time;
+			
+		}
+		if(p.millis()%spawnRate == 0){
+			
+			
 		}
 	}
 	
