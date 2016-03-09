@@ -270,8 +270,8 @@ public class GameLoop {
 				p.textSize(20);
 				p.textAlign(PApplet.CENTER);
 				p.fill(255);
-				p.text("Data: " + data, p.width-100, 120);
-				p.text("$: " + money , p.width-100, 150);
+				p.text("Data: " + data, p.width-100, 20);
+				p.text("$: " + money , p.width-100, 50);
 			}
 		}
 	}
