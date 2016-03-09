@@ -18,7 +18,7 @@ public class PlasmaTower extends Tower{
 		base = p.loadImage("resources/images/turret/basicturret/0.png");
 		head = p.loadImage("resources/images/turret/basicturret/1.png");
 		fireRate = 30;
-		headPoint = new PVector(pos.x, pos.y - 10);
+		headPoint = new PVector(pos.x, pos.y - 50);
 		range = 250;
 		projectiles = new ArrayList<Projectile>();
 		targets = new ArrayList<Enemy>();//The game loop should check and add to this list
@@ -51,11 +51,11 @@ public class PlasmaTower extends Tower{
 		for(int i = 0; i < projectiles.size(); i++){
 			projectiles.get(i).render();
 		}
-		p.image(base, pos.x, pos.y);
+		p.image(base, headPoint.x, headPoint.y);
 		
 		p.translate(headPoint.x, headPoint.y);
 		p.rotate(angle);
-		p.image(head, 0, 10);
+		p.image(head, 0, 0);
 		p.popMatrix();
 	}
 	

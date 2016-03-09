@@ -96,7 +96,7 @@ public class GameLoop {
 		camera = new Camera(p, true);
 		camera.setCameraBounds((building.height/2 - p.height/2), -building.height/5, -building.width/8, building.width/8);
 		off = new PVector(0,0);
-		grid = new Grid(p, building, 50);
+		grid = new Grid(p, building, 250);
 	}
 	
 	//Play placing turret noise
