@@ -11,10 +11,16 @@ public class Camera {
 	int curX, offSetX, setX;
 	int curY, offSetY, setY;
 	
+	//Bounds for the camera movement
 	int bTop, bBot, bLeft, bRight;
+	boolean bound;
+	
+	
 	
 	//mCam used for check for initial click, yMove for if y axis camera movement is enabled
-	boolean mCam, yMove;
+	boolean mCam
+	
+	//Checking if x/y movement is enabled
 	
 	Camera(PApplet p, boolean yMove) {
 		//Disambiguating variables
@@ -29,6 +35,7 @@ public class Camera {
 		
 		//Initializing
 		mCam = false;
+		bound = false;
 	}
 	
 	//Constructor with yMove defaulted to false
@@ -82,10 +89,10 @@ public class Camera {
 		setY = (int) off.y;
 		
 		//Move toward edge camera movement
-		if(mode == 1) {
-			offSetX = setX;
-			offSetY = setY;
-		}
+		//if(mode == 1) {
+			//offSetX = setX;
+			//offSetY = setY;
+		//}
 		
 		//Getting the current position of the mouse
 		curX = p.mouseX;
@@ -104,40 +111,39 @@ public class Camera {
 			//System.out.println(p.mouseX + "    " + (p.width-50));
 			
 			if(p.mouseX < 50) {
-				if(offSetX > bLeft) {
-					offSetX -= PApplet.abs(curX - p.mouseX)/2;
-				} else {
-					offSetX = bLeft;
-				}
+				offSetX -= PApplet.abs(curX - p.mouseX)/2;
 			} else if(p.mouseX > (p.width - 50)) {
-				if(offSetX < bRight) {
-					offSetX += PApplet.abs(curX - p.mouseX)/2;
-				} else {
-					offSetX = bRight;
-				}
+				offSetX += PApplet.abs(curX - p.mouseX)/2;
 			}
 			
 			//Checking if y-axis movement is enabled
 			if(yMove) {
 				if(p.mouseY < 50) {
-					if(offSetY > bBot) {
-						offSetY -= PApplet.abs(curY - p.mouseY);
-					} else {
-						offSetY = bBot;
-					}
+					offSetY -= PApplet.abs(curY - p.mouseY);
 				} else if(p.mouseY > (p.height - 50)) {
-					if(offSetY < bTop) {
-						offSetY += PApplet.abs(curY - p.mouseY);
-					} else {
-						offSetY = bTop;
-					}
+					offSetY += PApplet.abs(curY - p.mouseY);
 				}
+			}
+			
+			//Checking if X offSet has exceeded boundary's
+			if(offSetX > bLeft) {
+				offSetX = bLeft;
+			} else if(offSetX < bRight) {
+				offSetX = bRight;
+			}
+			
+			//Checking if Y offSet has exceeded boundary's
+			if(offSetY > bBot) {
+				offSetY = bBot;
+			} else if(offSetY < bTop) {
+				offSetY = bTop;
 			}
 		}
 	}
 	
 	//Sets the bounds of the camera
 	public void setCameraBounds(int bTop, int bBot, int bLeft, int bRight) {
+		bound = true;
 		this.bTop = bTop;
 		this.bBot = bBot;
 		this.bLeft = bLeft;

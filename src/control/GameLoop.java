@@ -19,7 +19,7 @@ public class GameLoop {
 	int money;
 	int health;
 	PVector off;
-	Camera camera;
+	newCamera camera;
 	Minim minim;
 	AudioPlayer place;
 	
@@ -87,9 +87,9 @@ public class GameLoop {
 		
 		
 		
-		camera = new Camera(p, true);
-		camera.setCameraBounds((building.height/2 - p.height/2), -building.height/5, -building.width/8, building.width/8);
-		off = new PVector(0,0);
+		camera = new newCamera(p);
+		camera.setPushBorder(50);
+		off = new PVector(p.width/2,p.height/2);
 		grid = new Grid(p, building, 250);
 	}
 	
@@ -104,8 +104,8 @@ public class GameLoop {
 		//Updating the game state
 		this.gameState = gameState;
 		System.out.println(gameState);
-		camera.update(off,1);
-		
+		camera.setCurOffSet(off);
+		camera.calcOffSet();		
 		off = camera.getOffSet();
 		
 		//Checking the gameLoop should be updating
@@ -253,7 +253,7 @@ public class GameLoop {
 	public void render(){
 		//Checking of the gameLoop should be rendered
 		p.pushMatrix();
-		p.translate(-off.x,-off.y);
+		p.translate(off.x,off.y);
 		if(gameState == 4 || gameState == 5) {
 			p.pushMatrix();
 			p.translate(p.width/2, p.height/2);
