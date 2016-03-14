@@ -26,7 +26,7 @@ public class newCamera {
 	boolean drag, push;
 	
 	//drag checker
-	boolean dragged;
+	boolean draggedX, draggedY;
 	
 	//edge border for pushing the camera
 	int border;
@@ -39,6 +39,7 @@ public class newCamera {
 	
 	//Initializing the camera
 	public newCamera(PApplet p) {
+		//setting papplet
 		this.p = p;
 		
 		//Initializing booleans
@@ -46,6 +47,9 @@ public class newCamera {
 		moveY = true;
 		drag = true;
 		push = true;
+		
+		draggedX = false;
+		draggedY = false;
 		
 		boundX = false;
 		boundY = false;
@@ -68,21 +72,26 @@ public class newCamera {
 	
 	//calculating the off set
 	public void calcOffSet() {
-		//resetting the tmp off sets to 0
-		tmpOffSetX = 0;
-		tmpOffSetY = 0;
+		//Setting the current off set
+		offSetX = curOffSetX;
+		offSetY = curOffSetY;
 		
 		//if x movement is enabled
 		if(moveX) {
 			//checking if screen drag is enabled
 			if(drag) {
 				//checking if the screen is being dragged
-				if(p.mousePressed) {
-					//getting difference between start loc and cur loc
-					tmpOffSetX = startX - p.mouseX;
+				if(p.mousePressed && !draggedX) {
+					//holding the current off set at time of click
+					tmpOffSetX = curOffSetX;
+					draggedX = true;
+				} else if(p.mousePressed && draggedX){
+					//setting the off set while mouse is dragged
+					offSetX = tmpOffSetX - (startX - p.mouseX);
 				} else {
-					//setting the start loc
+					//setting the current start loc
 					startX = p.mouseX;
+					draggedX = false;
 				}
 			}
 			//checking if screen push is enabled
@@ -90,7 +99,7 @@ public class newCamera {
 				//checking if mouse past borders
 				if(p.mouseX < border) {
 					//increasing off set
-					tmpOffSetX += border - p.mouseX;
+					offSetX += (border - p.mouseX);
 				} else if(p.mouseX > p.width - border) {
 					//decreasing off set
 					offSetX += (p.width-border) - p.mouseX;
@@ -102,21 +111,26 @@ public class newCamera {
 		if(moveY) {
 			//checking if screen drag is enabled
 			if(drag) {
-				//checking if screen is being dragged
-				if(p.mousePressed) {
-					//getting difference between start loc and cur loc
-					tmpOffSetY = startY - p.mouseY;
+				//checking if the screen is being dragged
+				if(p.mousePressed && !draggedY) {
+					//holding the current off set at time of click
+					tmpOffSetY = curOffSetY;
+					draggedY = true;
+				} else if(p.mousePressed && draggedY){
+					//setting the off set while mouse is dragged
+					offSetY = tmpOffSetY - (startY - p.mouseY);
 				} else {
-					//setting the start loc
+					//setting the current start loc
 					startY = p.mouseY;
+					draggedY = false;
 				}
 			}
-			//checking if screen push is enabled
+			//checking if screen push is enabled/
 			if(push) {
 				//checking if mouse past borders
 				if(p.mouseY < border) {
 					//increasing off set
-					tmpOffSetY += border - p.mouseY;
+					offSetY += (border - p.mouseY);
 				} else if(p.mouseY > p.height - border) {
 					//decreasing off set
 					offSetY += (p.height-border) - p.mouseY;
@@ -200,6 +214,6 @@ public class newCamera {
 	
 	//returning the calculated off set
 	public PVector getOffSet() {
-		return new PVector(offSetX + tmpOffSetX, offSetY + tmpOffSetY);
+		return new PVector(offSetX, offSetY);
 	}
 }

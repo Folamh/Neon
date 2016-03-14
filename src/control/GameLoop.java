@@ -89,7 +89,11 @@ public class GameLoop {
 		
 		camera = new newCamera(p);
 		camera.setPushBorder(50);
-		off = new PVector(p.width/2,p.height/2);
+		camera.setBoundX(true);
+		camera.setBoundY(true);
+		camera.setBoundXDim(-e.width*2, e.width*2);
+		camera.setBoundYDim(-e.height*2, e.height*2);
+		off = new PVector(0,0);
 		grid = new Grid(p, building, 250);
 	}
 	
@@ -105,7 +109,7 @@ public class GameLoop {
 		this.gameState = gameState;
 		System.out.println(gameState);
 		camera.setCurOffSet(off);
-		camera.calcOffSet();		
+		camera.calcOffSet();
 		off = camera.getOffSet();
 		
 		//Checking the gameLoop should be updating
