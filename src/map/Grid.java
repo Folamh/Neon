@@ -32,7 +32,7 @@ public class Grid {
 		point.set(0, 0);
 		for(int i = 0; i < gridWidth; i++){
 			for(int j = 0; j < gridHeight; j++){
-				if((p.mouseX+off.x > (startX + i*gridSize)) && (p.mouseX+off.x < (startX + gridSize + i*gridSize)) && (p.mouseY+off.y > (startY + j*gridSize)) && (p.mouseY+off.y < (startY + gridSize + j*gridSize))){
+				if((p.mouseX-off.x > (startX + i*gridSize)) && (p.mouseX-off.x < (startX + gridSize + i*gridSize)) && (p.mouseY-off.y > (startY + j*gridSize)) && (p.mouseY-off.y < (startY + gridSize + j*gridSize))){
 					point.set((startX + i*gridSize + gridSize/2), (startY + j*gridSize + gridSize/2));
 				}
 			}

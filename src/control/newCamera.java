@@ -95,7 +95,7 @@ public class newCamera {
 				}
 			}
 			//checking if screen push is enabled
-			if(push) {
+			if(push && !draggedX) {
 				//checking if mouse past borders
 				if(p.mouseX < border) {
 					//increasing off set
@@ -126,7 +126,7 @@ public class newCamera {
 				}
 			}
 			//checking if screen push is enabled/
-			if(push) {
+			if(push && !draggedY) {
 				//checking if mouse past borders
 				if(p.mouseY < border) {
 					//increasing off set

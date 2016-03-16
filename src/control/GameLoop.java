@@ -91,8 +91,8 @@ public class GameLoop {
 		camera.setPushBorder(50);
 		camera.setBoundX(true);
 		camera.setBoundY(true);
-		camera.setBoundXDim(-e.width*2, e.width*2);
-		camera.setBoundYDim(-e.height*2, e.height*2);
+		camera.setBoundXDim(-building.width/8,building.width/8);
+		camera.setBoundYDim(-((building.height/2)-(p.height/2)),building.height/4);
 		off = new PVector(0,0);
 		grid = new Grid(p, building, 250);
 	}
