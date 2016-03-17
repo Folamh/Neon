@@ -10,6 +10,7 @@ import map.Path;
 import processing.core.*;
 import userInterface.*;
 
+//TODO: COMMENT THIS FUCKING SHIT SOON!!!!!!!!!!!!!!
 public class GameLoop {
 	PApplet p;
 	Path path1;
@@ -107,7 +108,6 @@ public class GameLoop {
 	{
 		//Updating the game state
 		this.gameState = gameState;
-		System.out.println(gameState);
 		camera.setCurOffSet(off);
 		camera.calcOffSet();
 		off = camera.getOffSet();

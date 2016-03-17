@@ -54,8 +54,6 @@ public class Grid {
 				
 				PVector point = returnPoint(i,j);
 				
-				System.out.println();
-				
 				for(PVector g: gridUsed) {
 					System.out.println(g + " " + point);
 					if(point == g) {

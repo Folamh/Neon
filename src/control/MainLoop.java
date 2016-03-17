@@ -65,7 +65,7 @@ public class MainLoop extends PApplet{
 		
 		gameLoop.update(gameState);
 		
-		System.out.println(gameState);
+		//System.out.println(gameState);
 		
 		//Checking if the player paused the game
 		if(gameLoop.getGameState() == 5 || gameLoop.getGameState() == 7) {

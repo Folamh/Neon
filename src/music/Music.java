@@ -91,12 +91,12 @@ public class Music {
 	public void doShit(int gameState) {//Does  all the functions needed for music to play
 		if(gameState != 0){
 			if (!songs.get(curSong).isPlaying()) {// If the song ends it will play another
-				System.out.println("Working?");
+				//System.out.println("Working?");
 				changeSong(gameState);
 			}
 			else{
 				if (gameState != prevGameState) {
-					System.out.println("Working?");
+					//System.out.println("Working?");
 					prevGameState = gameState;
 					changeSong(gameState);
 				}
