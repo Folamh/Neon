@@ -111,7 +111,7 @@ public class Path {
 		return path.get(0).ppLoc;
 	}
 		
-	//Displaying the path
+	//Displaying the path (for testing purposes)
 	public void display() {
 		for(PathPoint pp: path) {
 			p.pushMatrix();
