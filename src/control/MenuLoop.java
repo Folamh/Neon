@@ -57,24 +57,24 @@ public class MenuLoop {
 		
 		//Main menu
 		mainMenu.add(new Button(p, 4, p.width/2, 275, 200, 100, playImage));
-		mainMenu.add(new Button(p, 0, p.width/2, 100, titleImage));
+		mainMenu.add(new TextArea(p, p.width/2, 100, titleImage));
 		mainMenu.add(new Button(p, 3, p.width/2, 425, 200, 100, creditsImage));
 		mainMenu.add(new Button(p, 6, p.width/2, 575, 200, 100, exitImage));
 		
 		//Pause menu
-		pauseMenu.add(new Button(p, 0, p.width/2, 100, 200, 100, settingImage));
+		pauseMenu.add(new TextArea(p, p.width/2, 100, 200, 100, settingImage));
 		pauseMenu.add(new Button(p, 4, p.width/2, p.height-100, 200, 100, backImage));
 		
 		//Pause menu
-		endScreen.add(new Button(p, 0, p.width/2, p.height/2, p.width, p.height, blanc));
+		endScreen.add(new TextArea(p, p.width/2, p.height/2, p.width, p.height, blanc));
 		endScreen.add(new Button(p, 1, p.width/2, p.height-100, 200, 100, backImage));
 		
 		//settings menu
-		settingsMenu.add(new Button(p, 0, p.width/2, 100, settingImage));
+		settingsMenu.add(new TextArea(p, p.width/2, 100, settingImage));
 		settingsMenu.add(new Button(p, 1, p.width/2, p.height-100, 200, 100, backImage));
 		
 		//credits menu
-		creditsMenu.add(new Button(p, 0, p.width/2, p.height/2, 700, 700, credits));
+		creditsMenu.add(new TextArea(p, p.width/2, p.height/2, 700, 700, credits));
 		creditsMenu.add(new Button(p, 1, p.width/2, p.height-50, 100, 50, backImage));
 	}
 	
@@ -225,6 +225,7 @@ public class MenuLoop {
 			
 			//Main menu
 			case 1:{
+				//Going through menu objects in the mainMenu
 				for(MenuObject o: mainMenu) {
 					o.render();
 				}

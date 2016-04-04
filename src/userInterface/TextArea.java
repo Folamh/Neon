@@ -1,7 +1,6 @@
 package userInterface;
 
-import processing.core.PApplet;
-import processing.core.PImage;
+import processing.core.*;
 
 public class TextArea extends MenuObject{
 	
@@ -76,9 +75,9 @@ public class TextArea extends MenuObject{
 		return text;
 	}
 	
-	//Updating the button
+	//Updating the text area
 	public void update(){
-		mouseListener();
+		
 	}
 	
 	//Rendering the button
