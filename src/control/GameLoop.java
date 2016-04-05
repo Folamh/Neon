@@ -20,7 +20,7 @@ public class GameLoop {
 	int money;
 	int health;
 	PVector off;
-	newCamera camera;
+	Camera camera;
 	Minim minim;
 	AudioPlayer place;
 	
@@ -88,7 +88,7 @@ public class GameLoop {
 		
 		
 		
-		camera = new newCamera(p);
+		camera = new Camera(p);
 		camera.setPushBorder(50);
 		camera.setBoundX(true);
 		camera.setBoundY(true);
@@ -147,7 +147,7 @@ public class GameLoop {
 					{
 						
 						Button b = gameMenu.get(j);
-						if((b).getValue() == 4)
+						if(b.getValue() == 4)
 						{
 							placingTower = true;
 						}
@@ -157,10 +157,7 @@ public class GameLoop {
 			}
 			spawnEnemies();
 			if(placingTower){
-				if(money < 200){
-					
-				}
-				else{
+				if(money >= 200){
 					placeTower();
 					playPlace();
 				}

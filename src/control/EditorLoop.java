@@ -19,13 +19,17 @@ public class EditorLoop extends PApplet{
 		fullScreen();
 	}
 	
-	
+	//Offset for the camera
 	PVector off;
+	//Map object
 	Map m;
+	//Camera object
 	Camera cam;
+	//String to hold path to map file
 	String mapName;
+	//Array List holding paths in the map
 	ArrayList<Path> mapPaths;
-	
+	//Image objects for the background and building
 	PImage background,building;
 	
 	//Called once

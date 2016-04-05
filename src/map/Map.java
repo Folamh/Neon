@@ -6,39 +6,47 @@ import processing.core.*;
 
 public class Map {
 	
+	//PApplet for drawing on screen and stuff
 	PApplet p;
+	
 	//String for the map name
 	String mapName;
+	
+	//Strings to hold the background and building file
+	String backgroundFile;
+	String buildingFile;
+	
+	//Path grid width, height, xoffset, yoffset 
+	int pWidth, pHeight, pXOff, pYOff
+	
+	//Turret grid width, height, xoffset, yoffset 
+	int tWidth, tHeight, tXOff, tYOff
+	
 	//Array to hold the mapPaths
 	ArrayList<Path> mapPaths;
 	
-	//Spacing between the path points
-	int vertSpace, horiSpace;
 	
-	//The width and height of the map
-	int mapWidth, mapHeight;
 	
+	
+	//Constructor
 	public Map(PApplet p) {
 		//Initializing mapPath array list
 		mapPaths = new ArrayList<Path>();
 		this.p = p;
 		
-		//Adding for paths to the array list(i = greatest number of paths per map)
-		for(int i = 0; i < 4; i++) {
+		//Max number of paths
+		int paths = 4;
+		
+		//Adding for paths to the array list(paths = greatest number of paths per map)
+		for(int i = 0; i < paths; i++) {
 			mapPaths.add(new Path(p));
 		}
 	}
 	
 	public void loadMap(String mapFile) {
 		
-		//String to hold the background file
-		String backgroundFile;
-		
 		//List to hold all lines of the file
 		ArrayList<String> lines = new ArrayList<String>();
-		
-		//Tile number
-		int tileNum = 0;
 		
 		//Trying to read in the file
 		try {
@@ -55,54 +63,59 @@ public class Map {
 					lines.add(line);
 				}
 				
-				//Getting the map width and height
-				String[] dim = lines.get(0).split(",");
+				//Getting the background and building paths
+				backgroundFile = lines.get(0);
+				buildingFile = lines.get(1);
 				
-				mapWidth = Integer.parseInt(dim[0]);
-				mapHeight = Integer.parseInt(dim[1]);
+				//Getting the path grid details
+				String gridDetails[] = lines.get(3).split(",");
 				
-				//Getting the spacing of path points for the map
-				String[] temp = lines.get(1).split("\\|");
+				pWidth = Integer.parseInt(gridDetails[0]);
+				pHeight = Integer.parseInt(gridDetails[0]);
+				pXOff = Integer.parseInt(gridDetails[0]);
+				pYOff = Integer.parseInt(gridDetails[0]);
 				
-				vertSpace = mapHeight/lines.size();
-				horiSpace = mapWidth/temp.length;
+				//Getting the turret grid details
+				gridDetails = lines.get(4).split(","); 
 				
-				//Going through each line of the file(first line ignored, holds background file name)
-				for(int i = 1; i < lines.size(); i++) {
-					//String array to hold each set of tile data in each line
-					String[] tileDataSet = lines.get(i).split("\\|");
+				tWidth = Integer.parseInt(gridDetails[0]);
+				tHeight = Integer.parseInt(gridDetails[0]);
+				tXOff = Integer.parseInt(gridDetails[0]);
+				tYOff = Integer.parseInt(gridDetails[0]);
+				
+				//Getting all the path points
+				for(int i = 5; i < lines.size(); i++) {
+					//Getting next row of path points
+					String row[] = lines.get(i).split("|");
 					
-					//Going through each set of tile data
-					for(int j = 0; j < tileDataSet.length; j++) {
+					//Going through each element in the row
+					for(int r = 0; r < row.length; r++) {
 						
-						//Number of cols in the map
-						int n = tileDataSet.length;
+						//Splitting the row up into its columns
+						String col[] = row[r].split(",");
 						
-						//Separating the individual bits of data for each tile
-						String[] tileData = tileDataSet[j].split(",");
-						
-						//Getting the x/y of the tile/path point
-						//TODO make it so you don't have to manually enter tile/half tile sizes
-						int x = (((tileNum%n))*horiSpace) + (horiSpace/2) + ((p.width/2) - (mapWidth/2));// + horiSpace/2; 
-						int y = (((tileNum/n))*vertSpace) + (vertSpace/2) + (p.height - mapHeight);
-						
-						//Getting the path points
-						for(int k = 0; k < tileData.length; k++) {
-							if(tileData[k] != "") {
-								int num = Integer.parseInt(tileData[k]);
-								mapPaths.get(k).addPoint(num, x, y);
+						for(int c = 0; c < col.length; c++) {
+							
+							//Adding path points
+							if(col[c] != "") {
+								
+								//Adding path points
+								//TODO: Make it so path points are read in
 							}
 						}
-						tileNum++;
 					}
 				}
+			} 
 			
-			} finally {
+			//Stuff done after map is loaded
+			finally {
 				
+				//Sorting all of the paths
 				for(Path path: mapPaths) {
 					path.sortPath();
 				}
 				
+				//Closing file
 				reader.close();
 			}
 			
