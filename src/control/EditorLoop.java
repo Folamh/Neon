@@ -22,7 +22,7 @@ public class EditorLoop extends PApplet{
 	
 	PVector off;
 	Map m;
-	Camera cam;
+	Camera cam;k
 	String mapName;
 	ArrayList<Path> mapPaths;
 	

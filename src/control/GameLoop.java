@@ -54,12 +54,15 @@ public class GameLoop {
 		//Initializing the path lists
 		path1 = new Path(p);
 		path2 = new Path(p);
+
+		
 		
 		gameEnemies = new ArrayList<Enemy>();
 		towers = new ArrayList<Tower>();
 		
 		background = p.loadImage("Resources\\Images\\Backgrounds\\Background\\0.png");
 		building = p.loadImage("Resources\\Images\\Backgrounds\\Building\\0.png");
+		grid = new Grid(p, building, 250);//TODO Mess with this placement
 		
 		spawnRate = 40;
 		gridUsed = new ArrayList<PVector>();
@@ -71,6 +74,7 @@ public class GameLoop {
 		
 		//Pause Menu Button Image
 		PImage bImage = p.loadImage("resources/images/menu/button/0.png");
+		
 		//Turret Button Image
 		PImage tImage = p.loadImage("resources/images/menu/button/buy.png");
 		gameMenu = new ArrayList<Button>();
@@ -95,7 +99,6 @@ public class GameLoop {
 		camera.setBoundXDim(-building.width/8,building.width/8);
 		camera.setBoundYDim(-((building.height/2)-(p.height/2)),building.height/4);
 		off = new PVector(0,0);
-		grid = new Grid(p, building, 250);
 	}
 	
 	//Play placing turret noise
