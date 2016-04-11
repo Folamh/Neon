@@ -17,16 +17,13 @@ public class Map {
 	String buildingFile;
 	
 	//Path grid width, height, xoffset, yoffset 
-	int pWidth, pHeight, pXOff, pYOff
+	int pCols, pRows, pX, pY;
 	
 	//Turret grid width, height, xoffset, yoffset 
-	int tWidth, tHeight, tXOff, tYOff
+	int tCols, tRows, tX, tY;
 	
 	//Array to hold the mapPaths
 	ArrayList<Path> mapPaths;
-	
-	
-	
 	
 	//Constructor
 	public Map(PApplet p) {
@@ -70,18 +67,23 @@ public class Map {
 				//Getting the path grid details
 				String gridDetails[] = lines.get(3).split(",");
 				
-				pWidth = Integer.parseInt(gridDetails[0]);
-				pHeight = Integer.parseInt(gridDetails[0]);
-				pXOff = Integer.parseInt(gridDetails[0]);
-				pYOff = Integer.parseInt(gridDetails[0]);
+				tCols = Integer.parseInt(gridDetails[0]);
+				tRows = Integer.parseInt(gridDetails[1]);
+				tX = Integer.parseInt(gridDetails[2]);
+				tY = Integer.parseInt(gridDetails[3]);
 				
 				//Getting the turret grid details
 				gridDetails = lines.get(4).split(","); 
 				
-				tWidth = Integer.parseInt(gridDetails[0]);
-				tHeight = Integer.parseInt(gridDetails[0]);
-				tXOff = Integer.parseInt(gridDetails[0]);
-				tYOff = Integer.parseInt(gridDetails[0]);
+				pCols = Integer.parseInt(gridDetails[0]);
+				pRows = Integer.parseInt(gridDetails[1]);
+				pX = Integer.parseInt(gridDetails[2]);
+				pY = Integer.parseInt(gridDetails[3]);
+				
+				//Current slot for the path points
+				int ppNum = 0;
+				int ppXSlot = 0;
+				int ppYSlot = 0;
 				
 				//Getting all the path points
 				for(int i = 5; i < lines.size(); i++) {
@@ -92,7 +94,11 @@ public class Map {
 					for(int r = 0; r < row.length; r++) {
 						
 						//Splitting the row up into its columns
-						String col[] = row[r].split(",");
+						String col[] = row[r].split(",");	
+						
+						//Getting the current position for the path point
+						ppXSlot = ((ppNum%pCols)*pX)+(pX/2);
+						ppYSlot = ((ppNum/pCols)*pY)+(pY/2);
 						
 						for(int c = 0; c < col.length; c++) {
 							
@@ -100,9 +106,12 @@ public class Map {
 							if(col[c] != "") {
 								
 								//Adding path points
-								//TODO: Make it so path points are read in
+								mapPaths.get(c).addPoint(Integer.parseInt(col[c]),ppXSlot,ppYSlot);
 							}
 						}
+						
+						//Incrementing the path point number
+						ppNum++;
 					}
 				}
 			} 
