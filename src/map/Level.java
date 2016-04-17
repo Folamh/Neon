@@ -1,7 +1,7 @@
 package map;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,20 +12,21 @@ public class Level {
 	PApplet p;
 	
 	//File to be read from
-	String file;
+	File file;
 	//Wave spawn rate
 	int waveRate;
 	int spawnRate;
 	
 	public ArrayList<Wave> wave;
 	
-	Level(String file){
+	Level(File file) throws IOException{
 		this.file = file;
 		
 		waveRate = 30;
 		spawnRate = 5;
 		
 		wave = new ArrayList<Wave>();
+		makeWaves();
 	}
 	
 	void makeWaves() throws IOException{

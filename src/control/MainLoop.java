@@ -1,6 +1,8 @@
 
 package control;
 
+import java.io.File;
+
 import ddf.minim.Minim;
 import music.Music;
 import processing.core.*;
@@ -29,6 +31,7 @@ public class MainLoop extends PApplet{
 	Minim minim;
 	int gameState;
 	Music music;
+	File[] levelFiles;
 	
 	//Only use this for initializing variables
 	public void setup() {
@@ -51,6 +54,10 @@ public class MainLoop extends PApplet{
 
 		//Initializing menu
 		menuLoop = new MenuLoop(this, minim);
+		
+		//Setup of level files
+		File levelPath = new File("Resources\\Levels");
+		levelFiles = levelPath.listFiles();
 	}
 	
 	public void update(){
