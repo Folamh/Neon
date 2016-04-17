@@ -17,7 +17,7 @@ public class Level {
 	int waveRate;
 	int spawnRate;
 	
-	ArrayList<Waves> Waves;
+	public ArrayList<Wave> wave;
 	
 	Level(String file){
 		this.file = file;
@@ -25,15 +25,19 @@ public class Level {
 		waveRate = 30;
 		spawnRate = 5;
 		
-		Waves = new ArrayList<Waves>();
+		wave = new ArrayList<Wave>();
 	}
 	
 	void makeWaves() throws IOException{
 		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
 		    for(String line; (line = br.readLine()) != null; ) {
-		        // process the line.
-		    	Waves.add(new Waves(line));
+		        // Processes the line
+		    	wave.add(new Wave(line));
 		    }
 		}
+	}
+	
+	public int[] getWave(int curWave, int subWave){
+		return wave.get(curWave).getSubWave(subWave);
 	}
 }

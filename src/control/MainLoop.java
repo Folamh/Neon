@@ -49,9 +49,8 @@ public class MainLoop extends PApplet{
 		minim = new Minim(this);
 		music = new Music(this);
 
-		//Initializing menu and game loops
+		//Initializing menu
 		menuLoop = new MenuLoop(this, minim);
-		gameLoop = new GameLoop(this, minim, gameState);
 	}
 	
 	public void update(){

@@ -2,15 +2,16 @@ package map;
 
 import java.util.ArrayList;
 
-public class Waves {
+public class Wave {
 	String line;
 	
 	ArrayList<int[]> wave;
 	
-	Waves(String line){
+	Wave(String line){
 		this.line = line;
 		
 		wave = new ArrayList<int[]>();
+		divideWave();
 	}
 	
 	void divideWave(){
@@ -23,5 +24,13 @@ public class Waves {
 			}
 			wave.add(creeps);
 		}
+	}
+
+	public int[] getSubWave(int subWave) {
+		return wave.get(subWave);
+	}
+
+	public int getSubWaveSize() {
+		return wave.size();
 	}
 }
