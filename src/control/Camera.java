@@ -2,7 +2,7 @@ package control;
 
 import processing.core.*;
 
-public class newCamera {
+public class Camera {
 
 	//PApplet from the main loop
 	PApplet p;
@@ -38,7 +38,7 @@ public class newCamera {
 	int minX, maxX, minY, maxY;
 	
 	//Initializing the camera
-	public newCamera(PApplet p) {
+	public Camera(PApplet p) {
 		//setting papplet
 		this.p = p;
 		

@@ -25,7 +25,7 @@ public class GameLoop {
 	
 	//Camera controls
 	PVector off;
-	newCamera camera;
+	Camera camera;
 	
 	//Music player
 	Minim minim;
@@ -98,7 +98,7 @@ public class GameLoop {
 		s = new Animation(p, "Resources/Images/Backgrounds/Server", 10);
 		
 		//Camera variables 
-		camera = new newCamera(p);
+		camera = new Camera(p);
 		camera.setPushBorder(50);
 		camera.setBoundX(true);
 		camera.setBoundY(true);
