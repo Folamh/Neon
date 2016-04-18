@@ -144,8 +144,31 @@ public class Map {
 		
 	}
 	
-	//Only used for editing purposes
-	public void render(int path) {
-		mapPaths.get(path).display();
+	//Function for returning the background path
+	public String getBackground() {
+		return backgroundFile;
+	}
+	
+	//Function for returning the building file path
+	public String getBuilding() {
+		return buildingFile;
+	}
+	
+	//Function for drawing the grid for towers
+	public void drawTowerGrid() {
+		//Drawing the vertical lines
+		for(int i = 0; i <= tCols; i++) {
+			p.line((tX*i)+(tX/2), tY/2, (tX*i)+(tX/2), (tY*tCols)+(tY/2));
+		}
+		
+		//Drawing the horizontal lines
+		for(int i = 0; i <= tCols; i++) {
+			p.line(tX/2, (tY*i)+(tY/2), (tX*tCols)+(tX/2), (tY*i)+(tY/2));
+		}
+	}
+	
+	//Function for drawing pathpoint grid
+	public void drawPathGrid() {
+		
 	}
 }

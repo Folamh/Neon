@@ -1,6 +1,7 @@
 package control;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import map.*;
 import map.Path.PathPoint;
@@ -38,17 +39,19 @@ public class EditorLoop extends PApplet{
 		//Setting the frame rate
 		frameRate(60);
 		
-		background = loadImage("resources\\images\\backgrounds\\0.png");
-		building = loadImage("resources\\images\\backgrounds\\1.png");
-		
-		//Setting the path for the map file
-		mapName = "resources\\maps\\map1.txt";
+		//Getting the map path from the user
+		mapName = getMap();
 		
 		//Initializing the map
 		m = new Map(this);
 		
 		//Loading in a map
 		m.loadMap(mapName);
+		
+		//Loading the images
+		background = loadImage(m.getBackground());
+		building = loadImage(m.getBuilding());
+		
 		//Getting the loaded in paths from the map class
 		mapPaths = m.getPaths();
 		
@@ -61,6 +64,7 @@ public class EditorLoop extends PApplet{
 		camera.setBoundYDim(-((building.height/2)-(this.height/2)),building.height/4);
 		off = new PVector(0,0);
 		
+		//Telling image coordinates to be at the center of the images
 		imageMode(CENTER);
 	}
 	
@@ -77,8 +81,45 @@ public class EditorLoop extends PApplet{
 		pushMatrix();
 		translate(-off.x,-off.y);
 		image(building,width/2,height-(building.height/2));
-		p.display();
 		popMatrix();
+		
+	}
+	
+	//Function to get the map name
+	public String getMap() {
+		//String to hold the map name
+		String map;
+		//Scanner to get input from the console
+		Scanner input = new Scanner(System.in);
+		
+		//Prompting for map name in console
+		System.out.println("Please enter the name of the map you would like to load: ");
+		//Getting the map name from the console
+		map = input.nextLine();
+		//Returning the map name
+		return map;
+	}
+	
+	//function for listening to key strokes
+	public void keyListener() {
+		//Checking if a key is pressed
+		if(keyPressed) {
+			//Checking for special key
+			if(key == CODED) {
+				if(keyCode ==) {
+					
+				}
+			}
+		}
+	}
+	
+	//Updating function
+	public void update() {
+		
+	}
+	
+	//Rendering function
+	public void render() {
 		
 	}
 }
