@@ -32,6 +32,7 @@ public class MainLoop extends PApplet{
 	int gameState;
 	Music music;
 	File[] levelFiles;
+	private boolean playingLevel;
 	
 	//Only use this for initializing variables
 	public void setup() {
@@ -69,14 +70,19 @@ public class MainLoop extends PApplet{
 		//Updating the game state form the menuLoop
 		gameState = menuLoop.getGameState();
 		
-		gameLoop.update(gameState);
+		//Return level
+		if(playingLevel){
+			gameLoop.update(gameState);
+			
+			if(gameLoop.getGameState() == 5 || gameLoop.getGameState() == 7) {
+				gameState = gameLoop.getGameState();
+			}
+		}
 		
 		//System.out.println(gameState);
 		
 		//Checking if the player paused the game
-		if(gameLoop.getGameState() == 5 || gameLoop.getGameState() == 7) {
-			gameState = gameLoop.getGameState();
-		}
+		
 		
 		//Music player
 		music.doShit(gameState);
@@ -85,7 +91,9 @@ public class MainLoop extends PApplet{
 	public void render(){
 		//Rendering the background
 		image(background,width/2,height/2);
-		gameLoop.render();
+		if(playingLevel){
+			gameLoop.render();
+		}
 		menuLoop.render();
 		
 	}
