@@ -24,12 +24,13 @@ public class EditorLoop extends PApplet{
 	//Map object
 	Map m;
 	//Camera object
-	Camera cam;
+	Camera camera;
 	//String to hold path to map file
 	String mapName;
 	//Array List holding paths in the map
 	ArrayList<Path> mapPaths;
 	//Image objects for the background and building
+	//Image variables to hold background and building
 	PImage background,building;
 	
 	//Called once
@@ -43,9 +44,6 @@ public class EditorLoop extends PApplet{
 		//Setting the path for the map file
 		mapName = "resources\\maps\\map1.txt";
 		
-		//Initializing the camera
-		cam = new Camera(this);
-		
 		//Initializing the map
 		m = new Map(this);
 		
@@ -54,7 +52,13 @@ public class EditorLoop extends PApplet{
 		//Getting the loaded in paths from the map class
 		mapPaths = m.getPaths();
 		
-		//Initializing the offset vector
+		//Camera variables 
+		camera = new Camera(this);
+		camera.setPushBorder(50);
+		camera.setBoundX(true);
+		camera.setBoundY(true);
+		camera.setBoundXDim(-building.width/8,building.width/8);
+		camera.setBoundYDim(-((building.height/2)-(this.height/2)),building.height/4);
 		off = new PVector(0,0);
 		
 		imageMode(CENTER);
@@ -64,8 +68,9 @@ public class EditorLoop extends PApplet{
 	public void draw() {
 		image(background,width/2,height/2);
 		
-		cam.update(off,1);
-		off = cam.getOffSet();
+		camera.setCurOffSet(off);
+		camera.calcOffSet();
+		off = camera.getOffSet();
 		
 		Path p = mapPaths.get(0);
 		
