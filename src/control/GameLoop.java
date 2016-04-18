@@ -90,6 +90,8 @@ public class GameLoop {
 		
 		camera = new Camera(p);
 		camera.setPushBorder(50);
+		camera.setPush(false);
+		camera.setDrag(true);
 		camera.setBoundX(true);
 		camera.setBoundY(true);
 		camera.setBoundXDim(-building.width/8,building.width/8);
