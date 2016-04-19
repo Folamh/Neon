@@ -58,6 +58,9 @@ public class MainLoop extends PApplet{
 		//Initializing menu
 		menuLoop = new MenuLoop(this, minim);
 		
+		//Initializing game
+		gameLoop = new GameLoop(this, minim, gameState);
+		
 		//Setup of level files
 		File levelPath = new File("Resources\\Levels");
 		levelFiles = levelPath.listFiles();
@@ -78,17 +81,18 @@ public class MainLoop extends PApplet{
 		levelFlag = menuLoop.levelFlag;
 		if(levelFlag != 0){
 			Level level = new Level(levelFiles[levelFlag - 1]);
-			gameLoop = new GameLoop(this, minim, gameState, level);
+			gameLoop.setLevel(level);
 			levelFlag = 0;
 			playingLevel = true;
 		}
 		if(playingLevel){
 			gameLoop.update(gameState);
-			
-			if(gameLoop.getGameState() == 5 || gameLoop.getGameState() == 7) {
-				gameState = gameLoop.getGameState();
-			}
 		}
+			
+		if(gameLoop.getGameState() == 5 || gameLoop.getGameState() == 7) {
+			gameState = gameLoop.getGameState();
+		}
+		
 		
 		//System.out.println(gameState);
 		

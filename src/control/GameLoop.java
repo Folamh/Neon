@@ -55,12 +55,11 @@ public class GameLoop {
 	int subWave;
 	boolean levelComplete;
 	
-	GameLoop(PApplet p, Minim minim, int gameState, Level level)
+	GameLoop(PApplet p, Minim minim, int gameState)
 	{
 		this.p = p;
 		this.minim = minim;
 		this.gameState = gameState;
-		this.level = level;
 		money = 1000;
 		
 		place = this.minim.loadFile("Resources/Audio/PlaceTurret.wav");
@@ -110,6 +109,7 @@ public class GameLoop {
 		//Wave variables
 		curWave = 0;
 		subWave = 0;
+		levelComplete = false;
 	}
 	
 	//Play placing turret noise
@@ -313,5 +313,9 @@ public class GameLoop {
 	//Returning the current state of the game
 	public int getGameState() {
 		return gameState;
+	}
+	
+	public void setLevel(Level level){
+		this.level = level;
 	}
 }
