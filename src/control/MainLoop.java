@@ -75,8 +75,9 @@ public class MainLoop extends PApplet{
 		
 		//Return level
 		//TODO set the levelFlag from the menu
+		levelFlag = menuLoop.levelFlag;
 		if(levelFlag != 0){
-			Level level = new Level(levelFiles[levelFlag]);
+			Level level = new Level(levelFiles[levelFlag - 1]);
 			gameLoop = new GameLoop(this, minim, gameState, level);
 			levelFlag = 0;
 			playingLevel = true;

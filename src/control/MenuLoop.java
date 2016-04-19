@@ -24,7 +24,7 @@ public class MenuLoop {
 	ArrayList<MenuObject> endScreen;
 	ArrayList<MenuObject> levelMenu;
 	
-	int levelFlag;
+	public int levelFlag;
 	
 	public MenuLoop(PApplet p, Minim minim) {
 		//Disambiguating variables
@@ -42,6 +42,7 @@ public class MenuLoop {
 		settingsMenu = new ArrayList<MenuObject>();
 		creditsMenu = new ArrayList<MenuObject>();
 		endScreen = new ArrayList<MenuObject>();
+		levelMenu = new ArrayList<MenuObject>();
 		
 		//Loading the image for buttons
 		PImage playImage = p.loadImage("resources/images/menu/button/0.png");
