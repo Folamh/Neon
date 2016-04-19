@@ -82,7 +82,6 @@ public class MainLoop extends PApplet{
 	
 	public void render(){
 		//Rendering the background
-		image(background,width/2,height/2);
 		
 	
 		

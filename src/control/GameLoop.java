@@ -192,7 +192,6 @@ public class GameLoop {
 		
 	public void render(){
 		//Checking of the gameLoop should be rendered
-		p.text("$: " + money , p.width/8, p.height/8);
 		p.pushMatrix();
 		p.translate(-off.x,-off.y);
 		if(gameState == 4 || gameState == 5) {
@@ -214,6 +213,10 @@ public class GameLoop {
 		if(gameState == 4) {
 			for(int i = 0; i < gameMenu.size(); i++){
 				gameMenu.get(i).render();
+				p.fill(255);
+				p.rect(p.width - p.width/8,p.height/8,p.width-p.width/8+50,p.height/8+50);
+				p.textSize(30);
+				p.text("$: " + money , p.width/8, p.height/8);
 			}
 		}
 	}
