@@ -19,14 +19,19 @@ public class Level {
 	
 	public ArrayList<Wave> wave;
 	
-	Level(File file) throws IOException{
+	public Level(File file){
 		this.file = file;
 		
 		waveRate = 30;
 		spawnRate = 5;
 		
 		wave = new ArrayList<Wave>();
-		makeWaves();
+		try {
+			makeWaves();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	void makeWaves() throws IOException{

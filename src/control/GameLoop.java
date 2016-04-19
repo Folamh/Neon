@@ -7,7 +7,6 @@ import ddf.minim.Minim;
 import gameObject.*;
 import map.Grid;
 import map.Level;
-import map.Path;
 import processing.core.*;
 import userInterface.*;
 

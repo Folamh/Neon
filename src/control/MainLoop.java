@@ -4,6 +4,7 @@ package control;
 import java.io.File;
 
 import ddf.minim.Minim;
+import map.Level;
 import music.Music;
 import processing.core.*;
 
@@ -32,7 +33,8 @@ public class MainLoop extends PApplet{
 	int gameState;
 	Music music;
 	File[] levelFiles;
-	private boolean playingLevel;
+	boolean playingLevel;
+	int levelFlag;
 	
 	//Only use this for initializing variables
 	public void setup() {
@@ -59,6 +61,7 @@ public class MainLoop extends PApplet{
 		//Setup of level files
 		File levelPath = new File("Resources\\Levels");
 		levelFiles = levelPath.listFiles();
+		levelFlag = 0;
 	}
 	
 	public void update(){
@@ -71,6 +74,13 @@ public class MainLoop extends PApplet{
 		gameState = menuLoop.getGameState();
 		
 		//Return level
+		//TODO set the levelFlag from the menu
+		if(levelFlag != 0){
+			Level level = new Level(levelFiles[levelFlag]);
+			gameLoop = new GameLoop(this, minim, gameState, level);
+			levelFlag = 0;
+			playingLevel = true;
+		}
 		if(playingLevel){
 			gameLoop.update(gameState);
 			
