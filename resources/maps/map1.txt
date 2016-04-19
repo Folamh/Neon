@@ -1,0 +1,5 @@
+resources\\Images\\Backgrounds\\Background\\0.png
+resources\\Images\\Backgrounds\\Building\\0.png
+1,1,10,10,10,10
+1,1,10,10,10,10
+,,,|

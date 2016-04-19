@@ -24,7 +24,7 @@ public class GameLoop {
 	
 	//Camera controls
 	PVector off;
-	newCamera camera;
+	Camera camera;
 	
 	//Music player
 	Minim minim;
@@ -97,8 +97,10 @@ public class GameLoop {
 		s = new Animation(p, "Resources/Images/Backgrounds/Server", 10);
 		
 		//Camera variables 
-		camera = new newCamera(p);
+		camera = new Camera(p);
 		camera.setPushBorder(50);
+		camera.setPush(false);
+		camera.setDrag(true);
 		camera.setBoundX(true);
 		camera.setBoundY(true);
 		camera.setBoundXDim(-building.width/8,building.width/8);
@@ -147,6 +149,7 @@ public class GameLoop {
 						towers.get(i).calculateLead();
 					}
 				}
+				
 				for(int i = 0; i < gameMenu.size(); i++) {
 					MenuObject o = gameMenu.get(i);
 					
