@@ -17,27 +17,38 @@ public class EditorLoop extends PApplet{
 	
 	//Settings go here
 	public void settings() {
-		fullScreen();
+		//fullScreen();
+		//Setting resolution to 720p
+		size(1280,720, JAVA2D);
 	}
 	
 	//Offset for the camera
 	PVector off;
-	//Map object
-	Map m;
 	//Camera object
 	Camera camera;
+	
+	//Map object
+	Map m;
 	//String to hold path to map file
 	String mapName;
 	//Array List holding paths in the map
 	ArrayList<Path> mapPaths;
-	//Image objects for the background and building
 	//Image variables to hold background and building
 	PImage background,building;
 	
+	//Current thing being edited
+	int curEdit;
+	
+	//bool flag for checking if key was pressed
+	boolean pressed;
+	
 	//Called once
 	public void setup() {
-		//Setting the frame rate
+		//Setting the desired frame rate
 		frameRate(60);
+		
+		//Setting default thing to be editing
+		curEdit = 0;
 		
 		//Getting the map path from the user
 		mapName = getMap();
@@ -55,6 +66,9 @@ public class EditorLoop extends PApplet{
 		//Getting the loaded in paths from the map class
 		mapPaths = m.getPaths();
 		
+		//Setting pressed flag to false
+		pressed = false;
+		
 		//Camera variables 
 		camera = new Camera(this);
 		camera.setPushBorder(50);
@@ -70,19 +84,8 @@ public class EditorLoop extends PApplet{
 	
 	//Called once a loop
 	public void draw() {
-		image(background,width/2,height/2);
-		
-		camera.setCurOffSet(off);
-		camera.calcOffSet();
-		off = camera.getOffSet();
-		
-		Path p = mapPaths.get(0);
-		
-		pushMatrix();
-		translate(-off.x,-off.y);
-		image(building,width/2,height-(building.height/2));
-		popMatrix();
-		
+		update();
+		render();
 	}
 	
 	//Function to get the map name
@@ -95,7 +98,7 @@ public class EditorLoop extends PApplet{
 		//Prompting for map name in console
 		System.out.println("Please enter the name of the map you would like to load: ");
 		//Getting the map name from the console
-		map = input.nextLine();
+		map = "resources/maps/" + input.nextLine();
 		//Returning the map name
 		return map;
 	}
@@ -104,22 +107,154 @@ public class EditorLoop extends PApplet{
 	public void keyListener() {
 		//Checking if a key is pressed
 		if(keyPressed) {
-			//Checking for special key
-			if(key == CODED) {
-				if(keyCode ==) {
+			//Checking if key was pressed last frame
+			if(!pressed) {
+				//Setting key pressed to true
+				pressed = true;
+				
+				//Checking for special key
+				if(key == CODED) {
+					//Checking if the left arrow key is pressed
+					if(keyCode == LEFT) {
+						if(curEdit == 0) {
+							m.setTowerGridCol(m.getTowerGridCol()-1);
+						}else if(curEdit == 1) {
+							m.setPathGridCol(m.getPathGridCol()-1);
+						}
+					}
 					
+					//Checking if the right arrow key is pressed
+					if(keyCode == RIGHT) {
+						if(curEdit == 0) {
+							m.setTowerGridCol(m.getTowerGridCol()+1);
+						}else if(curEdit == 1) {
+							m.setPathGridCol(m.getPathGridCol()+1);
+						}
+					}
+					
+					//Checking of the up arrow key is pressed
+					if(keyCode == UP) {
+						if(curEdit == 0) {
+							m.setTowerGridRow(m.getTowerGridRow()+1);
+						}else if(curEdit == 1) {
+							m.setPathGridRow(m.getPathGridRow()+1);
+						}
+					}
+					
+					//Checking if the down arrow key is pressed
+					if(keyCode == DOWN) {
+						if(curEdit == 0) {
+							m.setTowerGridRow(m.getTowerGridRow()-1);
+						}else if(curEdit == 1) {
+							m.setPathGridRow(m.getPathGridRow()-1);
+						}
+					}
+				}
+				
+		
+			}
+			
+			if(key == 'w') {
+				if(curEdit == 0) {
+					m.setTowerGridGapY(m.getTowerGridGapY()-1);
+				}else if(curEdit == 1) {
+					m.setPathGridGapY(m.getPathGridGapY()-1);
 				}
 			}
+			
+			if(key == 'a') {
+				if(curEdit == 0) {
+					m.setTowerGridGapX(m.getTowerGridGapX()-1);
+				}else if(curEdit == 1) {
+					m.setPathGridGapX(m.getPathGridGapX()-1);
+				}
+			}
+			
+			if(key == 's') {
+				if(curEdit == 0) {
+					m.setTowerGridGapY(m.getTowerGridGapY()+1);
+				}else if(curEdit == 1) {
+					m.setPathGridGapY(m.getPathGridGapY()+1);
+				}
+			}
+			
+			if(key == 'd') {
+				if(curEdit == 0) {
+					m.setTowerGridGapX(m.getTowerGridGapX()+1);
+				}else if(curEdit == 1) {
+					m.setPathGridGapX(m.getPathGridGapX()+1);
+				}
+			}
+			
+			if(key == 'q') {
+				if(curEdit == 0) {
+					m.setTowerGridW(m.getTowerGridW()-1);
+				}else if(curEdit == 1) {
+					m.setPathGridW(m.getPathGridW()-1);
+				}
+			}
+			
+			if(key == 'e') {
+				if(curEdit == 0) {
+					m.setTowerGridW(m.getTowerGridW()+1);
+				}else if(curEdit == 1) {
+					m.setPathGridW(m.getPathGridW()+1);
+				}
+			}
+			
+			if(key == 'r') {
+				if(curEdit == 0) {
+					m.setTowerGridH(m.getTowerGridH()+1);
+				}else if(curEdit == 1) {
+					m.setPathGridH(m.getPathGridH()+1);
+				}
+			}
+			
+			if(key == 'f') {
+				if(curEdit == 0) {
+					m.setTowerGridH(m.getTowerGridH()-1);
+				}else if(curEdit == 1) {
+					m.setPathGridH(m.getPathGridH()-1);
+				}
+			}
+			
+			if(key == '1') {
+				curEdit = 0;
+			}
+			
+			if(key == '2') {
+				curEdit = 1;
+			}
+		}
+			
+		
+		if(!keyPressed) {
+			pressed = false;
 		}
 	}
 	
 	//Updating function
 	public void update() {
+		keyListener();
+		camera.setCurOffSet(off);
+		camera.calcOffSet();
+		off = camera.getOffSet();
+		
+		Path p = mapPaths.get(0);
 		
 	}
 	
 	//Rendering function
 	public void render() {
-		
+		image(background,width/2,height/2);
+		pushMatrix();
+		translate(off.x,off.y);
+		image(building,width/2,height/2);
+		if(curEdit == 0) {
+			m.drawTowerGrid();
+		} else if(curEdit == 1) {
+			m.drawPathGrid();
+		}
+		popMatrix();
 	}
 }

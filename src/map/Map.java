@@ -16,11 +16,11 @@ public class Map {
 	String backgroundFile;
 	String buildingFile;
 	
-	//Path grid width, height, xoffset, yoffset 
-	int pCols, pRows, pX, pY;
+	//Path grid width, height, xStartLoc, yStartLoc, gridBoxWidth, gridBoxHeight 
+	int pCols, pRows, pX, pY, pW, pH;
 	
-	//Turret grid width, height, xoffset, yoffset 
-	int tCols, tRows, tX, tY;
+	//Turret grid width, height, xStartLoc, yStartLoc, gridBoxWidth, gridBoxHeight 
+	int tCols, tRows, tX, tY, tW, tH;
 	
 	//Array to hold the mapPaths
 	ArrayList<Path> mapPaths;
@@ -65,20 +65,24 @@ public class Map {
 				buildingFile = lines.get(1);
 				
 				//Getting the path grid details
-				String gridDetails[] = lines.get(3).split(",");
+				String gridDetails[] = lines.get(2).split(",");
 				
 				tCols = Integer.parseInt(gridDetails[0]);
 				tRows = Integer.parseInt(gridDetails[1]);
 				tX = Integer.parseInt(gridDetails[2]);
 				tY = Integer.parseInt(gridDetails[3]);
+				tW = Integer.parseInt(gridDetails[4]);
+				tH = Integer.parseInt(gridDetails[5]);
 				
 				//Getting the turret grid details
-				gridDetails = lines.get(4).split(","); 
+				gridDetails = lines.get(3).split(","); 
 				
 				pCols = Integer.parseInt(gridDetails[0]);
 				pRows = Integer.parseInt(gridDetails[1]);
 				pX = Integer.parseInt(gridDetails[2]);
 				pY = Integer.parseInt(gridDetails[3]);
+				pW = Integer.parseInt(gridDetails[4]);
+				pH = Integer.parseInt(gridDetails[5]);
 				
 				//Current slot for the path points
 				int ppNum = 0;
@@ -154,21 +158,157 @@ public class Map {
 		return buildingFile;
 	}
 	
+	//Function for getting tower grid columns
+	public int getTowerGridCol() {
+		return tCols;
+	}
+	
+	//Function for getting the tower grid rows
+	public int getTowerGridRow() {
+		return tRows;
+	}
+	
+	//Function for getting the path grid columns
+	public int getPathGridCol() {
+		return pCols;
+	}
+	
+	//Function for getting the path grid rows
+	public int getPathGridRow() {
+		return pRows;
+	}
+	
+	//Function for setting tower grid columns
+	public void setTowerGridCol(int x) {
+		tCols = x;
+		if(tCols < 1) tCols = 1;
+	}
+	
+	//Function for setting the tower grid rows
+	public void setTowerGridRow(int x) {
+		tRows = x;
+		if(tRows < 1) tRows = 1;
+	}
+	
+	//Function for setting the path grid columns
+	public void setPathGridCol(int x) {
+		pCols = x;
+		if(pCols < 1) pCols = 1;
+	}
+	
+	//Function for setting the path grid rows
+	public void setPathGridRow(int x) {
+		pRows = x;
+		if(pRows < 1) pRows = 1;
+	}
+	
+	//Function for getting the x position of the tower grid
+	public int getTowerGridGapX() {
+		return tX;
+	}
+	
+	//Function for getting the y position of the tower grid
+	public int getTowerGridGapY() {
+		return tY;
+	}
+	
+	//Function for getting the x position of the path grid
+	public int getPathGridGapX() {
+		return pX;
+	}
+	
+	//Function for getting the y position of the path grid
+	public int getPathGridGapY() {
+		return pY;
+	}
+	
+	//Function for setting the x position of the tower grid 
+	public void setTowerGridGapX(int x) {
+		tX = x;
+	}
+	
+	//Function for setting the y position of the tower grid
+	public void setTowerGridGapY(int y) {
+		tY = y;
+	}
+	
+	//Function for setting the x position of the path grid
+	public void setPathGridGapX(int x) {
+		pX = x;
+	}
+	
+	//Function for setting the y position of the path grid
+	public void setPathGridGapY(int y) {
+		pY = y;
+	}
+	
+	//Function for getting the width of the tower grid
+	public int getTowerGridW() {
+		return tW;
+	}
+	
+	//Function for getting the height of the tower grid
+	public int getTowerGridH() {
+		return tH;
+	}
+	
+	//Function for getting the width of the path grid
+	public int getPathGridW() {
+		return pW;
+	}
+	
+	//Function for getting the height of the path grid
+	public int getPathGridH() {
+		return pH;
+	}
+	
+	//Setting the width of the tower grid
+	public void setTowerGridW(int x) {
+		tW = x;
+		if(tW < 1) tW = 1;
+	}
+	
+	//Setting the height of the tower grid
+	public void setTowerGridH(int x) {
+		tH = x;
+		if(tH < 1) tH = 1;
+	}
+	
+	//Setting the width of the path grid
+	public void setPathGridW(int x) {
+		pW = x;
+		if(pW < 1) pW = 1;
+	}
+	
+	//Setting the height of the path grid
+	public void setPathGridH(int x) {
+		pH = x;
+		if(pH < 1) pH = 1;
+	}
+	
 	//Function for drawing the grid for towers
 	public void drawTowerGrid() {
 		//Drawing the vertical lines
 		for(int i = 0; i <= tCols; i++) {
-			p.line((tX*i)+(tX/2), tY/2, (tX*i)+(tX/2), (tY*tCols)+(tY/2));
+			p.line((tW*i)+tX, tY, (tW*i)+tX, (tH*tRows)+tY);
 		}
 		
 		//Drawing the horizontal lines
-		for(int i = 0; i <= tCols; i++) {
-			p.line(tX/2, (tY*i)+(tY/2), (tX*tCols)+(tX/2), (tY*i)+(tY/2));
+		for(int i = 0; i <= tRows; i++) {
+			p.line(tX, (tH*i)+tY, (tW*tCols)+tX, (tH*i)+tY);
 		}
 	}
 	
 	//Function for drawing pathpoint grid
 	public void drawPathGrid() {
+		//Drawing the vertical lines
+		for(int i = 0; i <= pCols; i++) {
+			p.line((pW*i)+pX, pY, (pW*i)+pX, (pH*pRows)+pY);
+		}
 		
+		//Drawing the horizontal lines
+		for(int i = 0; i <= pRows; i++) {
+			p.line(pX, (pH*i)+pY, (pW*pCols)+pX, (pH*i)+pY);
+		}
 	}
 }
