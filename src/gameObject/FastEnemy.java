@@ -6,7 +6,7 @@ import processing.core.PApplet;
 
 public class FastEnemy extends Enemy{
 	
-	FastEnemy(PApplet p, Minim minim, int x, int y, Path path){
+	public FastEnemy(PApplet p, Minim minim, int x, int y, Path path){
 		super(p, minim, x, y, path);
 	}
 	

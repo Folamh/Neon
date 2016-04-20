@@ -22,6 +22,9 @@ public class MenuLoop {
 	ArrayList<MenuObject> settingsMenu;
 	ArrayList<MenuObject> creditsMenu;
 	ArrayList<MenuObject> endScreen;
+	ArrayList<MenuObject> levelMenu;
+	
+	public int levelFlag;
 	
 	public MenuLoop(PApplet p, Minim minim) {
 		//Disambiguating variables
@@ -39,6 +42,7 @@ public class MenuLoop {
 		settingsMenu = new ArrayList<MenuObject>();
 		creditsMenu = new ArrayList<MenuObject>();
 		endScreen = new ArrayList<MenuObject>();
+		levelMenu = new ArrayList<MenuObject>();
 		
 		//Loading the image for buttons
 		PImage playImage = p.loadImage("resources/images/menu/button/0.png");
@@ -56,7 +60,7 @@ public class MenuLoop {
 		startMenu = new Animation(p,"resources/images/menu/start", 10);
 		
 		//Main menu
-		mainMenu.add(new Button(p, 4, p.width/2, 275, 200, 100, playImage));
+		mainMenu.add(new Button(p, 8, p.width/2, 275, 200, 100, playImage));
 		mainMenu.add(new TextArea(p, p.width/2, 100, titleImage));
 		mainMenu.add(new Button(p, 3, p.width/2, 425, 200, 100, creditsImage));
 		mainMenu.add(new Button(p, 6, p.width/2, 575, 200, 100, exitImage));
@@ -76,6 +80,12 @@ public class MenuLoop {
 		//credits menu
 		creditsMenu.add(new TextArea(p, p.width/2, p.height/2, 700, 700, credits));
 		creditsMenu.add(new Button(p, 1, p.width/2, p.height-50, 100, 50, backImage));
+		
+		//level menu
+		levelFlag = 0;
+		levelMenu.add(new Button(p, 1, p.width/2, p.height-50, 100, 50, backImage));
+		levelMenu.add(new Button(p, 2, p.width/2, 50, 100, 50, backImage));
+		//TODO Add more buttons
 	}
 	
 	//Play SELECT.wav
@@ -201,6 +211,28 @@ public class MenuLoop {
 				break;
 			}
 			
+			//level selection menu
+			case 8: {//TODO Make this work
+				for(int i = 0; i < levelMenu.size(); i++) {
+					MenuObject o = levelMenu.get(i);
+					
+					o.update();
+					
+					if(o.getClicked()) {
+						if(((Button)o).getValue() == 1) { 
+							this.gameState = ((Button)o).getValue();
+							playBack();
+						}
+						else{
+							levelFlag =((Button)o).getValue() - 1;
+							this.gameState = 4;
+							playSelect();
+						}
+					}
+				}
+				break;
+			}
+			
 			default: {
 				
 				break;
@@ -276,6 +308,16 @@ public class MenuLoop {
 			case 7: {
 				for(int i = 0; i < endScreen.size(); i++) {
 					MenuObject o = endScreen.get(i);
+					
+					o.render();
+				}
+				break;
+			}
+			
+			//level menu
+			case 8: {
+				for(int i = 0; i < levelMenu.size(); i++) {
+					MenuObject o = levelMenu.get(i);
 					
 					o.render();
 				}

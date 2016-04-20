@@ -4,6 +4,7 @@ package control;
 import java.io.File;
 
 import ddf.minim.Minim;
+import map.Level;
 import music.Music;
 import processing.core.*;
 
@@ -32,6 +33,8 @@ public class MainLoop extends PApplet{
 	int gameState;
 	Music music;
 	File[] levelFiles;
+	boolean playingLevel;
+	int levelFlag;
 	
 	//Only use this for initializing variables
 	public void setup() {
@@ -55,9 +58,13 @@ public class MainLoop extends PApplet{
 		//Initializing menu
 		menuLoop = new MenuLoop(this, minim);
 		
+		//Initializing game
+		gameLoop = new GameLoop(this, minim, gameState);
+		
 		//Setup of level files
 		File levelPath = new File("Resources\\Levels");
 		levelFiles = levelPath.listFiles();
+		levelFlag = 0;
 	}
 	
 	public void update(){
@@ -69,14 +76,28 @@ public class MainLoop extends PApplet{
 		//Updating the game state form the menuLoop
 		gameState = menuLoop.getGameState();
 		
-		gameLoop.update(gameState);
+		//Return level
+		//TODO set the levelFlag from the menu
+		levelFlag = menuLoop.levelFlag;
+		if(levelFlag != 0){
+			Level level = new Level(levelFiles[levelFlag - 1]);
+			gameLoop.setLevel(level);
+			levelFlag = 0;
+			playingLevel = true;
+		}
+		if(playingLevel){
+			gameLoop.update(gameState);
+		}
+			
+		if(gameLoop.getGameState() == 5 || gameLoop.getGameState() == 7) {
+			gameState = gameLoop.getGameState();
+		}
+		
 		
 		//System.out.println(gameState);
 		
 		//Checking if the player paused the game
-		if(gameLoop.getGameState() == 5 || gameLoop.getGameState() == 7) {
-			gameState = gameLoop.getGameState();
-		}
+		
 		
 		//Music player
 		music.doShit(gameState);
@@ -85,7 +106,9 @@ public class MainLoop extends PApplet{
 	public void render(){
 		//Rendering the background
 		image(background,width/2,height/2);
-		gameLoop.render();
+		if(playingLevel){
+			gameLoop.render();
+		}
 		menuLoop.render();
 		
 	}

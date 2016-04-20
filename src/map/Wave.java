@@ -15,12 +15,17 @@ public class Wave {
 	}
 	
 	void divideWave(){
-		String[] split = line.split("|");// Divides up the lines for each sub wave.
+		String[] split = line.split("\\|");// Divides up the lines for each sub wave.
 		for(String a: split){
 			String[] temp = a.split(",");// Splits up the spawn number in the sub wave.
 			int[] creeps = new int[3];
-			for(int i = 0; i < creeps.length; i++){
-				creeps[i] = Integer.parseInt(temp[i]);// Changes the String to an integer.
+			for(int i = 0; i < temp.length; i++){
+				if(temp[i] != ""){
+					creeps[i] = Integer.parseInt(temp[i]);// Changes the String to an integer.
+				}
+				else{
+					creeps[i] = 0;
+				}
 			}
 			subWave.add(creeps);
 		}

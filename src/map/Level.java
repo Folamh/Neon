@@ -13,25 +13,25 @@ public class Level {
 	
 	//File to be read from
 	File file;
-	//Wave spawn rate
-	int waveRate;
-	int spawnRate;
 	
 	public ArrayList<Wave> wave;
 	
-	Level(File file) throws IOException{
+	public Level(File file){
 		this.file = file;
 		
-		waveRate = 30;
-		spawnRate = 5;
-		
 		wave = new ArrayList<Wave>();
-		makeWaves();
+		try {
+			makeWaves();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	void makeWaves() throws IOException{
 		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
-		    for(String line; (line = br.readLine()) != null; ) {
+			String line = "";
+		    while((line = br.readLine()) != null) {
 		        // Processes the line
 		    	wave.add(new Wave(line));
 		    }
