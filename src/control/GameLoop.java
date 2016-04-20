@@ -135,6 +135,7 @@ public class GameLoop {
 		if(gameState == 4) {
 			if(levelComplete){
 				//TODO Add a level complete
+				this.gameState = 7;
 			}
 			else{
 				for(int i = 0; i < gameEnemies.size(); i++){
@@ -309,19 +310,11 @@ public class GameLoop {
 			left = !left;
 			prevTime = time;
 			subWave++;
-			System.out.println(level.wave.get(curWave).getSubWaveSize());
-			if(subWave > level.wave.get(curWave).getSubWaveSize()){
-				waveComplete = true;
-				if(wait > 60*60){
+			
+			if(subWave >= level.wave.get(curWave).getSubWaveSize()){
 					subWave = 0;
 					curWave++;
 					wait = 0;
-					waveComplete = false;
-					System.out.println("Did this happen?");
-				}
-				else{
-					wait++;
-				}
 			}
 			//Check if all waves have been completed
 			if(curWave >= level.wave.size()){
