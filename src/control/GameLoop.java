@@ -7,6 +7,7 @@ import ddf.minim.Minim;
 import gameObject.*;
 import map.Grid;
 import map.Level;
+import map.Path;
 import processing.core.*;
 import userInterface.*;
 
@@ -54,6 +55,9 @@ public class GameLoop {
 	int curWave;
 	int subWave;
 	boolean levelComplete;
+	int wait;
+
+	private boolean waveComplete;
 	
 	GameLoop(PApplet p, Minim minim, int gameState)
 	{
@@ -71,7 +75,7 @@ public class GameLoop {
 		building = p.loadImage("Resources\\Images\\Backgrounds\\Building\\0.png");
 		grid = new Grid(p, building, 250);//TODO Mess with this placement
 		
-		spawnRate = 40;
+		spawnRate = 120;
 		gridUsed = new ArrayList<PVector>();
 		placingTower = false;
 		maxData = 10;
@@ -110,6 +114,7 @@ public class GameLoop {
 		curWave = 0;
 		subWave = 0;
 		levelComplete = false;
+		wait = 0;
 	}
 	
 	//Play placing turret noise
@@ -196,21 +201,127 @@ public class GameLoop {
 		
 		//Checking if count frames have passed
 		if(time%spawnRate == 0 && prevTime != time) {
-			int[] wave = level.getWave(curWave, subWave);
-			for(int i = 0; i < wave[0]; i++){
-				//TODO spawn basic enemy
+			
+			//TODO Place holder until more levels are done
+			
+			if(!waveComplete){
+				int[] wave = level.getWave(curWave, subWave);
+				for(int i = 0; i < wave[0]; i++){
+					//TODO spawn basic enemy
+					if(left){
+						Path path1 = new Path(p);
+						
+						path1.addPoint(0, 1, p.height + 40);
+						path1.addPoint(1, p.width/2 - 65, p.height + 40);
+						path1.addPoint(2, p.width/2 - 65, p.height - 212);
+						path1.addPoint(3, p.width/2 - 585, p.height - 212);
+						path1.addPoint(4, p.width/2 - 585, p.height - 463);
+						path1.addPoint(5, p.width/2 - 440, p.height - 463);
+						path1.addPoint(6, p.width/2 - 440, p.height - 713);
+						path1.addPoint(7, p.width/2 + 585, p.height - 713);
+						
+						BasicEnemy enemy = new BasicEnemy(p, minim, (int) (1 - (i*p.random(20, 50))), p.height + 40, path1);
+						gameEnemies.add(enemy);
+					}
+					else{
+						Path path2 = new Path(p);
+						
+						path2.addPoint(0, p.width, p.height + 40);
+						path2.addPoint(1, p.width/2 + 65, p.height + 40);
+						path2.addPoint(2, p.width/2 + 65, p.height - 212);
+						path2.addPoint(3, p.width/2 + 585, p.height - 212);
+						path2.addPoint(4, p.width/2 + 585, p.height - 463);
+						path2.addPoint(5, p.width/2 - 440, p.height - 463);
+						path2.addPoint(6, p.width/2 - 440, p.height - 713);
+						path2.addPoint(7, p.width/2 + 585, p.height - 713);
+						
+						BasicEnemy enemy = new BasicEnemy(p, minim, (int) (p.width + (i*p.random(20, 50))), p.height + 40, path2);
+						gameEnemies.add(enemy);
+					}
+				}
+				for(int i = 0; i < wave[1]; i++){
+					//TODO spawn fast enemy
+					if(left){
+						Path path1 = new Path(p);
+						
+						path1.addPoint(0, 1, p.height + 40);
+						path1.addPoint(1, p.width/2 - 65, p.height + 40);
+						path1.addPoint(2, p.width/2 - 65, p.height - 212);
+						path1.addPoint(3, p.width/2 - 585, p.height - 212);
+						path1.addPoint(4, p.width/2 - 585, p.height - 463);
+						path1.addPoint(5, p.width/2 - 440, p.height - 463);
+						path1.addPoint(6, p.width/2 - 440, p.height - 713);
+						path1.addPoint(7, p.width/2 + 585, p.height - 713);
+						
+						FastEnemy enemy = new FastEnemy(p, minim, (int) (1 - (i*15 + i*p.random(20, 50))), p.height + 40, path1);
+						gameEnemies.add(enemy);
+					}
+					else{
+						Path path2 = new Path(p);
+						
+						path2.addPoint(0, p.width, p.height + 40);
+						path2.addPoint(1, p.width/2 + 65, p.height + 40);
+						path2.addPoint(2, p.width/2 + 65, p.height - 212);
+						path2.addPoint(3, p.width/2 + 585, p.height - 212);
+						path2.addPoint(4, p.width/2 + 585, p.height - 463);
+						path2.addPoint(5, p.width/2 - 440, p.height - 463);
+						path2.addPoint(6, p.width/2 - 440, p.height - 713);
+						path2.addPoint(7, p.width/2 + 585, p.height - 713);
+						
+						FastEnemy enemy = new FastEnemy(p, minim, (int) (p.width + (i*15 + i*p.random(20, 50))), p.height + 40, path2);
+						gameEnemies.add(enemy);
+					}
+				}
+				for(int i = 0; i < wave[2]; i++){
+					//TODO spawn tank enemy
+					if(left){
+						Path path1 = new Path(p);
+						
+						path1.addPoint(0, 1, p.height + 40);
+						path1.addPoint(1, p.width/2 - 65, p.height + 40);
+						path1.addPoint(2, p.width/2 - 65, p.height - 212);
+						path1.addPoint(3, p.width/2 - 585, p.height - 212);
+						path1.addPoint(4, p.width/2 - 585, p.height - 463);
+						path1.addPoint(5, p.width/2 - 440, p.height - 463);
+						path1.addPoint(6, p.width/2 - 440, p.height - 713);
+						path1.addPoint(7, p.width/2 + 585, p.height - 713);
+						
+						TankEnemy enemy = new TankEnemy(p, minim, (int) (1 - (i*15 + i*p.random(20, 50))), p.height + 40, path1);
+						gameEnemies.add(enemy);
+					}
+					else{
+						Path path2 = new Path(p);
+						
+						path2.addPoint(0, p.width, p.height + 40);
+						path2.addPoint(1, p.width/2 + 65, p.height + 40);
+						path2.addPoint(2, p.width/2 + 65, p.height - 212);
+						path2.addPoint(3, p.width/2 + 585, p.height - 212);
+						path2.addPoint(4, p.width/2 + 585, p.height - 463);
+						path2.addPoint(5, p.width/2 - 440, p.height - 463);
+						path2.addPoint(6, p.width/2 - 440, p.height - 713);
+						path2.addPoint(7, p.width/2 + 585, p.height - 713);
+						
+						TankEnemy enemy = new TankEnemy(p, minim, (int) (p.width + (i*15 + i*p.random(20, 50))), p.height + 40, path2);
+						gameEnemies.add(enemy);
+					}
+				}
 			}
-			for(int i = 0; i < wave[1]; i++){
-				//TODO spawn fast enemy
-			}
-			for(int i = 0; i < wave[2]; i++){
-				//TODO spawn tank enemy
-			}
+			left = !left;
 			prevTime = time;
 			subWave++;
-			if(subWave >= level.wave.get(curWave).getSubWaveSize()){
-				subWave = 0;
-				curWave++;
+			System.out.println(level.wave.get(curWave).getSubWaveSize());
+			if(subWave > level.wave.get(curWave).getSubWaveSize()){
+				waveComplete = true;
+				if(wait > 60*60){
+					subWave = 0;
+					curWave++;
+					wait = 0;
+					waveComplete = false;
+					System.out.println("Did this happen?");
+				}
+				else{
+					wait++;
+				}
 			}
 			//Check if all waves have been completed
 			if(curWave >= level.wave.size()){

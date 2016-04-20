@@ -6,7 +6,7 @@ import processing.core.PApplet;
 
 public class TankEnemy extends Enemy{
 	
-	TankEnemy(PApplet p, Minim minim, int x, int y, Path path){
+	public TankEnemy(PApplet p, Minim minim, int x, int y, Path path){
 		super(p, minim, x, y, path);
 	}
 	
